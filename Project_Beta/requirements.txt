@@ -1,0 +1,28 @@
+# Required Python packages for the Virtual Robot Race
+
+# Input & Control
+keyboard==0.13.5
+
+# Numerical & Data Handling
+numpy==2.2.1
+pandas==2.2.3
+python-dateutil==2.9.0.post0
+pytz==2024.2
+typing_extensions==4.12.2
+packaging==25.0
+
+# Computer Vision & Image
+opencv-python==4.11.0.86
+pillow==11.1.0
+
+# Deep Learning
+torch==2.6.0
+torchvision==0.21.0
+
+# Networking
+websockets==14.1
+
+# Video I/O (for make_video.py)
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+av==15.1.0

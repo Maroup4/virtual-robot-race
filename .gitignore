@@ -1,20 +1,87 @@
+# ---------------------------------------
+# Python-specific
+# ---------------------------------------
 # Byte-compiled / cache
 __pycache__/
 *.py[cod]
 
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Model files (large)
+*.pth
+
+# ---------------------------------------
+# Project-specific
+# ---------------------------------------
+# Training data (ignore contents but keep structure)
+training_data/**
+!training_data/.gitkeep
+
+# Data interactive (ignore contents but keep structure, but exclude debug completely)
+data_interactive/**
+!data_interactive/.gitkeep
+data_interactive/debug/
+
+# Debug folder (ignore completely anywhere)
+debug/
+
+# ---------------------------------------
+# Unity-specific
+# (optional: safe to ignore generated files/folders)
+# ---------------------------------------
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+*.unitypackage
+
+# ---------------------------------------
 # IDE/editor
+# ---------------------------------------
 .vscode/
 .idea/
 *.code-workspace
 
-# Large files
-*.pth
-
-# Ignore model files but keep directory
-Project_Alpha/models/
-!Project_Alpha/models/.gitkeep
-
-
+# ---------------------------------------
 # OS-specific
+# ---------------------------------------
 .DS_Store
 Thumbs.db
+
+# ---------------------------------------
+# Models directory (ignore contents but keep structure)
+Project_Alpha/models/*
+!Project_Alpha/models/.gitkeep
+
+# --- Project_Beta 専用の除外 ---
+# venv
+Project_Beta/.venv/
+
+# training_data：中身は全無視、構造だけ残す
+Project_Beta/training_data/**
+!Project_Beta/training_data/.gitkeep
+
+# data_interactive：中身は全無視、構造だけ残す
+Project_Beta/data_interactive/**
+!Project_Beta/data_interactive/.gitkeep
+
+# debug は完全無視
+Project_Beta/debug/**
+
+# debug は完全無視
+Project_Beta/rulebasesample/**
+
+# Python キャッシュ
+Project_Beta/__pycache__/
+

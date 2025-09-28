@@ -1,0 +1,33 @@
+[Logger Initialized at 2025/09/28 17:06:20][17:06:20.224] [Log] [FileLogger] Logging to: C:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Windows\runtime_log.txt
+[17:06:20.751] [Log] [WebSocketClient] Subscribed to Tick (20fps).
+[17:06:20.755] [Log] [PlayerCameraRGB] Initialized & subscribed to Tick (20fps).
+[17:06:20.758] [Log] [DataLogger] Initialized & subscribed to Tick.
+[17:06:20.758] [Log] [GameManager] Game Started.TickScheduler initialized (20fps)
+[17:06:20.760] [Log] [WebSocketClient] Start() begin.
+[17:06:20.771] [Log] [WebSocketClient] Connecting...
+[17:06:20.792] [Log] [TorqueController] Drag & Inertia settings applied.
+[17:06:21.053] [Log] [RaceManager] Race Started!
+[17:06:21.178] [Log] [WebSocketClient] Connected to server.
+[17:06:21.199] [Log] [WebSocketClient] Identity received → name=AndyC, mode=keyboard, raceFlag=1
+[17:06:26.179] [Log] [GateTrigger] Gate 0 passed by Robot
+[17:06:38.033] [Log] [GateTrigger] Gate 1 passed by Robot
+[17:06:38.147] [Log] [GateTrigger] Gate 2 passed by Robot
+[17:06:38.147] [Log] [RobotStatus] Lap ++ → Now: 1
+[17:06:40.166] [Log] [GateTrigger] Gate 0 passed by Robot
+[17:06:50.851] [Log] [GateTrigger] Gate 1 passed by Robot
+[17:06:50.949] [Log] [GateTrigger] Gate 2 passed by Robot
+[17:06:50.949] [Log] [RobotStatus] Lap ++ → Now: 2
+[17:06:50.949] [Log] [RaceManager] Robot has FINISHED the race!
+[17:06:50.950] [Log] [RobotStatus] ShowFinish() called.
+[17:06:50.951] [Log] [RaceManager] Race Ended!
+[17:06:50.951] [Log] [WebSocketClient] StopReceivingCommands(): torque updates will be ignored.
+[17:06:50.952] [Log] [GameManager] OnRaceEndedSignal received from RaceManager.
+[17:06:55.106] [Log] [GASpost] PostResult(name,secs,mode): AndyC, 0:26.127, keyboard
+[17:06:55.144] [Log] [GASpost] 送信開始: {"name":"AndyC","time":"0:26.127","mode":"keyboard"}
+[17:06:55.193] [Log] [GameManager] User confirmed POST.
+[17:06:55.193] [Log] [GameManager] Race Ended. Triggering shutdown after decision (POST)...
+[17:06:55.428] [Log] [GameManager] Race Ended. Preparing to send data after 100ms delay...
+[17:06:55.536] [Log] [WebSocketClient] Waiting briefly before sending race data...
+[17:06:55.640] [Log] [WebSocketClient] Race Data JSON sent successfully.
+[17:06:55.682] [Log] [WebSocketClient] Connection closed.
+[17:06:57.148] [Log] [GameManager] Quitting application...
