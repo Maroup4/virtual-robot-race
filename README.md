@@ -38,7 +38,6 @@ virtual-robot-race/
 ├── Project_Alpha/ # Current active version
 ├── Project_Beta/ # (Coming soon)
 ├── README.md
-├── requirements.txt
 ├── .gitignore
 └── LICENSE
 
