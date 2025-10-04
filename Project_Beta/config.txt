@@ -16,7 +16,7 @@ MODE_NUM=1
 # Unity launch mode:
 # 0 = Launch Unity automatically from AAGP.exe
 # 1 = Launch Unity manually (useful for debugging)
-DEBUG_MODE=0
+DEBUG_MODE=1
 
 # JPEG image saving:
 # 0 = Delete images after run (lightweight mode)
@@ -27,10 +27,10 @@ JPEG_SAVE=0
 # NAME: Player name (up to 10 characters, alphanumeric only)
 # RACE_FLAG: Participation flag (1=Participate, 0=Do not participate)
 NAME=AndyC
-RACE_FLAG=1
+RACE_FLAG=0
 
 # --- post race video options ---
-AUTO_MAKE_VIDEO=1          # 1=auto make mp4, 0=off
+AUTO_MAKE_VIDEO=0        # 1=auto make mp4, 0=off
 OPEN_EXPLORER_ON_VIDEO=1   # 1=open Explorer on finish (Windows)
 VIDEO_FPS=20               # default FPS for MP4
 INFER_FPS=1                # 1=estimate FPS from timestamps
