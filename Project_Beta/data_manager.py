@@ -1,27 +1,9 @@
 # data_manager.py
-# Data manager for the new streaming protocol:
-# - Saves per-tick images (JPG) as they arrive
-# - Appends a lightweight frames_map.csv per tick (optional but useful)
-# - On race end, writes metadata.csv from Unity's final JSON (DataLogger output)
-# - Maintains "interactive" artifacts (latest SOC, preview A/B JPG, latest frame name)
-#
-# Public API expected by websocket_server.py:
-#   DataManager(base_dir: Path)
-#   start_new_run() -> (run_dir: Path, images_dir: Path)
-#   save_image_bytes(path: Path, data: bytes) -> None
-#   append_frame_map(tick, utc_ms, filename, soc, status, left_tq, right_tq) -> None
-#   flush_frame_map() -> None
-#   close_frame_map() -> None
-#   save_metadata_csv_from_unity_json(unity_json_obj: dict) -> None
-#
-# Notes:
-# - This module does NOT parse legacy "header+JPEG in one packet" anymore.
-# - It still updates interactive files:
-#     data_interactive/latest_SOC.txt
-#     data_interactive/latest_RGB_a.jpg / latest_RGB_b.jpg + latest_RGB_now.txt
-#     data_interactive/latest_frame_name.txt
-# - At the end of a run, UnityLog is copied (if present) and, if config.JPEG_SAVE == 0,
-#   all saved JPGs are removed for lightweight mode.
+# Data manager for AAGP streaming protocol (driveTorque / steerAngle unified)
+# - Saves per-tick images (JPG)
+# - Appends frames_map.csv (tick, driveTorque, steerAngle, SOC, status)
+# - On race end, writes metadata.csv from Unity’s DataLogger output
+# - No wheel_left/right columns anymore
 
 import os
 import csv
@@ -30,18 +12,14 @@ import time
 import shutil
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Tuple
 
 import config
-
-from typing import Optional, Tuple
-from pathlib import Path
 
 # -------------------------
 # Base directory resolution
 # -------------------------
 if getattr(sys, "frozen", False):
-    # PyInstaller build
     BASE_DIR = Path(os.path.dirname(sys.executable))
 else:
     BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -55,15 +33,15 @@ INTERACTIVE_DIR.mkdir(parents=True, exist_ok=True)
 SOC_FILE = INTERACTIVE_DIR / "latest_SOC.txt"
 RGB_FILE_A = INTERACTIVE_DIR / "latest_RGB_a.jpg"
 RGB_FILE_B = INTERACTIVE_DIR / "latest_RGB_b.jpg"
-RGB_NOW_FILE = INTERACTIVE_DIR / "latest_RGB_now.txt"      # contains "a" or "b"
+RGB_NOW_FILE = INTERACTIVE_DIR / "latest_RGB_now.txt"
 LATEST_FRAME_NAME_FILE = INTERACTIVE_DIR / "latest_frame_name.txt"
 LAST_RUN_DIR_FILE = INTERACTIVE_DIR / "last_run_dir.txt"
 
-# Unity runtime log (source) and per-run copy target
+# Unity runtime log (source path may differ per build)
 UNITY_LOG_SRC = BASE_DIR / "Windows" / "runtime_Log.txt"
 
+
 def _safe_replace(src_tmp: Path, dst: Path, retries: int = 10, delay_sec: float = 0.02) -> None:
-    """Atomic-ish replace of a file with small retries (Windows-friendly)."""
     for _ in range(retries):
         try:
             if dst.exists():
@@ -86,20 +64,7 @@ def _write_text(path: Path, text: str) -> None:
         print(f"[DataManager] Failed to write {path.name}: {e}")
 
 
-def _read_text(path: Path) -> Optional[str]:
-    try:
-        return path.read_text(encoding="utf-8").strip()
-    except Exception:
-        return None
-
-# Backward-compat shim (prefer using a DataManager instance)
-def get_current_run_dirs() -> Tuple[Optional[Path], Optional[Path]]:
-    """Use DataManager.current_run_dir / images_dir from your instance instead.
-    This shim returns (None, None) so old callers don't crash but can check."""
-    return None, None
-
-def read_last_run_dir() -> Path | None:
-    """Return the last run directory recorded by DataManager, or None."""
+def read_last_run_dir() -> Optional[Path]:
     try:
         p = LAST_RUN_DIR_FILE.read_text(encoding="utf-8").strip()
         if not p:
@@ -109,82 +74,65 @@ def read_last_run_dir() -> Path | None:
     except Exception:
         return None
 
-def get_latest_soc() -> float | None:
-    """
-    Read the most recent SOC value from interactive file.
-    Returns float (0.0–1.0) or None if not available.
-    """
-    try:
-        if SOC_FILE.exists():
-            txt = SOC_FILE.read_text(encoding="utf-8").strip()
-            return float(txt)
-    except Exception as e:
-        print(f"[DataManager] Failed to read latest SOC: {e}")
-    return None
 
 class DataManager:
     def __init__(self, base_dir: Path):
         self.base_dir = Path(base_dir)
         self.training_data_root = self.base_dir / "training_data"
 
-        # Set during start_new_run()
         self.current_run_dir: Optional[Path] = None
         self.images_dir: Optional[Path] = None
 
-        # frames_map.csv writer/handle
         self._frames_map_path: Optional[Path] = None
         self._frames_map_fp = None
         self._frames_map_writer = None
 
-        # preview toggle (A/B double buffer)
         self._preview_toggle_a = True
 
     # -------------------------
     # Run/session management
     # -------------------------
     def start_new_run(self):
-        """Create a new run directory and initialize frames_map.csv."""
         ts = time.strftime("run_%Y%m%d_%H%M%S")
         self.training_data_root.mkdir(parents=True, exist_ok=True)
-
         self.current_run_dir = self.training_data_root / ts
         self.images_dir = self.current_run_dir / "images"
         self.current_run_dir.mkdir(parents=True, exist_ok=True)
         self.images_dir.mkdir(parents=True, exist_ok=True)
-        
+
+        # create frames_map.csv
+        self._frames_map_path = self.current_run_dir / "frames_map.csv"
+        self._frames_map_fp = open(self._frames_map_path, "w", newline="", encoding="utf-8")
+        self._frames_map_writer = csv.writer(self._frames_map_fp)
+        self._frames_map_writer.writerow(
+            ["tick", "utc_ms", "filename", "soc", "status", "drive_torque", "steer_angle"]
+        )
+        print(f"[DataManager] New run created → {self.current_run_dir}")
+
         try:
             LAST_RUN_DIR_FILE.write_text(str(self.current_run_dir), encoding="utf-8")
         except Exception as e:
-            print(f"[DataManager] Failed to write LAST_RUN_DIR_FILE: {e}")
-
-        
+            print(f"[DataManager] Failed to record last run: {e}")
 
         return self.current_run_dir, self.images_dir
 
     # -------------------------
-    # Per-tick artifacts
+    # Per-tick image handling
     # -------------------------
     def save_image_bytes(self, path: Path, data: bytes) -> None:
-        """Save the raw JPG bytes to the given path under the current run/images,
-        and update interactive preview + latest frame name."""
-        if self.images_dir is None or self.current_run_dir is None:
+        if self.images_dir is None:
             raise RuntimeError("start_new_run() must be called before saving images.")
 
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Save the training image
         try:
             with open(path, "wb") as f:
                 f.write(data)
         except Exception as e:
-            print(f"[DataManager] Failed to write training image {path.name}: {e}")
+            print(f"[DataManager] Failed to save image {path}: {e}")
 
-        # Update interactive artifacts
-        # 1) latest frame name
         _write_text(LATEST_FRAME_NAME_FILE, path.name)
-
-        # 2) A/B preview file (so GUI tools can read the most recent frame atomically)
         try:
             target = RGB_FILE_A if self._preview_toggle_a else RGB_FILE_B
             tmp = target.with_suffix(target.suffix + ".tmp")
@@ -194,28 +142,37 @@ class DataManager:
             _write_text(RGB_NOW_FILE, "a" if self._preview_toggle_a else "b")
             self._preview_toggle_a = not self._preview_toggle_a
         except Exception as e:
-            print(f"[DataManager] Failed to update interactive preview: {e}")
+            print(f"[DataManager] Failed to update preview: {e}")
 
-    def append_frame_map(self, tick, utc_ms, filename, soc, status, left_tq, right_tq) -> None:
-        """Append one row to frames_map.csv."""
+    def append_frame_map(self, tick, utc_ms, filename, soc, status, drive_tq, steer_ang) -> None:
+        """Append one telemetry row to frames_map.csv. Missing values are zero-filled."""
         if self._frames_map_writer is None:
             return
-        self._frames_map_writer.writerow([tick, utc_ms, filename, soc, status, left_tq, right_tq])
 
-        # Also keep latest SOC for interactive tools
-        try:
-            if soc is not None:
+        # 0埋め（空欄がCSVに出ないように）
+        def f_or_0(v):
+            try:
+                return float(v)
+            except (TypeError, ValueError):
+                return 0.0
+
+        drive_tq = f_or_0(drive_tq)
+        steer_ang = f_or_0(steer_ang)
+
+        self._frames_map_writer.writerow([tick, utc_ms, filename, soc, status, drive_tq, steer_ang])
+
+        # 最新SOCを記録（GUIなどの参照用）
+        if soc is not None:
+            try:
                 _write_text(SOC_FILE, f"{float(soc):.4f}")
-        except Exception:
-            pass
+            except Exception:
+                pass
 
     def flush_frame_map(self) -> None:
-        """Flush frames_map.csv to disk."""
         if self._frames_map_fp:
             self._frames_map_fp.flush()
 
     def close_frame_map(self) -> None:
-        """Close frames_map.csv handle."""
         if self._frames_map_fp:
             self._frames_map_fp.close()
             self._frames_map_fp = None
@@ -225,26 +182,17 @@ class DataManager:
     # Final metadata
     # -------------------------
     def save_metadata_csv_from_unity_json(self, unity_json_obj: dict) -> None:
-        """Write metadata.csv from Unity's final DataLogger JSON payload.
-        Accepts:
-          - list[...] (final rows)
-          - dict with 'data': list[...]
-          - dict with 'payload': list[...] or {'data': list[...]}
-        """
+        """Convert Unity’s final DataLogger JSON into metadata.csv (no blanks)."""
         if self.current_run_dir is None:
-            raise RuntimeError("start_new_run() must be called before saving metadata.")
+            raise RuntimeError("start_new_run() must be called first.")
 
-        # --- payload / data 
         rows = unity_json_obj
         if isinstance(rows, dict):
-            # If wrapped as {"payload": ...}
             if "payload" in rows:
                 rows = rows["payload"]
-            # If wrapped as {"data": ...}
             if isinstance(rows, dict) and "data" in rows:
                 rows = rows["data"]
 
-        # If still a JSON string, try to parse
         if isinstance(rows, str):
             try:
                 rows = json.loads(rows)
@@ -256,47 +204,80 @@ class DataManager:
         meta_csv = self.current_run_dir / "metadata.csv"
         with open(meta_csv, "w", newline="", encoding="utf-8") as fp:
             w = csv.writer(fp)
+            # === ヘッダ ===
             w.writerow([
-                "id", "time_ms", "frame_id", "filename", "soc",
-                "wheel_left", "wheel_right", "status",
-                "pos_z", "pos_x", "pos_y", "yaw", "error_code"
+                "tick", "time_ms", "filename", "soc",
+                "drive_torque", "steer_angle",
+                "drive_valid", "steer_valid",
+                "status", "pos_x", "pos_y", "pos_z",
+                "yaw_deg", "error_code"
             ])
 
+            # 欠損を安全に変換するヘルパー
+            def f_or_0(v):
+                try:
+                    if v is None or v == "" or str(v).lower() == "nan":
+                        return 0.0
+                    return float(v)
+                except (TypeError, ValueError):
+                    return 0.0
+
+            def i_or_0(v):
+                try:
+                    return int(v)
+                except (TypeError, ValueError):
+                    return 0
+
+            # === データ書き込み ===
             if isinstance(rows, list):
                 for r in rows:
-                    
+                    if not isinstance(r, dict):
+                        continue
+
+                    # 数値系の安全取得
+                    tick   = i_or_0(r.get("tick"))
+                    t_ms   = i_or_0(r.get("time_ms"))
+                    soc    = f_or_0(r.get("soc"))
+                    drive  = f_or_0(r.get("drive_torque") or r.get("driveTorque"))
+                    steer  = f_or_0(r.get("steer_angle") or r.get("steerAngle"))
+                    d_val  = i_or_0(r.get("drive_valid"))
+                    s_val  = i_or_0(r.get("steer_valid"))
+                    pos_x  = f_or_0(r.get("pos_x"))
+                    pos_y  = f_or_0(r.get("pos_y"))
+                    pos_z  = f_or_0(r.get("pos_z"))
+                    yaw    = f_or_0(r.get("yaw_deg") or r.get("yaw"))
+                    err    = i_or_0(r.get("error_code"))
+
+                    # 行出力
                     w.writerow([
-                        (r.get("id") if isinstance(r, dict) else None),
-                        (r.get("time_ms") if isinstance(r, dict) else None),
-                        (r.get("frame_id") if isinstance(r, dict) else None),
-                        (r.get("filename") if isinstance(r, dict) else None),
-                        (r.get("soc") if isinstance(r, dict) else None),
-                        (r.get("wheel_left") if isinstance(r, dict) else None),
-                        (r.get("wheel_right") if isinstance(r, dict) else None),
-                        (r.get("status") if isinstance(r, dict) else None),
-                        (r.get("pos_z") if isinstance(r, dict) else None),
-                        (r.get("pos_x") if isinstance(r, dict) else None),
-                        (r.get("pos_y") if isinstance(r, dict) else None),
-                        (r.get("yaw") if isinstance(r, dict) else None),
-                        (r.get("error_code") if isinstance(r, dict) else None),
+                        tick,
+                        t_ms,
+                        r.get("filename") or f"frame_{tick:06d}.jpg",
+                        soc,
+                        drive,
+                        steer,
+                        d_val,
+                        s_val,
+                        r.get("status") or "unknown",
+                        pos_x,
+                        pos_y,
+                        pos_z,
+                        yaw,
+                        err,
                     ])
             else:
-                print("[DataManager] WARNING: Final metadata payload wasn't a list → wrote header only.")
+                print("[DataManager] WARNING: Metadata payload not list, header only.")
 
-        print(f"[DataManager] Metadata saved to {meta_csv}")
+        print(f"[DataManager] metadata.csv written → {meta_csv}")
         self._copy_unity_log()
-       
-        # Deletion if AUTO_MAKE_VIDEO is ON (main.py will delete after export)
-        if not getattr(config, "AUTO_MAKE_VIDEO", True):
-            self._maybe_delete_images_if_flagged()
+        self._maybe_delete_images_if_flagged()
         self.close_frame_map()
-    
-    
+
+
     # -------------------------
     # Helpers
     # -------------------------
     def _copy_unity_log(self) -> None:
-        """Copy Unity runtime log to the current run directory (if present)."""
         if self.current_run_dir is None:
             return
         if UNITY_LOG_SRC.exists():
@@ -307,31 +288,22 @@ class DataManager:
             except Exception as e:
                 print(f"[DataManager] Failed to copy Unity log: {e}")
 
-        # Copy table_input.csv if we're in 'table' mode
         if config.MODE == "table":
             table_src = self.base_dir / "table_input.csv"
             if table_src.exists():
                 dst = self.current_run_dir / "table_input.csv"
                 try:
                     shutil.copy(table_src, dst)
-                    print(f"[DataManager] Copied table_input.csv to {dst}")
                 except Exception as e:
                     print(f"[DataManager] Failed to copy table_input.csv: {e}")
 
     def _maybe_delete_images_if_flagged(self) -> None:
-        """Delete all saved JPGs if config.JPEG_SAVE == 0 (lightweight mode)."""
         if self.images_dir is None:
             return
         try:
             if getattr(config, "JPEG_SAVE", 1) == 0:
-                print("[DataManager] JPEG_SAVE=0 → Deleting all saved JPEGs for lightweight mode")
+                print("[DataManager] JPEG_SAVE=0 → deleting saved images...")
                 for p in self.images_dir.glob("*.jpg"):
-                    try:
-                        p.unlink(missing_ok=True)
-                    except Exception as e:
-                        print(f"[DataManager] Failed to delete {p.name}: {e}")
-                print("[DataManager] All JPEG images deleted")
+                    p.unlink(missing_ok=True)
         except Exception as e:
-            print(f"[DataManager] Failed during JPEG cleanup: {e}")
-    
-    
+            print(f"[DataManager] Cleanup failed: {e}")

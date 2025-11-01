@@ -14,14 +14,14 @@ PORT=12346
 MODE_NUM=1
 
 # Unity launch mode:
-# 0 = Launch Unity automatically from AAGP.exe
+# 0 = Launch Unity automatically from Unity_Build.exe
 # 1 = Launch Unity manually (useful for debugging)
 DEBUG_MODE=1
 
 # JPEG image saving:
 # 0 = Delete images after run (lightweight mode)
 # 1 = Save images for AI training
-JPEG_SAVE=0
+JPEG_SAVE=1
 
 # Player settings
 # NAME: Player name (up to 10 characters, alphanumeric only)
