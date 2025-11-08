@@ -213,9 +213,41 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
             table_input = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(table_input)
 
-            # TODO: table制御の実装
-            print("[Main] Table mode not yet implemented in new architecture")
-            await asyncio.sleep(1)
+            # Table mode: Poll CSV data and send to Unity
+            print("[Main] Table mode: Sending commands from CSV")
+
+            # Poll table input and send to Unity
+            while not stop_event.is_set():
+                try:
+                    cmd = table_input.get_latest_command()
+                    drive = cmd.get("driveTorque", 0.0)
+                    steer = cmd.get("steerAngle", 0.0)
+
+                    # Send control command to Unity
+                    control_msg = {
+                        "type": "control",
+                        "robot_id": client.robot_id,
+                        "driveTorque": drive,
+                        "steerAngle": steer
+                    }
+                    await client.send_json(control_msg)
+
+                    # Show progress every 100 commands
+                    progress = table_input.get_progress()
+                    if progress[0] % 100 == 0:
+                        print(f"[Main] Table mode progress: {progress[0]}/{progress[1]}")
+
+                    # If both drive and steer are 0, we might be at end of CSV
+                    if drive == 0.0 and steer == 0.0:
+                        # Check if we're at the end
+                        if progress[0] >= progress[1]:
+                            print(f"[Main] Table mode: End of CSV reached")
+                            break
+
+                except Exception as e:
+                    print(f"[Main] Table control error: {e}")
+
+                await asyncio.sleep(0.05)  # 20Hz
 
         else:
             print(f"[Main] Unknown MODE: {mode}")

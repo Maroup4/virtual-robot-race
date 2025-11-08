@@ -2,7 +2,7 @@
 # ロボット個別の設定ファイル
 
 # 制御モード (1: keyboard, 2: table, 3: rule_based, 4: ai)
-MODE_NUM=1
+MODE_NUM=2
 
 # ロボットID (自動設定されるが、明示的に指定も可能)
 ROBOT_ID=R1
