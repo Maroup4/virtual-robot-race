@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m \"$(cat <<''EOF''\nComplete Robot1 integration with keyboard control\n\nMajor changes:\n- Simplified config.txt to global settings only (HOST, PORT, ACTIVE_ROBOTS, DEBUG_MODE)\n- Robot-specific settings moved to Robot1/robot_config.txt\n- Updated config.py to support per-robot configuration loading\n- Refactored main.py to use Robot1/ folder structure with importlib\n- Added module identification to Robot1/keyboard_input.py\n- Successfully tested keyboard control with new architecture (2 laps completed)\n\nTechnical improvements:\n- Explicit module loading using importlib.util instead of sys.path manipulation\n- No module path conflicts between root and Robot1/ folders\n- Clear logging shows which module is loaded ([keyboard_input] Loaded from Robot1/)\n\nPhase 1 milestone: Robot1 keyboard control fully operational\n\nGenerated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)",
+      "Bash(python -m py_compile:*)",
+      "Bash(python:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(nul)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

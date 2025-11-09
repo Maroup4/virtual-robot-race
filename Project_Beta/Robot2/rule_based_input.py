@@ -9,7 +9,7 @@ from pathlib import Path
 from PIL import Image
 
 # Module identification
-MODULE_SOURCE = "Robot1"
+MODULE_SOURCE = "Robot2"
 print(f"[rule_based_input] Loaded from {MODULE_SOURCE}/")
 
 # Import data_manager functions for Robot1
@@ -27,7 +27,7 @@ from rule_based_algorithms.debug_utils import annotate_and_save_canvas
 from rule_based_algorithms.debug_utils import overlay_and_save as overlay_and_save_fallback
 
 # --- Globals (control output) ---
-robot_id = "R1"
+robot_id = "R2"
 driveTorque: float = 0.0
 steerAngle: float = 0.0
 

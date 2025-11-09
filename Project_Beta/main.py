@@ -26,8 +26,8 @@ from data_manager import read_last_run_dir
 # Shared stop signal
 stop_event = threading.Event()
 
-# Global client instance
-robot_client: Optional[RobotWebSocketClient] = None
+# Global client instances (dictionary keyed by robot_id)
+robot_clients: dict[str, RobotWebSocketClient] = {}
 
 
 def launch_unity_exe() -> Optional[subprocess.Popen]:
@@ -185,9 +185,36 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
             inference_input = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(inference_input)
 
-            # TODO: AI制御の実装
-            print("[Main] AI mode not yet implemented in new architecture")
-            await asyncio.sleep(1)
+            # AI mode: Poll AI inference and send to Unity
+            print("[Main] AI mode: Autonomous driving with neural network")
+
+            # Poll AI inference and send to Unity
+            while not stop_event.is_set():
+                try:
+                    # Update AI model (loads image, runs inference, updates driveTorque/steerAngle)
+                    if not inference_input.update():
+                        # If update returns False, stop
+                        print("[Main] AI inference requested stop")
+                        break
+
+                    # Get latest command
+                    cmd = inference_input.get_latest_command()
+                    drive = cmd.get("driveTorque", 0.0)
+                    steer = cmd.get("steerAngle", 0.0)
+
+                    # Send control command to Unity
+                    control_msg = {
+                        "type": "control",
+                        "robot_id": client.robot_id,
+                        "driveTorque": drive,
+                        "steerAngle": steer
+                    }
+                    await client.send_json(control_msg)
+
+                except Exception as e:
+                    print(f"[Main] AI control error: {e}")
+
+                await asyncio.sleep(0.05)  # 20Hz
 
         elif mode == "rule_based":
             # Load rule_based_input from Robot{N}/ directory explicitly
@@ -199,9 +226,36 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
             rule_based_input = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(rule_based_input)
 
-            # TODO: rule_based制御の実装
-            print("[Main] Rule-based mode not yet implemented in new architecture")
-            await asyncio.sleep(1)
+            # Rule-based mode: Poll lane detection and driver model
+            print("[Main] Rule-based mode: Autonomous lane following")
+
+            # Poll rule-based control and send to Unity
+            while not stop_event.is_set():
+                try:
+                    # Update rule-based controller (processes image, detects lane, calculates control)
+                    if not rule_based_input.update():
+                        # If update returns False, stop
+                        print("[Main] Rule-based control requested stop")
+                        break
+
+                    # Get latest command
+                    cmd = rule_based_input.get_latest_command()
+                    drive = cmd.get("driveTorque", 0.0)
+                    steer = cmd.get("steerAngle", 0.0)
+
+                    # Send control command to Unity
+                    control_msg = {
+                        "type": "control",
+                        "robot_id": client.robot_id,
+                        "driveTorque": drive,
+                        "steerAngle": steer
+                    }
+                    await client.send_json(control_msg)
+
+                except Exception as e:
+                    print(f"[Main] Rule-based control error: {e}")
+
+                await asyncio.sleep(0.05)  # 20Hz
 
         elif mode == "table":
             # Load table_input from Robot{N}/ directory explicitly
@@ -259,33 +313,31 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
 
 async def main() -> None:
     """
-    Main orchestration (Robot1対応版):
-      1) Load Robot1 config
+    Main orchestration (Multi-robot version):
+      1) Load all active robot configs
       2) Launch Unity (WebSocketServer)
       3) Wait for Unity to be ready
-      4) Connect RobotWebSocketClient
-      5) Start control module (from Robot1/)
+      4) Connect all RobotWebSocketClients
+      5) Start control modules for each robot concurrently
       6) Wait for stop_event
       7) Graceful shutdown
-      8) Build video
+      8) Build videos (for each robot)
     """
-    global robot_client
+    global robot_clients
 
     print("[Main] Starting new architecture (Unity=Server, Python=Client)...")
-    print("[Main] Robot1対応版 - Robot1/robot_config.txt から設定を読み込みます")
+    print(f"[Main] Active robots: {config.ACTIVE_ROBOTS}")
 
-    # 1) Load Robot1 config
-    robot_num = 1  # Phase 1: Robot1のみ対応
-    robot_config = config.get_robot_config(robot_num)
-    robot_id = robot_config.get("ROBOT_ID", "R1")
-    mode_num = robot_config.get("MODE_NUM", 1)
-    mode = config.get_mode_string(mode_num)
-
-    print(f"[Main] Robot{robot_num} config loaded:")
-    print(f"  - ROBOT_ID: {robot_id}")
-    print(f"  - MODE: {mode} (MODE_NUM={mode_num})")
-    print(f"  - NAME: {robot_config.get('NAME', 'Player0000')}")
-    print(f"  - RACE_FLAG: {robot_config.get('RACE_FLAG', 1)}")
+    # 1) Load all active robot configs
+    robot_configs = {}
+    for robot_num in config.ACTIVE_ROBOTS:
+        robot_configs[robot_num] = config.get_robot_config(robot_num)
+        rc = robot_configs[robot_num]
+        print(f"[Main] Robot{robot_num} config loaded:")
+        print(f"  - ROBOT_ID: {rc.get('ROBOT_ID')}")
+        print(f"  - MODE: {config.get_mode_string(rc.get('MODE_NUM', 1))} (MODE_NUM={rc.get('MODE_NUM', 1)})")
+        print(f"  - NAME: {rc.get('NAME', 'Player0000')}")
+        print(f"  - RACE_FLAG: {rc.get('RACE_FLAG', 1)}")
 
     unity_proc = None
 
@@ -305,24 +357,54 @@ async def main() -> None:
             print("[Main] Unity server did not start. Exiting.")
             return
 
-        # 4) Create and connect client
-        robot_client = RobotWebSocketClient(
-            robot_id=robot_id,
-            server_url=server_url
-        )
+        # 4) Create and connect all clients (but don't start control yet)
+        all_tasks = []
+        robot_modes = {}  # Store mode for each robot
 
-        await robot_client.connect()
+        # Phase 1: Connect all robots
+        for robot_num in config.ACTIVE_ROBOTS:
+            rc = robot_configs[robot_num]
+            robot_id = rc.get("ROBOT_ID", f"R{robot_num}")
+            mode_num = rc.get("MODE_NUM", 1)
+            mode = config.get_mode_string(mode_num)
 
-        # 5) Start control module and receive loop concurrently
-        control_task = asyncio.create_task(
-            run_control_module(robot_client, mode, robot_num)
-        )
-        receive_task = asyncio.create_task(
-            robot_client.receive_loop()
-        )
+            # Create client
+            client = RobotWebSocketClient(
+                robot_id=robot_id,
+                server_url=server_url
+            )
+            robot_clients[robot_id] = client
+            robot_modes[robot_id] = (mode, robot_num)
 
-        # 6) Wait for stop_event or tasks to complete
-        while not stop_event.is_set() and robot_client.running:
+            # Connect
+            await client.connect()
+            print(f"[Main] Robot{robot_num} ({robot_id}) connected")
+
+        print(f"[Main] All {len(robot_clients)} robots connected. Starting control modules simultaneously...")
+
+        # Phase 2: Start all control modules and receive loops simultaneously
+        for robot_id, client in robot_clients.items():
+            mode, robot_num = robot_modes[robot_id]
+
+            # 5) Start control module and receive loop for this robot
+            control_task = asyncio.create_task(
+                run_control_module(client, mode, robot_num)
+            )
+            receive_task = asyncio.create_task(
+                client.receive_loop()
+            )
+
+            all_tasks.extend([control_task, receive_task])
+
+        print(f"[Main] All control modules started at the same time")
+
+        # 6) Wait for stop_event or any client to stop
+        while not stop_event.is_set():
+            # Check if any client is still running
+            any_running = any(client.running for client in robot_clients.values())
+            if not any_running:
+                break
+
             await asyncio.sleep(0.1)
 
             # Optional: hotkey 'q' to force stop
@@ -339,24 +421,27 @@ async def main() -> None:
         print("[Main] Shutting down...")
         stop_event.set()
 
-        # Cancel tasks
-        control_task.cancel()
-        receive_task.cancel()
+        # Cancel all tasks
+        for task in all_tasks:
+            task.cancel()
 
         try:
-            await asyncio.gather(control_task, receive_task, return_exceptions=True)
+            await asyncio.gather(*all_tasks, return_exceptions=True)
         except Exception:
             pass
 
-        # Close client
-        if robot_client:
-            await robot_client.close()
+        # Close all clients
+        for robot_id, client in robot_clients.items():
+            await client.close()
+            print(f"[Main] {robot_id} closed")
 
-        # 8) Post-race: build video
-        try:
-            await build_video_and_open_explorer(robot_config)
-        except Exception as e:
-            print(f"[Main] Post-race video pipeline failed: {e}")
+        # 8) Post-race: build videos for each robot
+        for robot_num in config.ACTIVE_ROBOTS:
+            rc = robot_configs[robot_num]
+            try:
+                await build_video_and_open_explorer(rc)
+            except Exception as e:
+                print(f"[Main] Robot{robot_num} video pipeline failed: {e}")
 
         print("[Main] System fully stopped.")
 

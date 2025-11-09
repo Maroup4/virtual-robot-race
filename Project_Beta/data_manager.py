@@ -25,8 +25,41 @@ else:
     BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
 
 # -------------------------
-# Interactive artifacts
+# Interactive artifacts (Robot-specific paths)
 # -------------------------
+def get_interactive_dir(robot_id: str) -> Path:
+    """Get interactive directory for a specific robot (e.g., Robot1/data_interactive)"""
+    robot_num = int(robot_id[1:])  # "R1" -> 1
+    interactive_dir = BASE_DIR / f"Robot{robot_num}" / "data_interactive"
+    interactive_dir.mkdir(parents=True, exist_ok=True)
+    return interactive_dir
+
+
+def get_soc_file(robot_id: str) -> Path:
+    return get_interactive_dir(robot_id) / "latest_SOC.txt"
+
+
+def get_rgb_file_a(robot_id: str) -> Path:
+    return get_interactive_dir(robot_id) / "latest_RGB_a.jpg"
+
+
+def get_rgb_file_b(robot_id: str) -> Path:
+    return get_interactive_dir(robot_id) / "latest_RGB_b.jpg"
+
+
+def get_rgb_now_file(robot_id: str) -> Path:
+    return get_interactive_dir(robot_id) / "latest_RGB_now.txt"
+
+
+def get_latest_frame_name_file(robot_id: str) -> Path:
+    return get_interactive_dir(robot_id) / "latest_frame_name.txt"
+
+
+def get_last_run_dir_file(robot_id: str) -> Path:
+    return get_interactive_dir(robot_id) / "last_run_dir.txt"
+
+
+# Legacy support: Default to Robot1 if no robot_id specified
 INTERACTIVE_DIR = BASE_DIR / "data_interactive"
 INTERACTIVE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -64,9 +97,11 @@ def _write_text(path: Path, text: str) -> None:
         print(f"[DataManager] Failed to write {path.name}: {e}")
 
 
-def read_last_run_dir() -> Optional[Path]:
+def read_last_run_dir(robot_id: str = "R1") -> Optional[Path]:
+    """Read last run directory for a specific robot."""
     try:
-        p = LAST_RUN_DIR_FILE.read_text(encoding="utf-8").strip()
+        last_run_file = get_last_run_dir_file(robot_id)
+        p = last_run_file.read_text(encoding="utf-8").strip()
         if not p:
             return None
         path = Path(p)
@@ -75,32 +110,63 @@ def read_last_run_dir() -> Optional[Path]:
         return None
 
 
-def get_latest_soc() -> Optional[float]:
-    """Read the latest SOC value from the interactive data file."""
+def get_latest_soc(robot_id: str = "R1") -> Optional[float]:
+    """Read the latest SOC value from the interactive data file for a specific robot."""
     try:
-        soc_str = SOC_FILE.read_text(encoding="utf-8").strip()
+        soc_file = get_soc_file(robot_id)
+        soc_str = soc_file.read_text(encoding="utf-8").strip()
         return float(soc_str)
     except Exception:
         return None
 
 
-def get_latest_frame_name() -> Optional[str]:
-    """Read the latest frame filename from the interactive data file."""
+def get_latest_frame_name(robot_id: str = "R1") -> Optional[str]:
+    """Read the latest frame filename from the interactive data file for a specific robot."""
     try:
-        return LATEST_FRAME_NAME_FILE.read_text(encoding="utf-8").strip()
+        frame_file = get_latest_frame_name_file(robot_id)
+        return frame_file.read_text(encoding="utf-8").strip()
     except Exception:
         return None
 
 
+def get_latest_rgb_path(robot_id: str = "R1") -> Optional[Path]:
+    """Get the path to the latest RGB image for a specific robot."""
+    try:
+        rgb_now_file = get_rgb_now_file(robot_id)
+        which = rgb_now_file.read_text(encoding="utf-8").strip()
+        if which == "a":
+            return get_rgb_file_a(robot_id)
+        elif which == "b":
+            return get_rgb_file_b(robot_id)
+        else:
+            # Fallback to _a
+            return get_rgb_file_a(robot_id)
+    except Exception:
+        return get_rgb_file_a(robot_id)
+
+
 class DataManager:
-    def __init__(self, base_dir: Path):
+    def __init__(self, base_dir: Path, robot_id: str = "R1"):
         self.base_dir = Path(base_dir)
-        self.training_data_root = self.base_dir / "training_data"
+        self.robot_id = robot_id
+
+        # Robot-specific paths
+        robot_num = int(robot_id[1:])  # "R1" -> 1
+        self.robot_dir = self.base_dir / f"Robot{robot_num}"
+        self.training_data_root = self.robot_dir / "training_data"
 
         self.current_run_dir: Optional[Path] = None
         self.images_dir: Optional[Path] = None
 
         self._preview_toggle_a = True
+
+        # Interactive file paths
+        self.soc_file = get_soc_file(robot_id)
+        self.rgb_file_a = get_rgb_file_a(robot_id)
+        self.rgb_file_b = get_rgb_file_b(robot_id)
+        self.rgb_now_file = get_rgb_now_file(robot_id)
+        self.latest_frame_name_file = get_latest_frame_name_file(robot_id)
+        self.last_run_dir_file = get_last_run_dir_file(robot_id)
 
     # -------------------------
     # Run/session management
@@ -113,12 +179,12 @@ class DataManager:
         self.current_run_dir.mkdir(parents=True, exist_ok=True)
         self.images_dir.mkdir(parents=True, exist_ok=True)
 
-        print(f"[DataManager] New run created → {self.current_run_dir}")
+        print(f"[DataManager] [{self.robot_id}] New run created → {self.current_run_dir}")
 
         try:
-            LAST_RUN_DIR_FILE.write_text(str(self.current_run_dir), encoding="utf-8")
+            self.last_run_dir_file.write_text(str(self.current_run_dir), encoding="utf-8")
         except Exception as e:
-            print(f"[DataManager] Failed to record last run: {e}")
+            print(f"[DataManager] [{self.robot_id}] Failed to record last run: {e}")
 
         return self.current_run_dir, self.images_dir
 
@@ -136,19 +202,19 @@ class DataManager:
             with open(path, "wb") as f:
                 f.write(data)
         except Exception as e:
-            print(f"[DataManager] Failed to save image {path}: {e}")
+            print(f"[DataManager] [{self.robot_id}] Failed to save image {path}: {e}")
 
-        _write_text(LATEST_FRAME_NAME_FILE, path.name)
+        _write_text(self.latest_frame_name_file, path.name)
         try:
-            target = RGB_FILE_A if self._preview_toggle_a else RGB_FILE_B
+            target = self.rgb_file_a if self._preview_toggle_a else self.rgb_file_b
             tmp = target.with_suffix(target.suffix + ".tmp")
             with open(tmp, "wb") as f:
                 f.write(data)
             _safe_replace(tmp, target)
-            _write_text(RGB_NOW_FILE, "a" if self._preview_toggle_a else "b")
+            _write_text(self.rgb_now_file, "a" if self._preview_toggle_a else "b")
             self._preview_toggle_a = not self._preview_toggle_a
         except Exception as e:
-            print(f"[DataManager] Failed to update preview: {e}")
+            print(f"[DataManager] [{self.robot_id}] Failed to update preview: {e}")
 
 
     # -------------------------

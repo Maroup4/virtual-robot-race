@@ -13,7 +13,7 @@ from torchvision import transforms
 from PIL import Image
 
 # Module identification
-MODULE_SOURCE = "Robot1"
+MODULE_SOURCE = "Robot2"
 print(f"[inference_input] Loaded from {MODULE_SOURCE}/")
 
 # Import data_manager from parent directory
@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import data_manager
 
 # Global control values to be accessed externally
-robot_id = "R1"
+robot_id = "R2"
 driveTorque = 0.0
 steerAngle = 0.0
 

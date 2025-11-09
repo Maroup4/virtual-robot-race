@@ -5,6 +5,8 @@
 import asyncio
 import json
 import websockets
+from pathlib import Path
+import data_manager
 
 class RobotWebSocketClient:
     """WebSocket client for connecting to Unity server"""
@@ -112,8 +114,42 @@ class RobotWebSocketClient:
             print(f"[{self.robot_id}] JSON decode error: {e}")
 
     async def handle_binary_message(self, message: bytes):
-        """Handle binary message from server"""
-        print(f"[{self.robot_id}] Binary message received: {len(message)} bytes")
+        """Handle binary message from server (image data)"""
+        try:
+            # Save image to interactive directory using double-buffering
+            # This allows rule-based controller to read the latest image
+            rgb_now_file = data_manager.get_rgb_now_file(self.robot_id)
+            rgb_file_a = data_manager.get_rgb_file_a(self.robot_id)
+            rgb_file_b = data_manager.get_rgb_file_b(self.robot_id)
+            frame_name_file = data_manager.get_latest_frame_name_file(self.robot_id)
+
+            # Determine which buffer to use
+            try:
+                current = rgb_now_file.read_text(encoding="utf-8").strip()
+                use_a = (current != "a")  # Toggle buffer
+            except Exception:
+                use_a = True
+
+            # Write to selected buffer
+            target = rgb_file_a if use_a else rgb_file_b
+            target.write_bytes(message)
+
+            # Update pointer
+            rgb_now_file.write_text("a" if use_a else "b", encoding="utf-8")
+
+            # Update frame name for debug overlay (format: frame_XXXXXX.jpg)
+            if not hasattr(self, '_image_count'):
+                self._image_count = 0
+            self._image_count += 1
+            frame_name = f"frame_{self._image_count:06d}.jpg"
+            frame_name_file.write_text(frame_name, encoding="utf-8")
+
+            # Optional: Periodic logging (every 100 images to reduce spam)
+            if self._image_count % 100 == 1:
+                print(f"[{self.robot_id}] Image received: {len(message)} bytes (count={self._image_count})")
+
+        except Exception as e:
+            print(f"[{self.robot_id}] Error saving image: {e}")
 
     def get_latest_control(self) -> dict:
         """Get latest control command"""
