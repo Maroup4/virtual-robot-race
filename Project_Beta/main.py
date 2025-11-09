@@ -127,13 +127,29 @@ async def build_video_and_open_explorer(robot_config: dict) -> None:
             print(f"[Main] Cleanup after video failed: {e}")
 
 
-async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num: int):
+async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num: int, robot_config: dict):
     """
     Run the control module based on mode string.
     This integrates keyboard/ai/rule_based control with the WebSocket client.
     Imports from Robot{N}/ directory.
     """
     print(f"[Main] Starting control module: {mode} (Robot{robot_num})")
+
+    # Check if keyboard is disabled for this robot
+    if mode == "keyboard" and robot_config.get('KEYBOARD_DISABLED', False):
+        print(f"[Main] Robot{robot_num} keyboard control is DISABLED (another robot has priority)")
+        print(f"[Main] Robot{robot_num} will send zero control commands")
+        # Send zero commands indefinitely
+        while not stop_event.is_set():
+            control_msg = {
+                "type": "control",
+                "robot_id": client.robot_id,
+                "driveTorque": 0.0,
+                "steerAngle": 0.0
+            }
+            await client.send_json(control_msg)
+            await asyncio.sleep(0.05)  # 20Hz
+        return
 
     # Import from Robot{N}/ directory using importlib for explicit module loading
     import importlib.util
@@ -330,14 +346,30 @@ async def main() -> None:
 
     # 1) Load all active robot configs
     robot_configs = {}
+    keyboard_robot = None  # Track which robot gets keyboard control
+
     for robot_num in config.ACTIVE_ROBOTS:
         robot_configs[robot_num] = config.get_robot_config(robot_num)
         rc = robot_configs[robot_num]
+        mode_num = rc.get('MODE_NUM', 1)
+        mode_str = config.get_mode_string(mode_num)
+
         print(f"[Main] Robot{robot_num} config loaded:")
         print(f"  - ROBOT_ID: {rc.get('ROBOT_ID')}")
-        print(f"  - MODE: {config.get_mode_string(rc.get('MODE_NUM', 1))} (MODE_NUM={rc.get('MODE_NUM', 1)})")
+        print(f"  - MODE: {mode_str} (MODE_NUM={mode_num})")
         print(f"  - NAME: {rc.get('NAME', 'Player0000')}")
         print(f"  - RACE_FLAG: {rc.get('RACE_FLAG', 1)}")
+
+        # Check for keyboard mode conflict
+        if mode_str == "keyboard":
+            if keyboard_robot is None:
+                keyboard_robot = robot_num
+                print(f"[Main] ✓ Robot{robot_num} will use keyboard control")
+            else:
+                print(f"[Main] ⚠ WARNING: Robot{robot_num} is set to keyboard mode, but Robot{keyboard_robot} already has keyboard control!")
+                print(f"[Main] ⚠ Robot{robot_num} will be DISABLED (no control input)")
+                # Mark this robot as disabled
+                rc['KEYBOARD_DISABLED'] = True
 
     unity_proc = None
 
@@ -359,7 +391,7 @@ async def main() -> None:
 
         # 4) Create and connect all clients (but don't start control yet)
         all_tasks = []
-        robot_modes = {}  # Store mode for each robot
+        robot_modes = {}  # Store mode and config for each robot
 
         # Phase 1: Connect all robots
         for robot_num in config.ACTIVE_ROBOTS:
@@ -371,10 +403,11 @@ async def main() -> None:
             # Create client
             client = RobotWebSocketClient(
                 robot_id=robot_id,
-                server_url=server_url
+                server_url=server_url,
+                robot_config=rc
             )
             robot_clients[robot_id] = client
-            robot_modes[robot_id] = (mode, robot_num)
+            robot_modes[robot_id] = (mode, robot_num, rc)  # Store config too
 
             # Connect
             await client.connect()
@@ -384,11 +417,11 @@ async def main() -> None:
 
         # Phase 2: Start all control modules and receive loops simultaneously
         for robot_id, client in robot_clients.items():
-            mode, robot_num = robot_modes[robot_id]
+            mode, robot_num, rc = robot_modes[robot_id]
 
             # 5) Start control module and receive loop for this robot
             control_task = asyncio.create_task(
-                run_control_module(client, mode, robot_num)
+                run_control_module(client, mode, robot_num, rc)
             )
             receive_task = asyncio.create_task(
                 client.receive_loop()
@@ -403,6 +436,7 @@ async def main() -> None:
             # Check if any client is still running
             any_running = any(client.running for client in robot_clients.values())
             if not any_running:
+                print("[Main] All clients stopped (server disconnected or race ended)")
                 break
 
             await asyncio.sleep(0.1)

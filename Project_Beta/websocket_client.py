@@ -11,15 +11,25 @@ import data_manager
 class RobotWebSocketClient:
     """WebSocket client for connecting to Unity server"""
 
-    def __init__(self, robot_id: str = "R1", server_url: str = "ws://localhost:12346/robot"):
+    def __init__(self, robot_id: str = "R1", server_url: str = "ws://localhost:12346/robot", robot_config: dict = None):
         self.robot_id = robot_id
         self.server_url = server_url
         self.websocket = None
         self.running = False
+        self.robot_config = robot_config or {}
 
         # 制御コマンド（最新値）
         self.drive_torque = 0.0
         self.steer_angle = 0.0
+
+        # DataManager for saving images (if JPEG_SAVE=1)
+        self.data_manager = None
+        if self.robot_config.get('JPEG_SAVE', 0) == 1:
+            from pathlib import Path
+            base_dir = Path(__file__).parent
+            self.data_manager = data_manager.DataManager(base_dir, robot_id=robot_id)
+            self.data_manager.start_new_run()
+            print(f"[{self.robot_id}] DataManager initialized for image saving")
 
     async def connect(self):
         """Connect to Unity WebSocket server"""
@@ -82,12 +92,14 @@ class RobotWebSocketClient:
                     await self.handle_json_message(message)
                 elif isinstance(message, bytes):
                     await self.handle_binary_message(message)
-        except websockets.exceptions.ConnectionClosed:
-            print(f"[{self.robot_id}] Connection closed by server")
+        except websockets.exceptions.ConnectionClosed as e:
+            print(f"[{self.robot_id}] Connection closed by server (code: {e.code}, reason: {e.reason})")
+            print(f"[{self.robot_id}] Server shutdown detected - stopping client...")
         except Exception as e:
             print(f"[{self.robot_id}] Receive error: {e}")
         finally:
             self.running = False
+            print(f"[{self.robot_id}] Client stopped (running=False)")
 
     async def handle_json_message(self, message: str):
         """Handle JSON message from server"""
@@ -106,6 +118,11 @@ class RobotWebSocketClient:
                 status = data.get("status", "")
                 message = data.get("message", "")
                 print(f"[{self.robot_id}] Server response: {status} - {message}")
+
+            elif msg_type == "metadata":
+                # レース終了時のメタデータ受信
+                print(f"[{self.robot_id}] Metadata received from Unity")
+                await self.save_metadata(data)
 
             else:
                 print(f"[{self.robot_id}] Unknown message type: {msg_type}")
@@ -144,12 +161,56 @@ class RobotWebSocketClient:
             frame_name = f"frame_{self._image_count:06d}.jpg"
             frame_name_file.write_text(frame_name, encoding="utf-8")
 
+            # Save to training_data if JPEG_SAVE=1
+            if self.data_manager is not None:
+                image_path = self.data_manager.images_dir / frame_name
+                self.data_manager.save_image_bytes(image_path, message)
+
             # Optional: Periodic logging (every 100 images to reduce spam)
             if self._image_count % 100 == 1:
                 print(f"[{self.robot_id}] Image received: {len(message)} bytes (count={self._image_count})")
 
         except Exception as e:
             print(f"[{self.robot_id}] Error saving image: {e}")
+
+    async def save_metadata(self, data: dict):
+        """Save race metadata to CSV file and Unity log"""
+        try:
+            if self.data_manager is None or self.data_manager.current_run_dir is None:
+                print(f"[{self.robot_id}] No DataManager - metadata not saved")
+                return
+
+            # Save metadata.csv (tick-by-tick data from Unity)
+            csv_data = data.get('csv_data', '')
+            if csv_data:
+                # Unescape the CSV data (reverse the JSON escaping)
+                csv_data = csv_data.replace('\\n', '\n').replace('\\r', '\r').replace('\\"', '"').replace('\\\\', '\\')
+
+                metadata_file = self.data_manager.current_run_dir / "metadata.csv"
+                metadata_file.write_text(csv_data, encoding='utf-8')
+
+                # Count lines for logging
+                line_count = len(csv_data.split('\n')) - 1  # Subtract header
+                print(f"[{self.robot_id}] Metadata CSV saved to {metadata_file} ({line_count} data rows)")
+            else:
+                print(f"[{self.robot_id}] Warning: No CSV data in metadata")
+
+            # Save unity_log.txt
+            unity_log = data.get('unity_log', '')
+            if unity_log:
+                # Unescape the log data
+                unity_log = unity_log.replace('\\n', '\n').replace('\\r', '\r').replace('\\"', '"').replace('\\\\', '\\')
+
+                log_file = self.data_manager.current_run_dir / "unity_log.txt"
+                log_file.write_text(unity_log, encoding='utf-8')
+                print(f"[{self.robot_id}] Unity log saved to {log_file}")
+            else:
+                print(f"[{self.robot_id}] Warning: No Unity log in metadata")
+
+        except Exception as e:
+            print(f"[{self.robot_id}] Error saving metadata: {e}")
+            import traceback
+            traceback.print_exc()
 
     def get_latest_control(self) -> dict:
         """Get latest control command"""

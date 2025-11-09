@@ -1,0 +1,2 @@
+session_id,robot_id,race_time_ms,lap_count,goal_lap,status,error_code,position_x,position_y,position_z,yaw_deg
+20251109_195614,R1,18644,0,2,Fallen,1,1.245,-0.102,1.41,125.95
