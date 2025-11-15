@@ -6,7 +6,7 @@
 # 2 = table (CSV playback)
 # 3 = rule_based (autonomous lane following)
 # 4 = ai (neural network inference)
-MODE_NUM=2
+MODE_NUM=4
 
 # Robot identifier (used for WebSocket communication)
 ROBOT_ID=R2
@@ -22,7 +22,7 @@ RACE_FLAG=0
 # Image saving:
 # 1 = Save JPEG images during run
 # 0 = Do not save images (faster, less disk usage)
-JPEG_SAVE=0
+JPEG_SAVE=1
 
 # Automatic video creation after race:
 # 1 = Auto-create MP4 video from images

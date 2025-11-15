@@ -17,4 +17,4 @@ ACTIVE_ROBOTS=1,2
 # Unity launch mode:
 # 0 = Launch Unity automatically from Unity_Build.exe
 # 1 = Launch Unity manually (useful for debugging)
-DEBUG_MODE=1
+DEBUG_MODE=0

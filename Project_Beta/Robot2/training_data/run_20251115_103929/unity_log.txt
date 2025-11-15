@@ -1,0 +1,36 @@
+[Logger Initialized at 2025/11/15 10:39:26][10:39:26.255] [Log] [FileLogger] Logging to: C:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Windowsuntime_log.txt
+[10:39:26.265] [Log] [PlayerCameraRGB] Created internal RenderTexture.
+[10:39:26.267] [Log] [PlayerCameraRGB] Created internal RenderTexture.
+[10:39:26.781] [Log] [WebSocketServer] Starting server...
+[10:39:26.782] [Log] [WebSocketServer] Robot registered: R2 (Controller=True, Battery=True)
+[10:39:26.782] [Log] [WebSocketServer] Robot registered: R1 (Controller=True, Battery=True)
+[10:39:26.783] [Log] [WebSocketServer] Total robots discovered: 2
+[10:39:26.841] [Log] [WebSocketServer] Server started on ws://localhost:12346/robot
+[10:39:26.844] [Log] [PlayerCameraRGB] Initialized & subscribed to Tick (20fps) [Server Mode, Robot=R1, Target=R1_CameraRobot, Offset=(0.00, 0.00, 0.00)].
+[10:39:26.844] [Log] [GameManager] PlayerCameraRGB initialized with WebSocketServer (Robot=R1)
+[10:39:26.845] [Log] [PlayerCameraRGB] Initialized & subscribed to Tick (20fps) [Server Mode, Robot=R2, Target=R2_CameraRobot, Offset=(0.00, 0.00, 0.00)].
+[10:39:26.845] [Log] [GameManager] PlayerCameraRGB initialized with WebSocketServer (Robot=R2)
+[10:39:26.845] [Log] [GameManager] Game Started.TickScheduler initialized (20fps)
+[10:39:31.242] [Log] [RaceManager] All robots connected (2/2). Starting race sequence.
+[10:39:31.242] [Log] [RaceManager] Start sequence begun.
+[10:39:31.244] [Log] [DataLogger] Initialized for Robot1 & subscribed to Tick.
+[10:39:31.244] [Log] [RaceManager] DataLogger initialized for R1 (controller=True)
+[10:39:31.245] [Log] [DataLogger] Initialized for Robot2 & subscribed to Tick.
+[10:39:31.245] [Log] [RaceManager] DataLogger initialized for R2 (controller=True)
+[10:39:40.643] [Log] [WebSocketServer] Control applied from R1: drive=-0.215, steer=0.716
+[10:39:40.643] [Log] [WebSocketServer] Control applied from R2: drive=-0.348, steer=0.539
+[10:39:40.669] [Log] [RobotStatus] Robot2 committed a FALSE START! Distance moved: 0.103m, TimerStarted: False
+[10:39:40.669] [Log] [RobotStatus] Robot2: Status text updated to 'False Start'
+[10:39:40.671] [Log] [RobotStatus] Robot2 camera disposed.
+[10:39:40.671] [Log] [RobotStatus] Robot2 GameObject deactivated.
+[10:39:40.671] [Log] [RobotStatus] Robot1 committed a FALSE START! Distance moved: 0.071m, TimerStarted: False
+[10:39:40.672] [Log] [RobotStatus] Robot1: Status text updated to 'False Start'
+[10:39:40.672] [Log] [RobotStatus] Robot1 camera disposed.
+[10:39:40.673] [Log] [RobotStatus] Robot1 GameObject deactivated.
+[10:39:42.770] [Log] [RaceManager] StartAllRobotTimers called. Robot count: 2
+[10:39:42.770] [Log] [RaceManager] Started timer for: Robot1
+[10:39:42.771] [Log] [RaceManager] Started timer for: Robot2
+[10:39:42.771] [Log] [RaceManager] GO! Timers started and start time stamped.
+[10:39:42.776] [Log] [RaceManager] ALL robots finished (2/2)! Ending race.
+[10:39:42.777] [Log] [RaceManager] Race Ended!
+[10:39:42.778] [Log] [RaceManager] Reading log file: C:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Windowsuntime_log.txt

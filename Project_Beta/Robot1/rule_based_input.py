@@ -108,7 +108,7 @@ def update():
             if raw_go:
                 _started_latch = True
                 status_Robot.set_state(status_Robot.RUN_STRAIGHT)
-                print("[RuleBased] START latched")
+                print(f"[{robot_id} RuleBased] START latched")
 
         start_go = _started_latch  # official GO/NO-GO passed to driver
 
@@ -185,10 +185,10 @@ def update():
                     )
 
                 if outp and (_lost_age % 20 == 0 or _lost_age == 1):  # Log periodically
-                    print(f"[RuleBased] Saved debug: {outp}")
+                    print(f"[{robot_id} RuleBased] Saved debug: {outp}")
             except Exception as e:
                 if _lost_age % 20 == 0:  # Log errors periodically
-                    print(f"[RuleBased] Debug overlay save failed: {e}")
+                    print(f"[{robot_id} RuleBased] Debug overlay save failed: {e}")
 
         # === Logging (every 20 frames = ~1 second) ===
         if _lost_age % 20 == 0 or not start_go:
@@ -200,7 +200,7 @@ def update():
             steer_deg = math.degrees(steerAngle)
 
             print(
-                f"[RuleBased] Drive={driveTorque:+.2f} Steer={steerAngle:+.3f}rad({steer_deg:+.1f}°) | "
+                f"[{robot_id} RuleBased] Drive={driveTorque:+.2f} Steer={steerAngle:+.3f}rad({steer_deg:+.1f}°) | "
                 f"GO={start_go} LaneOK={lane_ok}, {mode_label} LostAge={_lost_age} "
                 f"Lat={lat_str} Theta={tht_str} SOC={soc_str}"
             )
@@ -208,7 +208,7 @@ def update():
         return True
 
     except Exception as e:
-        print(f"[RuleBased] Error: {e}")
+        print(f"[{robot_id} RuleBased] Error: {e}")
         return True
 
 
@@ -219,4 +219,4 @@ def reset():
     _lost_age = 0
     driveTorque = 0.0
     steerAngle = 0.0
-    print("[RuleBased] State reset")
+    print(f"[{robot_id} RuleBased] State reset")

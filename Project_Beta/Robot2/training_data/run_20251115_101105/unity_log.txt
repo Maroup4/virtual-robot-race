@@ -1,0 +1,620 @@
+[Logger Initialized at 2025/11/15 10:11:01][10:11:01.478] [Log] [FileLogger] Logging to: C:\AARACE\Unity\Project_Betauntime_log.txt
+[10:11:01.701] [Log] [WebSocketServer] Starting server...
+[10:11:01.702] [Log] [WebSocketServer] Robot registered: R2 (Controller=True, Battery=True)
+[10:11:01.702] [Log] [WebSocketServer] Robot registered: R1 (Controller=True, Battery=True)
+[10:11:01.704] [Log] [WebSocketServer] Total robots discovered: 2
+[10:11:01.709] [Log] [WebSocketServer] Server started on ws://localhost:12346/robot
+[10:11:01.711] [Log] [PlayerCameraRGB] Initialized & subscribed to Tick (20fps) [Server Mode, Robot=R2, Target=R2_CameraRobot, Offset=(0.00, 0.00, 0.00)].
+[10:11:01.711] [Log] [GameManager] PlayerCameraRGB initialized with WebSocketServer (Robot=R2)
+[10:11:01.712] [Log] [PlayerCameraRGB] Initialized & subscribed to Tick (20fps) [Server Mode, Robot=R1, Target=R1_CameraRobot, Offset=(0.00, 0.00, 0.00)].
+[10:11:01.712] [Log] [GameManager] PlayerCameraRGB initialized with WebSocketServer (Robot=R1)
+[10:11:01.712] [Log] [GameManager] Game Started.TickScheduler initialized (20fps)
+[10:11:07.173] [Log] [RaceManager] All robots connected (2/2). Starting race sequence.
+[10:11:07.174] [Log] [RaceManager] Start sequence begun.
+[10:11:07.176] [Log] [DataLogger] Initialized for Robot1 & subscribed to Tick.
+[10:11:07.177] [Log] [RaceManager] DataLogger initialized for R1 (controller=True)
+[10:11:07.177] [Log] [DataLogger] Initialized for Robot2 & subscribed to Tick.
+[10:11:07.178] [Log] [RaceManager] DataLogger initialized for R2 (controller=True)
+[10:11:07.656] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:07.664] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.045] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.046] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.091] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.091] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.138] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.139] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.180] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.201] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.230] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.267] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.276] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.309] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.327] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.357] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.385] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.405] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.434] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.451] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.486] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.494] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.548] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.548] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.599] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.599] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.657] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.657] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.712] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.712] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.762] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.765] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.812] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.812] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.869] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.869] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.926] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.927] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:08.982] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:08.983] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.030] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.031] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.089] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.089] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.135] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.135] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.187] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.188] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.242] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.243] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.299] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.300] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.351] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.351] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.410] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.411] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.465] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.466] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.520] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.520] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.572] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.572] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.622] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.622] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.683] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.684] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.733] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.734] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.780] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.782] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.835] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.836] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.886] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.887] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.933] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.933] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:09.989] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:09.990] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.041] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.043] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.091] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.092] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.150] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.151] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.205] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.205] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.256] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.257] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.308] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.309] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.355] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.356] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.414] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.414] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.460] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.460] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.529] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.529] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.575] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.575] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.634] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.635] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.680] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.681] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.742] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.743] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.791] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.791] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.836] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.837] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.892] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.892] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.949] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.950] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:10.996] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:10.996] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.056] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.057] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.106] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.107] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.165] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.166] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.185] [Log] [RaceManager] StartAllRobotTimers called. Robot count: 2
+[10:11:11.185] [Log] [RaceManager] Started timer for: Robot1
+[10:11:11.186] [Log] [RaceManager] Started timer for: Robot2
+[10:11:11.186] [Log] [RaceManager] GO! Timers started and start time stamped.
+[10:11:11.193] [Log] [RobotStatus] Robot2: StatusText updated to 'Running'. GameObject: StatusText, Active: True
+[10:11:11.194] [Log] [RobotStatus] Robot1: StatusText updated to 'Running'. GameObject: StatusText, Active: True
+[10:11:11.211] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.212] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.260] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.261] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.308] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.309] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.373] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.373] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.432] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.433] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.479] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.480] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.536] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.537] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.584] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.584] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.649] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.651] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.699] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.700] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.753] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.753] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.807] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.807] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.855] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.855] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.910] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:11.910] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:11.956] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.000
+[10:11:11.958] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.000
+[10:11:12.018] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.000
+[10:11:12.018] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.000
+[10:11:12.080] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.000
+[10:11:12.081] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.000
+[10:11:12.138] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.000
+[10:11:12.139] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.000
+[10:11:12.181] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.181] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.233] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.235] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.287] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.289] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.336] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.336] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.393] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.394] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.447] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.448] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.498] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.500] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.554] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.554] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.607] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.608] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.666] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.667] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.714] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.715] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.757] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.757] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.814] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.814] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.859] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.859] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.921] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.922] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:12.977] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:12.977] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:13.022] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:13.023] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:13.077] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:13.077] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:13.085] [Log] [GateTrigger] Gate 0 passed by Body v5
+[10:11:13.107] [Log] [GateTrigger] Gate 0 passed by LapSensor
+[10:11:13.108] [Log] [GateTrigger] Gate 0 passed by Body v5
+[10:11:13.128] [Log] [GateTrigger] Gate 0 passed by LapSensor
+[10:11:13.141] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:13.142] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:13.189] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:13.189] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:13.244] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:13.244] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:13.302] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.100
+[10:11:13.303] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.100
+[10:11:13.355] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.200
+[10:11:13.355] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.200
+[10:11:13.405] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.300
+[10:11:13.406] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.300
+[10:11:13.462] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.400
+[10:11:13.462] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.400
+[10:11:13.508] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.400
+[10:11:13.509] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.400
+[10:11:13.563] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.500
+[10:11:13.563] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.500
+[10:11:13.620] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:13.621] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:13.669] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:13.670] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.600
+[10:11:13.724] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:13.734] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:13.776] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:13.776] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:13.821] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:13.822] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.600
+[10:11:13.876] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:13.877] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:13.935] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:13.937] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.600
+[10:11:13.984] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:13.984] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.600
+[10:11:14.041] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:14.042] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:14.086] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:14.087] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:14.144] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.144] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.197] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.198] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.246] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.247] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.296] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.304] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.352] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:14.353] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:14.401] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:14.402] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:14.453] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:14.453] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:14.517] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.517] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.558] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.558] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.608] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.608] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.668] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.669] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.714] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.715] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.770] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:14.770] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.600
+[10:11:14.828] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:14.829] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:14.867] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.868] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.934] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.935] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:14.985] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:14.986] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:15.040] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:15.041] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:15.089] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:15.089] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:15.139] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:15.139] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:15.186] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:15.188] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:15.229] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.000
+[10:11:15.230] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.000
+[10:11:15.276] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.000
+[10:11:15.277] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.000
+[10:11:15.337] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.000
+[10:11:15.337] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.000
+[10:11:15.387] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:15.388] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:15.451] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:15.452] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:15.509] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.100
+[10:11:15.509] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.100
+[10:11:15.560] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.200
+[10:11:15.560] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.200
+[10:11:15.620] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.200
+[10:11:15.621] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.200
+[10:11:15.666] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.300
+[10:11:15.667] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.300
+[10:11:15.720] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.400
+[10:11:15.721] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.400
+[10:11:15.774] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.500
+[10:11:15.775] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.500
+[10:11:15.824] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:15.825] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.600
+[10:11:15.889] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:15.889] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:15.936] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:15.936] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:15.999] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.000] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:16.040] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:16.058] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.600
+[10:11:16.092] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:16.100] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.600
+[10:11:16.145] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:16.146] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:16.194] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:16.195] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.600
+[10:11:16.251] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:16.251] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:16.305] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.306] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:16.351] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.352] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:16.413] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.413] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:16.465] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.465] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:16.527] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:16.528] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.600
+[10:11:16.568] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:16.568] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:16.618] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:16.619] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.600
+[10:11:16.665] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:16.666] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:16.728] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:16.729] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:16.776] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:16.776] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:16.840] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.840] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:16.886] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.887] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:16.939] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:16.952] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.000] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.000] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.060] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:17.060] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.600
+[10:11:17.107] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:17.107] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.600
+[10:11:17.165] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:17.165] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.600
+[10:11:17.213] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:17.213] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:17.269] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:17.270] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.600
+[10:11:17.322] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.322] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.372] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.372] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.425] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.425] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.477] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.478] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.524] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.525] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.584] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.585] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.630] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.631] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.691] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.691] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.749] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:17.749] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.600
+[10:11:17.791] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:17.791] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:17.852] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:17.854] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:17.904] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:17.905] [Log] [WebSocketServer] Control applied from R2: drive=0.000, steer=0.000
+[10:11:17.946] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.000
+[10:11:17.946] [Log] [WebSocketServer] Control applied from R2: drive=0.250, steer=0.000
+[10:11:18.005] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.000
+[10:11:18.006] [Log] [WebSocketServer] Control applied from R2: drive=0.500, steer=0.000
+[10:11:18.060] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.000
+[10:11:18.064] [Log] [WebSocketServer] Control applied from R2: drive=0.750, steer=0.000
+[10:11:18.118] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.118] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:18.168] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.168] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:18.209] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.210] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:18.273] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.273] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:18.320] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.320] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:18.367] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.367] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:18.425] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.426] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.000
+[10:11:18.476] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.100
+[10:11:18.477] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.100
+[10:11:18.542] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.200
+[10:11:18.542] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.200
+[10:11:18.601] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.300
+[10:11:18.602] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.300
+[10:11:18.645] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.300
+[10:11:18.646] [Log] [WebSocketServer] Control applied from R2: drive=1.000, steer=0.300
+[10:11:18.665] [Log] [RobotStatus] Robot2 fell off track! Y position: -0.1001313
+[10:11:18.666] [Log] [RobotStatus] Robot2 has fallen off the track!
+[10:11:18.666] [Log] [RobotStatus] Robot2: StatusText updated to 'Fallen'. GameObject: StatusText, Active: True
+[10:11:18.668] [Log] [RobotStatus] Robot2 camera disposed.
+[10:11:18.668] [Log] [RobotStatus] Robot2 GameObject deactivated.
+[10:11:18.705] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.300
+[10:11:18.768] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.835] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.900] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:18.941] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.005] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.070] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.131] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.194] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.253] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.306] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=-0.100
+[10:11:19.367] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=-0.100
+[10:11:19.428] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.488] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.557] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.597] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.661] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.704] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.770] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.822] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.874] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.926] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:19.977] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.032] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.086] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.137] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.190] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.244] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.292] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.349] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.403] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.454] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.508] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.564] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:20.630] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:20.693] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.100
+[10:11:20.753] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.200
+[10:11:20.819] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.300
+[10:11:20.861] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.300
+[10:11:20.923] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.400
+[10:11:20.970] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.500
+[10:11:21.036] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:21.077] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.141] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.193] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.239] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.303] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.368] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:21.410] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:21.454] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:21.524] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.578] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.641] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:21.703] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:21.766] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:21.831] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:21.898] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:21.946] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:22.001] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:22.055] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.102] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.162] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.218] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:22.278] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:22.324] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:22.376] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.430] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:22.481] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:22.534] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:22.588] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:22.638] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.682] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.727] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:22.798] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.836] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.898] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:22.952] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.009] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:23.058] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:23.109] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.166] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:23.219] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.278] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.327] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:23.384] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:23.429] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:23.478] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.529] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:23.573] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:23.634] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.687] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.741] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:23.795] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:23.847] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:23.903] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:23.956] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:24.007] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:24.061] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:24.119] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:24.166] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:24.184] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.184] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.201] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.216] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.600
+[10:11:24.222] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.244] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.256] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.264] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.282] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.326] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.366] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.416] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.459] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:24.521] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:24.586] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.600
+[10:11:24.622] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.622] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.644] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.645] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.663] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.684] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.698] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.706] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:24.749] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.802] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.855] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:24.912] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.600
+[10:11:24.962] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.600
+[10:11:25.016] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:25.067] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:25.123] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.600
+[10:11:25.162] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.163] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.188] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:25.230] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:25.288] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:25.335] [Log] [WebSocketServer] Control applied from R1: drive=0.000, steer=0.000
+[10:11:25.392] [Log] [WebSocketServer] Control applied from R1: drive=0.250, steer=0.000
+[10:11:25.445] [Log] [WebSocketServer] Control applied from R1: drive=0.500, steer=0.000
+[10:11:25.497] [Log] [WebSocketServer] Control applied from R1: drive=0.750, steer=0.000
+[10:11:25.504] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.505] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.522] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.544] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.550] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.562] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.602] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.651] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.664] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.664] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.684] [Log] [BodyCollisionHandler] Robot1 collided with wall
+[10:11:25.708] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.760] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.812] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.862] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.917] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:25.971] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.003] [Log] [GateTrigger] Gate 1 passed by Body v5
+[10:11:26.022] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.045] [Log] [GateTrigger] Gate 1 passed by LapSensor
+[10:11:26.075] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.131] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.182] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.232] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.244] [Log] [GateTrigger] Gate 2 passed by Body v5
+[10:11:26.246] [Log] [RobotStatus] Lap ++ → Now: 1
+[10:11:26.282] [Log] [GateTrigger] Gate 2 passed by LapSensor
+[10:11:26.288] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.343] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.393] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.450] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.495] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.545] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.604] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.655] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.713] [Log] [WebSocketServer] Control applied from R1: drive=1.000, steer=0.000
+[10:11:26.724] [Log] [RobotStatus] Robot1 fell off track! Y position: -0.1008818
+[10:11:26.725] [Log] [RobotStatus] Robot1 has fallen off the track!
+[10:11:26.725] [Log] [RobotStatus] Robot1: StatusText updated to 'Fallen'. GameObject: StatusText, Active: True
+[10:11:26.726] [Log] [RobotStatus] Robot1 camera disposed.
+[10:11:26.726] [Log] [RobotStatus] Robot1 GameObject deactivated.
+[10:11:26.733] [Log] [RaceManager] ALL robots finished (2/2)! Ending race.
+[10:11:26.733] [Log] [RaceManager] Race Ended!
+[10:11:26.735] [Log] [RaceManager] Reading log file: C:\AARACE\Unity\Project_Betauntime_log.txt

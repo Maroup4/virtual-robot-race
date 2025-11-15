@@ -77,11 +77,11 @@ def _load_model():
     try:
         model.load_state_dict(torch.load(str(model_path), map_location="cpu"))
         model.eval()
-        print(f"[Inference] Model loaded from {model_path}")
+        print(f"[{robot_id} Inference] Model loaded from {model_path}")
         _model = model
     except FileNotFoundError:
-        print(f"[Inference] WARNING: Model not found at {model_path}")
-        print("[Inference] Using dummy predictions (drive=0.0, steer=0.0)")
+        print(f"[{robot_id} Inference] WARNING: Model not found at {model_path}")
+        print(f"[{robot_id} Inference] Using dummy predictions (drive=0.0, steer=0.0)")
         _model = None
 
     # Image preprocessing
@@ -148,7 +148,7 @@ def update():
             steer_deg = math.degrees(steerAngle)
             soc_str = f"{float(soc):.2f}"
             print(
-                f"[Inference] Drive={driveTorque:+.3f}, "
+                f"[{robot_id} Inference] Drive={driveTorque:+.3f}, "
                 f"Steer={steerAngle:+.3f}rad({steer_deg:+.1f}°), "
                 f"SOC={soc_str}"
             )
@@ -156,7 +156,7 @@ def update():
         return True
 
     except Exception as e:
-        print(f"[Inference] Error: {e}")
+        print(f"[{robot_id} Inference] Error: {e}")
         return True
 
 
@@ -170,4 +170,4 @@ def reset():
     _model_loaded = False
     if hasattr(update, '_frame_count'):
         update._frame_count = 0
-    print("[Inference] State reset")
+    print(f"[{robot_id} Inference] State reset")
