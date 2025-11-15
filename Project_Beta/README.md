@@ -199,9 +199,9 @@ python main.py
 ### 1. Keyboard Control (MODE_NUM=1)
 Manually drive your robot with the keyboard:
 - **W**: Accelerate
-- **S**: Brake/Reverse
-- **A**: Steer left
-- **D**: Steer right
+- **Z**: Brake/Reverse
+- **J**: Steer left
+- **L**: Steer right
 
 ### 2. Table Playback (MODE_NUM=2)
 Replay pre-recorded control data from CSV files.
