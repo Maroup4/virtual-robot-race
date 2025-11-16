@@ -228,7 +228,7 @@ Manually drive your robot with the keyboard:
 ### 2. Table Playback (MODE_NUM=2)
 Replay pre-recorded control data from CSV files.
 
-### 3. Rule-Based AI (MODE_NUM=3)
+### 3. Rule-Based  (MODE_NUM=3)
 Autonomous driving using:
 - Start signal detection
 - Lane following algorithms
@@ -311,7 +311,7 @@ RACE_FLAG=0   # Don't post AI result
 ACTIVE_ROBOTS=1,2
 
 # Robot1/robot_config.txt
-MODE_NUM=3    # Rule-based AI
+MODE_NUM=3    # Rule-based 
 NAME=RuleBot
 
 # Robot2/robot_config.txt
