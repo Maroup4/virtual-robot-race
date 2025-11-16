@@ -254,8 +254,8 @@ Robot1/training_data/
 | `filename` | Image filename linked to this tick (for training) |
 | `soc` | Robot battery State of Charge (%) |
 | `drive_torque` | Drive torque command value sent to robot |
-| `steer` | Steering angle command value (radians) |
-| `status` | Race status: `start` (before GO), `lap0`/`lap1` (racing), `finish` |
+| `steer` | Steering angle command value (radians, positive=right, negative=left) |
+| `status` | Race status: `StartSequence`, `Lap0`/`Lap1`/`Lap2`/`Lap3`, `Finish`, `Fallen`, `FalseStart`, `BatteryDepleted`, `ForceEnd` |
 | `pos_z` | Position in forward direction (meters) |
 | `pos_x` | Position in lateral direction (meters) |
 | `yaw` | Heading angle: 0° at start, positive=right, negative=left (degrees) |
