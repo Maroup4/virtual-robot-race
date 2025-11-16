@@ -57,24 +57,36 @@ Or download ZIP and extract it.
 
 ## 🔧 Step 2: Install Python & Libraries
 
+### Python Installation
 * Download and install **Python 3.10 (64-bit)**:
   [https://www.python.org/downloads/release/python-3100/](https://www.python.org/downloads/release/python-3100/)
 
-* Open Command Prompt or Terminal:
+  ⚠️ **Important**: During installation, check "Add Python to PATH"
 
-```bash
-# Move to the Project_Beta directory
-cd Project_Beta
+### Quick Setup (Recommended)
+📌 **Easiest way**: Simply double-click `setup_env.bat` in the Project_Beta folder.
 
-# Create virtual environment
-python -m venv .venv
+This will automatically:
+- Create virtual environment (.venv)
+- Activate it
+- Install all required packages
 
-# Activate virtual environment
-.venv\Scripts\activate
+### Manual Setup (Alternative)
+If you prefer manual control or setup_env.bat doesn't work:
 
-# Install required packages
-pip install -r requirements.txt
-```
+1. Open **Command Prompt** (not PowerShell)
+2. Navigate to Project_Beta:
+   ```bash
+   cd path\to\virtual-robot-race\Project_Beta
+   ```
+3. Run these commands one by one:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+✅ You'll see `(.venv)` at the start of your command line when virtual environment is active.
 
 ---
 

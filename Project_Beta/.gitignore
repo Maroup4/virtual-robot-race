@@ -1,0 +1,32 @@
+# Specs folder (documentation)
+specs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training data
+Robot*/training_data/
+Robot*/data_interactive/
+
+# Logs
+*.log
+nul

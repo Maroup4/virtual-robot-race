@@ -17,17 +17,17 @@ NAME=Player4321
 # Race participation flag:
 # 1 = Participate in race (results will be posted)
 # 0 = Watch only (no results posted)
-RACE_FLAG=1
+RACE_FLAG=0
 
 # Image saving:
 # 1 = Save JPEG images during run
 # 0 = Do not save images (faster, less disk usage)
-JPEG_SAVE=1
+JPEG_SAVE=0
 
 # Automatic video creation after race:
 # 1 = Auto-create MP4 video from images
 # 0 = Skip video creation
-AUTO_MAKE_VIDEO=1
+AUTO_MAKE_VIDEO=0
 
 # Video settings (only used if AUTO_MAKE_VIDEO=1)
 VIDEO_FPS=20

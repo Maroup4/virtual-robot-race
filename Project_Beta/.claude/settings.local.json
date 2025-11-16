@@ -12,7 +12,8 @@
       "Bash(dir \"c:\\AARACE\\GitProjects\\virtual-robot-race\\Project_Beta\\Robot1\\training_data\" /b 2)",
       "Bash(dir:*)",
       "Bash(findstr:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
