@@ -128,10 +128,7 @@ Project_Beta/
 │   ├── keyboard_input.py    # Manual control
 │   ├── table_input.py       # CSV playback
 │   ├── table_input.csv      # Recorded control data
-│   ├── rule_based_input.py  # Rule-based AI
-│   ├── inference_input.py   # Neural network AI
-│   ├── models/
-│   │   └── model.pth        # AI model (download separately)
+│   ├── rule_based_input.py  # Rule-based Control input
 │   ├── rule_based_algorithms/
 │   │   ├── driver_model.py
 │   │   ├── Linetrace_white.py
@@ -145,6 +142,9 @@ Project_Beta/
 │   │   ├── latest_frame_name.txt  # Current frame filename
 │   │   ├── latest_SOC.txt         # Current battery state of charge
 │   │   └── latest_torque.txt      # Current drive torque value
+│   ├── inference_input.py   # Neural network AI
+│   ├── models/
+│   │   └── model.pth        # AI model (download separately)
 │   └── training_data/       # Recorded runs
 │       └── run_YYYYMMDD_HHMMSS/
 │           ├── images/
