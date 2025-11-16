@@ -161,11 +161,11 @@ Project_Beta/
 HOST=localhost
 PORT=12346
 
-# Which robots to activate (comma-separated)
+# Which robots to activate (comma-separated, Beta: max 2 robots)
 ACTIVE_ROBOTS=1,2    # Both robots active
 # ACTIVE_ROBOTS=1    # Only Robot1
 
-DEBUG_MODE=0         # 0=Auto-launch Unity, 1=Manual launch
+DEBUG_MODE=0         # 0=Auto-launch Unity (recommended), 1=Manual (advanced)
 ```
 
 ### Per-Robot Settings (`Robot1/robot_config.txt`, `Robot2/robot_config.txt`)
@@ -187,7 +187,7 @@ RACE_FLAG=1          # 1=Post results to leaderboard, 0=Practice only
 DATA_SAVE=1          # 1=Save CSV and images, 0=Don't save
 AUTO_MAKE_VIDEO=0    # 1=Auto-create video after race
 
-# Video settings
+# Advanced video settings (usually no need to change)
 VIDEO_FPS=20
 INFER_FPS=1
 ```
