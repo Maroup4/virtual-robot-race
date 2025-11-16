@@ -30,3 +30,4 @@ Robot*/data_interactive/
 # Logs
 *.log
 nul
+Windows/runtime_log.txt
