@@ -14,6 +14,7 @@ print(f"[rule_based_input] Loaded from {MODULE_SOURCE}/")
 
 # Import data_manager functions for Robot2
 sys.path.insert(0, str(Path(__file__).parent.parent))  # Add Project_Beta to path
+sys.path.insert(0, str(Path(__file__).parent))  # Add Robot2 to path (for rule_based_algorithms)
 import data_manager
 
 # Import rule-based algorithms

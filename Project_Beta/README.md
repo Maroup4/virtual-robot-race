@@ -408,4 +408,12 @@ Please share your test results with us via Discord or GitHub Issues. 😊
 
 ---
 
+## Changelog
+
+### 2025-11-30
+- **Fix**: Rule-based mode (MODE_NUM=3) now works correctly when launched via `main.py`
+  - Fixed module import path issue for `rule_based_algorithms` in Robot1/Robot2
+
+---
+
 Race your Algorithm. Challenge the World. ✨
