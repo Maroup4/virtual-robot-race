@@ -85,3 +85,8 @@ Project_Beta/rulebasesample/**
 # Python キャッシュ
 Project_Beta/__pycache__/
 
+# Robot config (user-specific settings)
+**/robot_config.txt
+
+# Claude Code settings
+.claude/
