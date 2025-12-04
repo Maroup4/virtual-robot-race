@@ -96,7 +96,7 @@ The AI mode requires a trained model file `model.pth`.
 
 > ⚠️ This file is **not included** in the repository due to GitHub's 100MB limit.
 
-👉 [Download model.pth from Google Drive](https://drive.google.com/file/d/19qWtxAC1ABYiK1CGDg9A0PDX67u39I_v/view?usp=sharing)
+👉 [Download model.pth from Google Drive](https://drive.google.com/file/d/1NDL3A2lWDgXdy7OUWctyoR35jtYqthWD/view?usp=sharing)
 
 After downloading, place the file in:
 

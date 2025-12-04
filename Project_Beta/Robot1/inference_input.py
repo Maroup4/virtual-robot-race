@@ -1,14 +1,21 @@
-# inference_input.py (Robot1 version - New Architecture)
-# AI inference using a trained PyTorch model to predict drive/steer from RGB image + SOC
-# Compatible with Unity Server + Python Client architecture
-# Updated for steer-type control (driveTorque, steerAngle)
+# inference_input.py (Robot1 version - Updated for CNN Model)
+# ==============================================================================
+# AI Inference Engine - The Driver's Brain
+# ==============================================================================
+#
+# This is the core inference engine that runs the AI model.
+# It reads camera images, runs neural network inference, and outputs controls.
+#
+# IMPORTANT: This file is the FRAMEWORK - don't modify it directly.
+# To customize AI behavior, edit: ai_control_strategy.py
+#
+# ==============================================================================
 
-import time
 import os
 import sys
 from pathlib import Path
+
 import torch
-import torch.nn as nn
 from torchvision import transforms
 from PIL import Image
 
@@ -17,8 +24,54 @@ MODULE_SOURCE = "Robot1"
 print(f"[inference_input] Loaded from {MODULE_SOURCE}/")
 
 # Import data_manager from parent directory
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent))  # Add Project_Beta to path
 import data_manager
+
+# Get the directory of this file (Robot1/)
+_this_dir = Path(__file__).parent
+
+# Import model from same directory using importlib to avoid cache issues
+import importlib.util
+_model_spec = importlib.util.spec_from_file_location(
+    f"{MODULE_SOURCE}.model",
+    _this_dir / "model.py"
+)
+_model_module = importlib.util.module_from_spec(_model_spec)
+_model_spec.loader.exec_module(_model_module)
+DrivingNetwork = _model_module.DrivingNetwork
+
+# Import AI control strategy (user-customizable) using importlib
+try:
+    _strategy_spec = importlib.util.spec_from_file_location(
+        f"{MODULE_SOURCE}.ai_control_strategy",
+        _this_dir / "ai_control_strategy.py"
+    )
+    _strategy_module = importlib.util.module_from_spec(_strategy_spec)
+    _strategy_spec.loader.exec_module(_strategy_module)
+    should_wait_for_start = _strategy_module.should_wait_for_start
+    adjust_output = _strategy_module.adjust_output
+    on_race_start = _strategy_module.on_race_start
+    STRATEGY = _strategy_module.STRATEGY
+    print(f"[inference_input] Strategy loaded: {STRATEGY}")
+except Exception as e:
+    print(f"[inference_input] WARNING: ai_control_strategy.py not found, using defaults: {e}")
+    # Default fallback: hybrid with rule-based start detection
+    STRATEGY = "hybrid"
+    def should_wait_for_start(pil_img, race_started):
+        if not race_started:
+            # Import using importlib to avoid cache issues
+            _percept_spec = importlib.util.spec_from_file_location(
+                f"{MODULE_SOURCE}.perception_Startsignal",
+                _this_dir / "rule_based_algorithms" / "perception_Startsignal.py"
+            )
+            _percept_module = importlib.util.module_from_spec(_percept_spec)
+            _percept_spec.loader.exec_module(_percept_module)
+            return not _percept_module.detect_start_signal(pil_img)
+        return False
+    def adjust_output(drive, steer, pil_img, soc):
+        return drive, steer
+    def on_race_start():
+        pass
 
 # Global control values to be accessed externally
 robot_id = "R1"
@@ -29,6 +82,11 @@ steerAngle = 0.0
 _model = None
 _transform = None
 _model_loaded = False
+_device = None
+
+# Race state
+_race_started = False
+
 
 def get_latest_command():
     """Return the latest control command in the expected format."""
@@ -44,38 +102,28 @@ def saturate(value, min_val=-1.0, max_val=1.0):
     """Clamp the input value within the specified range."""
     return max(min_val, min(max_val, value))
 
-class SteerNet(nn.Module):
-    """Simple MLP for drive/steer prediction based on image + SOC."""
-    def __init__(self, input_size):
-        super().__init__()
-        self.fc = nn.Sequential(
-            nn.Linear(input_size, 512),
-            nn.ReLU(),
-            nn.Linear(512, 128),
-            nn.ReLU(),
-            nn.Linear(128, 2)  # Output: [drive_torque, steer_angle]
-        )
-
-    def forward(self, x):
-        return self.fc(x)
-
 
 def _load_model():
     """Load the trained model (called once on first update)."""
-    global _model, _transform, _model_loaded
+    global _model, _transform, _model_loaded, _device
 
     if _model_loaded:
         return
 
     _model_loaded = True
 
+    # Setup device
+    _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"[{robot_id} Inference] Using device: {_device}")
+
     # Load trained model
     model_path = Path(__file__).parent / "models" / "model.pth"
-    input_size = 224 * 224 * 3 + 1  # Image (flattened) + 1 SOC
-    model = SteerNet(input_size)
+
+    model = DrivingNetwork()
 
     try:
-        model.load_state_dict(torch.load(str(model_path), map_location="cpu"))
+        model.load_state_dict(torch.load(str(model_path), map_location=_device))
+        model.to(_device)
         model.eval()
         print(f"[{robot_id} Inference] Model loaded from {model_path}")
         _model = model
@@ -83,11 +131,18 @@ def _load_model():
         print(f"[{robot_id} Inference] WARNING: Model not found at {model_path}")
         print(f"[{robot_id} Inference] Using dummy predictions (drive=0.0, steer=0.0)")
         _model = None
+    except Exception as e:
+        print(f"[{robot_id} Inference] WARNING: Failed to load model: {e}")
+        _model = None
 
-    # Image preprocessing
+    # Image preprocessing (must match training transforms)
     _transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
+        transforms.Normalize(
+            mean=[0.485, 0.456, 0.406],
+            std=[0.229, 0.224, 0.225]
+        )
     ])
 
 
@@ -96,8 +151,10 @@ def update():
     Single update cycle for AI inference control.
     Called repeatedly by main.py at ~20Hz.
     Returns True if successful, False if should stop.
+
+    Control flow is determined by ai_control_strategy.py
     """
-    global driveTorque, steerAngle
+    global driveTorque, steerAngle, _race_started
 
     try:
         # Load model on first call
@@ -119,20 +176,46 @@ def update():
         if soc is None:
             soc = 1.0  # Default SOC if unavailable
 
-        # === Inference ===
+        # === Strategy: Check if should wait ===
+        # Delegates to ai_control_strategy.py
+        if should_wait_for_start(pil_img, _race_started):
+            # Waiting for start signal - output zero
+            driveTorque = 0.0
+            steerAngle = 0.0
+
+            # Log waiting status periodically
+            if not hasattr(update, '_frame_count'):
+                update._frame_count = 0
+            update._frame_count += 1
+            if update._frame_count % 40 == 0:  # Every 2 seconds
+                print(f"[{robot_id} Inference] Waiting for start signal... (Strategy: {STRATEGY})")
+            return True
+
+        # === Race Start Detection ===
+        if not _race_started:
+            _race_started = True
+            print(f"[{robot_id} Inference] RACE STARTED! (Strategy: {STRATEGY})")
+            on_race_start()
+
+        # === AI Inference ===
         if _model is not None:
+            # Prepare input tensors
+            image_tensor = _transform(pil_img).unsqueeze(0).to(_device)  # [1, 3, 224, 224]
+            soc_tensor = torch.tensor([[soc]], dtype=torch.float32).to(_device)  # [1, 1]
+
             # Run inference
-            image_tensor = _transform(pil_img).view(-1)
-            soc_tensor = torch.tensor([soc], dtype=torch.float32)
-            input_tensor = torch.cat([image_tensor, soc_tensor]).unsqueeze(0)
-
             with torch.no_grad():
-                output = _model(input_tensor)
-                raw_drive = output[0][0].item()
-                raw_steer = output[0][1].item()
+                output = _model(image_tensor, soc_tensor)
+                raw_drive = output[0, 0].item()
+                raw_steer = output[0, 1].item()
 
-                driveTorque = saturate(raw_drive, -1.0, 1.0)
-                steerAngle = saturate(raw_steer, -0.785, 0.785)  # ~±45 deg limit
+            # Apply saturation
+            raw_drive = saturate(raw_drive, -1.0, 1.0)
+            raw_steer = saturate(raw_steer, -0.785, 0.785)  # ~±45 deg limit
+
+            # === Strategy: Adjust output ===
+            # Delegates to ai_control_strategy.py
+            driveTorque, steerAngle = adjust_output(raw_drive, raw_steer, pil_img, soc)
         else:
             # Dummy output if no model
             driveTorque = 0.0
@@ -149,7 +232,7 @@ def update():
             soc_str = f"{float(soc):.2f}"
             print(
                 f"[{robot_id} Inference] Drive={driveTorque:+.3f}, "
-                f"Steer={steerAngle:+.3f}rad({steer_deg:+.1f}°), "
+                f"Steer={steerAngle:+.3f}rad({steer_deg:+.1f}deg), "
                 f"SOC={soc_str}"
             )
 
@@ -157,17 +240,28 @@ def update():
 
     except Exception as e:
         print(f"[{robot_id} Inference] Error: {e}")
+        import traceback
+        traceback.print_exc()
         return True
 
 
 def reset():
     """Reset AI inference state."""
-    global driveTorque, steerAngle, _model, _transform, _model_loaded
+    global driveTorque, steerAngle, _model, _transform, _model_loaded, _device, _race_started
     driveTorque = 0.0
     steerAngle = 0.0
     _model = None
     _transform = None
     _model_loaded = False
+    _device = None
+    _race_started = False
     if hasattr(update, '_frame_count'):
         update._frame_count = 0
+    # Reset start signal detector state (for hybrid mode)
+    try:
+        from rule_based_algorithms.perception_Startsignal import detect_start_signal
+        if hasattr(detect_start_signal, 'ready_to_go'):
+            detect_start_signal.ready_to_go = False
+    except ImportError:
+        pass
     print(f"[{robot_id} Inference] State reset")

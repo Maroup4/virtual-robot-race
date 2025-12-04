@@ -18,14 +18,15 @@ def detect_start_signal(img):
 
     try:
         width, height = img.size
-        top = 0
-        bottom = int(height * 0.2)
+        top = int(height * 0.05)
+        bottom = int(height * 0.25)
 
         # Define 3 rectangular regions (start lamps) on the top part of the image
+        # Robot2: Lamps are on the LEFT side of the image
         lamp_positions = [
-            (int(width * 0.35), int(width * 0.5)),
-            (int(width * 0.55), int(width * 0.7)),
-            (int(width * 0.75), int(width * 0.9))
+            (int(width * 0.18), int(width * 0.33)),  # ランプ1: 18%〜33%
+            (int(width * 0.33), int(width * 0.48)),  # ランプ2: 33%〜48% (左へ)
+            (int(width * 0.48), int(width * 0.63))   # ランプ3: 48%〜63% (左へ)
         ]
 
         red_count = 0

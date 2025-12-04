@@ -200,12 +200,18 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
         elif mode == "ai":
             # Load inference_input from Robot{N}/ directory explicitly
             module_file = robot_dir / "inference_input.py"
-            spec = importlib.util.spec_from_file_location(
-                f"Robot{robot_num}.inference_input",
-                module_file
-            )
-            inference_input = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(inference_input)
+            try:
+                spec = importlib.util.spec_from_file_location(
+                    f"Robot{robot_num}.inference_input",
+                    module_file
+                )
+                inference_input = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(inference_input)
+            except Exception as e:
+                print(f"[Main] Failed to load inference_input: {e}")
+                import traceback
+                traceback.print_exc()
+                return
 
             # AI mode: Poll AI inference and send to Unity
             print("[Main] AI mode: Autonomous driving with neural network")

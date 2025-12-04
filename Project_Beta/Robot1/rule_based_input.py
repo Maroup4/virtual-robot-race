@@ -5,6 +5,7 @@
 import time
 import os
 import sys
+import importlib.util
 from pathlib import Path
 from PIL import Image
 
@@ -13,15 +14,25 @@ MODULE_SOURCE = "Robot1"
 print(f"[rule_based_input] Loaded from {MODULE_SOURCE}/")
 
 # Import data_manager functions for Robot1
-sys.path.insert(0, str(Path(__file__).parent.parent))  # Add Project_Beta to path
-sys.path.insert(0, str(Path(__file__).parent))  # Add Robot1 to path (for rule_based_algorithms)
+_this_dir = Path(__file__).parent
+sys.path.insert(0, str(_this_dir.parent))  # Add Project_Beta to path
+sys.path.insert(0, str(_this_dir))  # Add Robot1 to path (for rule_based_algorithms)
 import data_manager
 
 # Import rule-based algorithms
 from rule_based_algorithms import status_Robot
-from rule_based_algorithms import perception_Startsignal
 from rule_based_algorithms.sliding_windows import sliding_windows_white
 from rule_based_algorithms.driver_model import DriverModel, DriverConfig
+
+# Load perception_Startsignal using importlib to avoid module cache conflicts
+_startsignal_path = _this_dir / "rule_based_algorithms" / "perception_Startsignal.py"
+_startsignal_spec = importlib.util.spec_from_file_location(
+    f"perception_Startsignal_{MODULE_SOURCE}",  # Unique module name per robot
+    _startsignal_path
+)
+_startsignal_module = importlib.util.module_from_spec(_startsignal_spec)
+_startsignal_spec.loader.exec_module(_startsignal_module)
+detect_start_signal = _startsignal_module.detect_start_signal
 
 # Debug utilities
 from rule_based_algorithms.debug_utils import annotate_and_save_canvas
@@ -105,7 +116,7 @@ def update():
 
         # === Start signal (latched) ===
         if not _started_latch:
-            raw_go = perception_Startsignal.detect_start_signal(pil_img)
+            raw_go = detect_start_signal(pil_img)
             if raw_go:
                 _started_latch = True
                 status_Robot.set_state(status_Robot.RUN_STRAIGHT)
