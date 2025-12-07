@@ -29,19 +29,20 @@ class DriverConfig:
     lateral_norm_halfwidth_px: Optional[float] = None  # None → image_width/2
 
     # Speed planning (auto slow-down in curves)
-    v_min: float = 0.20
-    v_max: float = 0.70
+    v_min: float = 0.15             # Reduced for better curve handling
+    v_max: float = 0.55             # Reduced for stability (was 0.70)
     slow_w_theta: float = 0.70
     slow_w_lateral: float = 0.60
 
     # Steering blend (Yaw: right is +)
-    k_theta: float = 0.90          # Gain for theta (angle)
-    k_lateral: float = 0.60        # Gain for lateral offset
+    # Note: Reduced gains for torque-steer type (was differential drive gains)
+    k_theta: float = 0.45          # Gain for theta (was 0.90)
+    k_lateral: float = 0.30        # Gain for lateral offset (was 0.60)
     steer_limit: float = 0.785     # Max steer angle (radians, ~45 deg)
 
     # Output shaping
     torque_limit: float = 1.00
-    alpha_smooth: float = 0.30     # 0: off, 1: heavy smoothing (IIR)
+    alpha_smooth: float = 0.50     # Increased smoothing to reduce oscillation (was 0.30)
 
     # Battery (SOC) scaling
     use_soc_scaling: bool = True
@@ -60,6 +61,15 @@ class DriverConfig:
     search_steer_const: float = 0.6      # [rad] constant steer angle during search (~34 deg)
     loop_period_s: float = 0.050         # for logs only
 
+    # ====== Pulse control for curves (mimics keyboard "tap-tap" throttle) ======
+    pulse_enabled: bool = True           # Enable pulse throttle in curves
+    pulse_theta_threshold: float = 25.0  # Start pulsing when |theta| > this [deg] (raised to avoid straight-line trigger)
+    pulse_lateral_threshold: float = 30.0  # Or when |lateral| > this [px] (raised)
+    pulse_on_frames: int = 3             # Frames with throttle ON (was 2)
+    pulse_off_frames: int = 3            # Frames with throttle OFF (coast) (was 2)
+    pulse_drive_on: float = 0.35         # Throttle value during ON phase (was 0.50)
+    pulse_drive_off: float = 0.0         # Throttle value during OFF phase (coast)
+
 
 class DriverModel:
     """Given lane_mode, produce (drive_torque, steer_angle) for steer-type control."""
@@ -77,6 +87,9 @@ class DriverModel:
         # For hold mode, remember most recent base/steer
         self._last_base = 0.0
         self._last_steer = 0.0
+        # Pulse control state
+        self._pulse_counter = 0  # Frame counter for pulse timing
+        self._pulse_phase = True  # True = ON phase, False = OFF phase
         self.last_debug: Dict[str, float | int | str | bool | None] = {}
 
     def update(
@@ -89,6 +102,7 @@ class DriverModel:
         valid_lane: bool,
         lane_mode: str = "normal",   # "normal" / "hold" / "search"
         lost_age: int = 0,           # consecutive lost-frame count (for info)
+        single_side: bool = False,   # True if only one lane detected (estimated other)
     ) -> Tuple[float, float]:
         """Compute (drive_torque, steer_angle) for the current frame."""
         # Geometry update
@@ -142,10 +156,42 @@ class DriverModel:
                 self._last_base = base
                 self._last_steer = steer
 
-                drive = base * scale * self.cfg.forward_sign
+                # ====== Pulse control for curves (ちょんちょんアクセル) ======
+                # Disable pulse when single_side (estimated lane is less accurate)
+                use_pulse = False
+                if self.cfg.pulse_enabled and not single_side:
+                    # Check if we're in a curve that needs pulse control
+                    if (abs(theta_deg) > self.cfg.pulse_theta_threshold or
+                        abs(lateral_px) > self.cfg.pulse_lateral_threshold):
+                        use_pulse = True
+
+                if use_pulse:
+                    # Pulse mode: alternate between ON and OFF phases
+                    if self._pulse_phase:
+                        # ON phase
+                        drive = self.cfg.pulse_drive_on * scale * self.cfg.forward_sign
+                        self._pulse_counter += 1
+                        if self._pulse_counter >= self.cfg.pulse_on_frames:
+                            self._pulse_counter = 0
+                            self._pulse_phase = False
+                    else:
+                        # OFF phase (coast)
+                        drive = self.cfg.pulse_drive_off * self.cfg.forward_sign
+                        self._pulse_counter += 1
+                        if self._pulse_counter >= self.cfg.pulse_off_frames:
+                            self._pulse_counter = 0
+                            self._pulse_phase = True
+                else:
+                    # Normal continuous control
+                    drive = base * scale * self.cfg.forward_sign
+                    # Reset pulse state when not in curve
+                    self._pulse_counter = 0
+                    self._pulse_phase = True
+
                 drive, steer = self._post_process(drive, steer)
                 self._store_debug(True, True, "normal", lateral_px, theta_deg,
-                                  lateral_n, theta_rad, steer, drive, steer, soc, base, scale, lost_age)
+                                  lateral_n, theta_rad, steer, drive, steer, soc, base, scale, lost_age,
+                                  use_pulse=use_pulse, pulse_phase=self._pulse_phase)
                 return drive, steer
 
         # ---------------- hold ----------------
@@ -199,6 +245,8 @@ class DriverModel:
         base: Optional[float],
         scale: Optional[float],
         lost_age: int,
+        use_pulse: bool = False,
+        pulse_phase: bool = True,
     ) -> None:
         """Save last-frame debug values (read by overlay)."""
         self.last_debug = {
@@ -219,6 +267,9 @@ class DriverModel:
             "half_width_px": float(self._half_w),
             "forward_sign": int(self.cfg.forward_sign),
             "loop_period_s": float(self.cfg.loop_period_s),
+            # Pulse control info
+            "use_pulse": bool(use_pulse),
+            "pulse_phase": "ON" if pulse_phase else "OFF",
         }
 
 

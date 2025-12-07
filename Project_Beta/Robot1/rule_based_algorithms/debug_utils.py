@@ -15,9 +15,9 @@ def pil_to_bgr(pil_img):
     """Convert PIL.Image to OpenCV BGR ndarray."""
     return cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
 
-def _put_text(img: np.ndarray, text: str, xy: Tuple[int, int], *, scale: float = 0.5, thick: int = 1) -> None:
-    """Readable white text with black outline (slightly small by default)."""
-    font = cv2.FONT_HERSHEY_SIMPLEX
+def _put_text(img: np.ndarray, text: str, xy: Tuple[int, int], *, scale: float = 0.28, thick: int = 1) -> None:
+    """Readable white text with black outline (matching sliding_windows.py style)."""
+    font = cv2.FONT_HERSHEY_DUPLEX  # Unified with sliding_windows.py
     x, y = xy
     cv2.putText(img, text, (x, y), font, scale, (0, 0, 0), thick + 1, cv2.LINE_AA)
     cv2.putText(img, text, (x, y), font, scale, (255, 255, 255), thick, cv2.LINE_AA)
@@ -27,8 +27,11 @@ def _resolve_outpath(out_dir: str, *, frame_name: Optional[str] = None, src_path
     Decide the output filename.
     - If frame_name is provided, use "debug_{basename(frame_name)}".
     - Otherwise, use timestamp + (a/b fallback inferred from src_path).
+    - Output is placed in out_dir/output/ subdirectory.
     """
-    ensure_dir(out_dir)
+    # Use output/ subdirectory
+    actual_out_dir = os.path.join(out_dir, "output")
+    ensure_dir(actual_out_dir)
     if frame_name:
         base = os.path.basename(frame_name)  # avoid accidental subdirs
         out_name = f"debug_{base}"
@@ -36,7 +39,7 @@ def _resolve_outpath(out_dir: str, *, frame_name: Optional[str] = None, src_path
         tag = "a" if (src_path and "latest_RGB_a" in src_path) else "b"
         ts  = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]
         out_name = f"{ts}_latest_RGB_{tag}.jpg"
-    return os.path.join(out_dir, out_name)
+    return os.path.join(actual_out_dir, out_name)
 
 def _draw_steer_vector(img: np.ndarray, drive_tq: float, steer_ang: float, *, radius: int = 34, pad: int = 16) -> None:
     """
@@ -82,8 +85,8 @@ def annotate_and_save_canvas(
     frame_name: Optional[str] = None,
     src_path: Optional[str] = None,
     jpeg_quality: int = 85,
-    origin: Tuple[int, int] = (10, 22),    # top-left start
-    line: int = 22,                        # line spacing
+    origin: Tuple[int, int] = (6, 12),     # top-left start (reduced for smaller font)
+    line: int = 12,                        # line spacing (reduced for smaller font)
 ) -> Optional[str]:
     """
     Overlay a minimal HUD (mode + drive/steer) on the already-rendered SW canvas and save it.
@@ -94,15 +97,21 @@ def annotate_and_save_canvas(
 
     img = canvas_bgr.copy()
 
-    # Top-left HUD: Mode / drive & steer (no black panel)
+    # Top-left HUD: Frame name / Mode / drive & steer (no black panel)
     steer_deg = math.degrees(steer_angle)
     x, y = origin
+
+    # Frame name (e.g., "frame_000123.jpg")
+    if frame_name:
+        display_name = os.path.basename(frame_name)
+        _put_text(img, display_name, (x, y)); y += line
+
     _put_text(img, f"Mode: {mode}",                           (x, y)); y += line
     _put_text(img, f"Drive : {drive_torque:+.3f}",            (x, y)); y += line
-    _put_text(img, f"Steer : {steer_angle:+.3f}rad ({steer_deg:+.1f}°)", (x, y))
+    _put_text(img, f"Steer : {steer_deg:+.1f} deg", (x, y))
 
-    # Top-right steer vector (kept compact and padded not to overlap ROI)
-    _draw_steer_vector(img, drive_torque, steer_angle, radius=34, pad=16)
+    # Top-right steer vector (reduced size for smaller HUD)
+    _draw_steer_vector(img, drive_torque, steer_angle, radius=24, pad=10)
 
     out_path = _resolve_outpath(out_dir, frame_name=frame_name, src_path=src_path)
     cv2.imwrite(out_path, img, [int(cv2.IMWRITE_JPEG_QUALITY), int(jpeg_quality)])
@@ -118,8 +127,8 @@ def overlay_and_save(
     frame_name: Optional[str] = None,
     src_path: Optional[str] = None,
     jpeg_quality: int = 85,
-    origin: Tuple[int, int] = (10, 22),
-    line: int = 22,
+    origin: Tuple[int, int] = (6, 12),    # reduced for smaller font
+    line: int = 12,                        # reduced for smaller font
 ) -> str:
     """
     When no SW canvas is available, draw a full HUD on the raw frame and save:
@@ -138,18 +147,24 @@ def overlay_and_save(
     mode = (driver_debug or {}).get("lane_mode", "unknown")
 
     x, y = origin
+
+    # Frame name (e.g., "frame_000123.jpg")
+    if frame_name:
+        display_name = os.path.basename(frame_name)
+        _put_text(bgr, display_name, (x, y)); y += line
+
     _put_text(bgr, f"Mode: {mode}", (x, y)); y += line
     _put_text(bgr, f"Lateral : {'None' if lateral is None else f'{lateral:+.1f} px'}", (x, y)); y += line
     _put_text(bgr, f"Theta   : {'None' if theta   is None else f'{theta:+.1f} deg'}", (x, y)); y += line
     _put_text(bgr, f"Drive   : {'None' if drive is None else f'{drive:+.3f}'}",  (x, y)); y += line
     if steer is not None:
         steer_deg = math.degrees(steer)
-        _put_text(bgr, f"Steer   : {steer:+.3f}rad ({steer_deg:+.1f}°)", (x, y))
+        _put_text(bgr, f"Steer   : {steer_deg:+.1f} deg", (x, y))
     else:
         _put_text(bgr, f"Steer   : None", (x, y))
 
     if drive is not None and steer is not None:
-        _draw_steer_vector(bgr, float(drive), float(steer), radius=34, pad=16)
+        _draw_steer_vector(bgr, float(drive), float(steer), radius=24, pad=10)
 
     out_path = _resolve_outpath(out_dir, frame_name=frame_name, src_path=src_path)
     cv2.imwrite(out_path, bgr, [int(cv2.IMWRITE_JPEG_QUALITY), int(jpeg_quality)])
