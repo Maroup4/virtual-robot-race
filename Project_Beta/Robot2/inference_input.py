@@ -98,6 +98,20 @@ def get_latest_command():
     }
 
 
+def preload_model():
+    """
+    Preload the AI model before the control loop starts.
+    Call this BEFORE the race starts to avoid model loading delays
+    during the start signal sequence.
+    """
+    print(f"[{robot_id} Inference] Preloading AI model...")
+    _load_model()
+    if _model is not None:
+        print(f"[{robot_id} Inference] Model preloaded successfully!")
+    else:
+        print(f"[{robot_id} Inference] WARNING: Model preload failed (will use dummy output)")
+
+
 def saturate(value, min_val=-1.0, max_val=1.0):
     """Clamp the input value within the specified range."""
     return max(min_val, min(max_val, value))
