@@ -13,12 +13,18 @@ import cv2, os, glob, csv, argparse
 from typing import Optional
 
 # ===== Parameters (adjust if needed) =====
-ROI_TOP_FRAC  = 0.40       # ROI top (fraction of image height)
-ROI_BOT_FRAC  = 0.70       # ROI bottom
-NWINDOWS      = 9          # number of vertical windows
+ROI_TOP_FRAC  = 0.35       # ROI top (fraction of image height) - extended upward for curve visibility
+ROI_BOT_FRAC  = 0.88       # ROI bottom - extended downward for curve handling
+NWINDOWS      = 12         # number of vertical windows (increased for extended ROI)
 MARGIN        = 60         # half-width of each window [px]
 MINPIX        = 50         # re-centering threshold (min points in window)
 KERNEL        = 3          # morphology kernel size
+
+# ===== Validation thresholds =====
+MIN_POINTS_EACH_SIDE = 150  # Minimum points required for valid lane detection per side
+LATERAL_MAX_PX = 80.0       # Maximum acceptable lateral offset [px]
+THETA_MAX_DEG = 75.0        # Maximum acceptable heading angle [deg] (raised for sharp curves)
+LANE_WIDTH_PX = 100         # Estimated lane width for single-side fallback [px]
 
 # Window colors (BGR)
 WIN_COLOR_LEFT  = (255, 255, 0)   # bright cyan
@@ -41,16 +47,17 @@ class SWResult:
     theta_deg: Optional[float] = None
     img_width: Optional[int] = None
     canvas_bgr: Optional[np.ndarray] = None   # drawn canvas (BGR)
+    single_side: bool = False  # True if only one lane was detected (estimated other)
 
 # ---------- HUD text ----------
-def _put_text_bottom(img: np.ndarray, lines, pad=12, max_scale=1.0, min_scale=0.35, thick=1):
-    """Draw multiple lines of text bottom-left with auto scaling."""
+def _put_text_bottom(img: np.ndarray, lines, pad=6, max_scale=0.32, min_scale=0.28, thick=1):
+    """Draw multiple lines of text bottom-left with auto scaling (unified with debug_utils.py)."""
     h, w = img.shape[:2]
     font = cv2.FONT_HERSHEY_DUPLEX
     scale = max_scale
-    gap_ratio = 0.6
+    gap_ratio = 0.4
     max_w_limit = w - 2*pad
-    max_h_limit = int(h * 0.28)
+    max_h_limit = int(h * 0.20)
 
     def block_metrics(sc):
         sizes = [cv2.getTextSize(t, font, sc, thick)[0] for t in lines]
@@ -163,29 +170,57 @@ def sliding_windows_white(pil_img: Image.Image, save_debug=True, src_path=None, 
     lefty  = leftyR + y_top
     righty = rightyR + y_top
 
-    # Fit polynomials
+    # Fit polynomials with single-side fallback
     ok = False
     left_fit = right_fit = None
-    if leftx.size > 200 and rightx.size > 200:
+    single_side_mode = None  # None, "left_only", "right_only"
+
+    left_valid = leftx.size >= MIN_POINTS_EACH_SIDE
+    right_valid = rightx.size >= MIN_POINTS_EACH_SIDE
+
+    if left_valid and right_valid:
+        # Normal: both sides detected
         left_fit  = np.polyfit(lefty.astype(np.float32),  leftx.astype(np.float32),  2)
         right_fit = np.polyfit(righty.astype(np.float32), rightx.astype(np.float32), 2)
+        ok = True
+    elif left_valid and not right_valid:
+        # Left only: estimate right lane and continue driving
+        # This typically happens in right curves where right lane exits view
+        left_fit = np.polyfit(lefty.astype(np.float32), leftx.astype(np.float32), 2)
+        right_fit = left_fit.copy()
+        right_fit[2] += LANE_WIDTH_PX  # Estimate right lane position
+        single_side_mode = "left_only"
+        ok = True  # Allow driving with estimated lane
+    elif right_valid and not left_valid:
+        # Right only: estimate left lane and continue driving
+        # This typically happens in left curves where left lane exits view
+        right_fit = np.polyfit(righty.astype(np.float32), rightx.astype(np.float32), 2)
+        left_fit = right_fit.copy()
+        left_fit[2] -= LANE_WIDTH_PX  # Estimate left lane position
+        single_side_mode = "right_only"
+        ok = True  # Allow driving with estimated lane
+    # else: both invalid, ok stays False
 
+    # Draw fitted lines for visualization (even when single-side only)
+    can_draw = (left_fit is not None) and (right_fit is not None)
+    if can_draw:
         # Sample for drawing
         ploty = np.linspace(y_top, y_bot - 1, 100).astype(np.float32)
         left_fitx  = (left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]).astype(int)
         right_fitx = (right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]).astype(int)
 
+        # Draw detected line (orange) vs estimated line (pink dashed effect)
         for x, y in zip(left_fitx, ploty.astype(int)):
-            cv2.circle(dbg, (x, y), 2, (0, 200, 255), -1)
+            color = (0, 200, 255) if single_side_mode != "right_only" else (180, 105, 255)  # orange or pink
+            cv2.circle(dbg, (x, y), 2, color, -1)
         for x, y in zip(right_fitx, ploty.astype(int)):
-            cv2.circle(dbg, (x, y), 2, (0, 200, 255), -1)
+            color = (0, 200, 255) if single_side_mode != "left_only" else (180, 105, 255)  # orange or pink
+            cv2.circle(dbg, (x, y), 2, color, -1)
 
         # Plot midline (yellow)
         center_fitx = ((left_fitx + right_fitx) / 2).astype(int)
         for x, y in zip(center_fitx, ploty.astype(int)):
             cv2.circle(dbg, (x, y), 2, (0, 255, 255), -1)
-
-        ok = True
 
     # ----- Lateral / Theta: compute & visualize (0° = up, right positive) -----
     if ok and (left_fit is not None) and (right_fit is not None):
@@ -208,8 +243,20 @@ def sliding_windows_white(pil_img: Image.Image, save_debug=True, src_path=None, 
         theta_rad = np.arctan(dxdy_up)
         theta_deg = float(np.degrees(theta_rad))
 
+        # ===== Anomaly filtering: reject extreme values =====
+        is_anomaly = (abs(lateral) > LATERAL_MAX_PX or abs(theta_deg) > THETA_MAX_DEG)
+
+        # Build mode string for HUD
+        mode_str = ""
+        if single_side_mode == "left_only":
+            mode_str = " [L only]"
+        elif single_side_mode == "right_only":
+            mode_str = " [R only]"
+        if is_anomaly:
+            mode_str += " REJECTED"
+
         # Visualization
-        title = "Sliding Windows (WHITE)"
+        title = f"Sliding Windows (WHITE){mode_str}"
         _put_text_bottom(dbg, [title, f"Lateral = {lateral:+.1f} px", f"Theta  = {theta_deg:+.1f} deg"])
         pt_center = (W // 2, int(y_center))
         pt_xc     = (int(x_center_lane), int(y_center))
@@ -221,9 +268,27 @@ def sliding_windows_white(pil_img: Image.Image, save_debug=True, src_path=None, 
         pt_theta_end = (pt_xc[0] + dx_vis, pt_xc[1] - dy_vis)
         cv2.line(dbg, pt_xc, pt_theta_end, (255, 0, 0), 2)  # blue = heading
 
-        # Prepare result
+        # Prepare result - if anomaly, return ok=False with None values
         left_pts  = np.column_stack([leftx,  lefty])  if leftx.size  else None
         right_pts = np.column_stack([rightx, righty]) if rightx.size else None
+
+        if is_anomaly:
+            # Anomaly detected: return failure with debug canvas
+            result = SWResult(
+                ok=False,
+                left_pts=left_pts,
+                right_pts=right_pts,
+                left_fit=left_fit,
+                right_fit=right_fit,
+                lateral_px=None,  # Don't pass anomalous values
+                theta_deg=None,
+                img_width=W,
+                canvas_bgr=dbg if return_canvas else None,
+            )
+            if save_debug:
+                _save_debug_image(dbg, pil_img, src_path)
+            return result
+
         result = SWResult(
             ok=True,
             left_pts=left_pts,
@@ -234,16 +299,26 @@ def sliding_windows_white(pil_img: Image.Image, save_debug=True, src_path=None, 
             theta_deg=theta_deg,
             img_width=W,
             canvas_bgr=dbg if return_canvas else None,
+            single_side=(single_side_mode is not None),
         )
 
         if save_debug:
             _save_debug_image(dbg, pil_img, src_path)
         return result
 
+    # Even on failure, add HUD for debug info
+    if single_side_mode is not None:
+        mode_str = f" [{single_side_mode.replace('_', ' ').title()}]"
+        _put_text_bottom(dbg, [f"Sliding Windows (WHITE){mode_str}", "Detection failed"])
+    else:
+        _put_text_bottom(dbg, ["Sliding Windows (WHITE)", "Detection failed"])
+
     # Even on failure, return canvas (ROI/windows drawn)
+    left_pts  = np.column_stack([leftx,  lefty])  if leftx.size  else None
+    right_pts = np.column_stack([rightx, righty]) if rightx.size else None
     result = SWResult(
         ok=False,
-        left_pts=None, right_pts=None,
+        left_pts=left_pts, right_pts=right_pts,
         left_fit=left_fit, right_fit=right_fit,
         lateral_px=None, theta_deg=None, img_width=W,
         canvas_bgr=dbg if return_canvas else None,

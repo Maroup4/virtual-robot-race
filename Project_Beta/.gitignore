@@ -29,7 +29,11 @@ Thumbs.db
 
 # Training data
 Robot*/training_data/
+Robot*/training_data_bad/
 Robot*/data_interactive/
+
+# Utility scripts (not part of core)
+Robot*/make_promotion_video.py
 
 # Logs
 *.log

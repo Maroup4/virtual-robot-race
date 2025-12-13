@@ -16,8 +16,51 @@ import time
 from typing import Optional
 from pathlib import Path
 
-import config
+import config_loader
 from websocket_client import RobotWebSocketClient
+import data_manager as dm
+
+
+# -------------------------
+# Terminal Log Capture
+# -------------------------
+class LogCapture:
+    """Captures stdout/stderr while still printing to terminal."""
+    def __init__(self, original_stream):
+        self.logs = []
+        self.original = original_stream
+
+    def write(self, text):
+        if text:
+            self.logs.append(text)
+            self.original.write(text)
+
+    def flush(self):
+        self.original.flush()
+
+    def get_log_text(self) -> str:
+        return "".join(self.logs)
+
+
+# Install log capture at module load time
+_stdout_capture = LogCapture(sys.stdout)
+_stderr_capture = LogCapture(sys.stderr)
+sys.stdout = _stdout_capture
+sys.stderr = _stderr_capture
+
+
+def get_terminal_log() -> str:
+    """Get all captured terminal output."""
+    # Combine stdout and stderr logs
+    stdout_log = _stdout_capture.get_log_text()
+    stderr_log = _stderr_capture.get_log_text()
+    if stderr_log:
+        return stdout_log + "\n=== STDERR ===\n" + stderr_log
+    return stdout_log
+
+
+# Register the terminal log getter with data_manager
+dm.register_terminal_log_getter(get_terminal_log)
 
 # Lazy-import only when used
 import make_video
@@ -198,20 +241,27 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
             keyboard_input.stop_listener()
 
         elif mode == "ai":
-            # Load inference_input from Robot{N}/ directory explicitly
-            module_file = robot_dir / "inference_input.py"
-            try:
-                spec = importlib.util.spec_from_file_location(
-                    f"Robot{robot_num}.inference_input",
-                    module_file
-                )
-                inference_input = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(inference_input)
-            except Exception as e:
-                print(f"[Main] Failed to load inference_input: {e}")
-                import traceback
-                traceback.print_exc()
-                return
+            # Use preloaded inference module if available, otherwise load fresh
+            inference_input = robot_config.get('_preloaded_inference_module')
+            if inference_input is None:
+                # Fallback: Load inference_input from Robot{N}/ directory explicitly
+                module_file = robot_dir / "inference_input.py"
+                try:
+                    spec = importlib.util.spec_from_file_location(
+                        f"Robot{robot_num}.inference_input",
+                        module_file
+                    )
+                    inference_input = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(inference_input)
+                    # Preload model if not already done
+                    inference_input.preload_model()
+                except Exception as e:
+                    print(f"[Main] Failed to load inference_input: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    return
+            else:
+                print(f"[Main] Using preloaded inference module for Robot{robot_num}")
 
             # AI mode: Poll AI inference and send to Unity
             print("[Main] AI mode: Autonomous driving with neural network")
@@ -354,17 +404,17 @@ async def main() -> None:
     global robot_clients
 
     print("[Main] Starting new architecture (Unity=Server, Python=Client)...")
-    print(f"[Main] Active robots: {config.ACTIVE_ROBOTS}")
+    print(f"[Main] Active robots: {config_loader.ACTIVE_ROBOTS}")
 
     # 1) Load all active robot configs
     robot_configs = {}
     keyboard_robot = None  # Track which robot gets keyboard control
 
-    for robot_num in config.ACTIVE_ROBOTS:
-        robot_configs[robot_num] = config.get_robot_config(robot_num)
+    for robot_num in config_loader.ACTIVE_ROBOTS:
+        robot_configs[robot_num] = config_loader.get_robot_config(robot_num)
         rc = robot_configs[robot_num]
         mode_num = rc.get('MODE_NUM', 1)
-        mode_str = config.get_mode_string(mode_num)
+        mode_str = config_loader.get_mode_string(mode_num)
 
         print(f"[Main] Robot{robot_num} config loaded:")
         print(f"  - ROBOT_ID: {rc.get('ROBOT_ID')}")
@@ -387,7 +437,7 @@ async def main() -> None:
 
     try:
         # 2) Launch Unity
-        if config.DEBUG_MODE == 0:
+        if config_loader.DEBUG_MODE == 0:
             unity_proc = launch_unity_exe()
             if not unity_proc:
                 print("[Main] Failed to launch Unity. Exiting.")
@@ -396,7 +446,7 @@ async def main() -> None:
             print("[Main] DEBUG_MODE = 1 → Please launch Unity manually.")
 
         # 3) Wait for Unity server to be ready
-        server_url = f"ws://{config.HOST}:{config.PORT}/robot"
+        server_url = f"ws://{config_loader.HOST}:{config_loader.PORT}/robot"
         if not await wait_for_unity_server(server_url, timeout=30.0):
             print("[Main] Unity server did not start. Exiting.")
             return
@@ -406,18 +456,18 @@ async def main() -> None:
         robot_modes = {}  # Store mode and config for each robot
 
         # Phase 1: Connect all robots
-        for i, robot_num in enumerate(config.ACTIVE_ROBOTS):
+        for i, robot_num in enumerate(config_loader.ACTIVE_ROBOTS):
             rc = robot_configs[robot_num]
             robot_id = rc.get("ROBOT_ID", f"R{robot_num}")
             mode_num = rc.get("MODE_NUM", 1)
-            mode = config.get_mode_string(mode_num)
+            mode = config_loader.get_mode_string(mode_num)
 
             # Create client (only first robot sends active_robots info)
             client = RobotWebSocketClient(
                 robot_id=robot_id,
                 server_url=server_url,
                 robot_config=rc,
-                active_robots=config.ACTIVE_ROBOTS if i == 0 else None  # First robot sends the list
+                active_robots=config_loader.ACTIVE_ROBOTS if i == 0 else None  # First robot sends the list
             )
             robot_clients[robot_id] = client
             robot_modes[robot_id] = (mode, robot_num, rc)  # Store config too
@@ -426,7 +476,33 @@ async def main() -> None:
             await client.connect()
             print(f"[Main] Robot{robot_num} ({robot_id}) connected")
 
-        print(f"[Main] All {len(robot_clients)} robots connected. Starting control modules simultaneously...")
+        print(f"[Main] All {len(robot_clients)} robots connected.")
+
+        # Phase 1.5: Preload AI models BEFORE starting control loops
+        # This prevents model loading delays during the start signal sequence
+        import importlib.util  # Import here for Phase 1.5
+        print("[Main] Preloading AI models for all AI-mode robots...")
+        for robot_id, (mode, robot_num, rc) in robot_modes.items():
+            if mode == "ai":
+                robot_dir = Path(f"Robot{robot_num}")
+                module_file = robot_dir / "inference_input.py"
+                try:
+                    spec = importlib.util.spec_from_file_location(
+                        f"Robot{robot_num}.inference_input_preload",
+                        module_file
+                    )
+                    inference_module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(inference_module)
+                    inference_module.preload_model()
+                    # Store the preloaded module for later use
+                    rc['_preloaded_inference_module'] = inference_module
+                except Exception as e:
+                    print(f"[Main] WARNING: Failed to preload model for Robot{robot_num}: {e}")
+                    import traceback
+                    traceback.print_exc()
+        print("[Main] AI model preloading complete.")
+
+        print("[Main] Starting control modules simultaneously...")
 
         # Phase 2: Start all control modules and receive loops simultaneously
         for robot_id, client in robot_clients.items():
@@ -483,7 +559,7 @@ async def main() -> None:
             print(f"[Main] {robot_id} closed")
 
         # 8) Post-race: build videos for each robot
-        for robot_num in config.ACTIVE_ROBOTS:
+        for robot_num in config_loader.ACTIVE_ROBOTS:
             rc = robot_configs[robot_num]
             try:
                 await build_video_and_open_explorer(rc)

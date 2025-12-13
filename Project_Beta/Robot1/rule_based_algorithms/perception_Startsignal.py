@@ -19,7 +19,7 @@ def detect_start_signal(img):
     try:
         width, height = img.size
         top = 0
-        bottom = int(height * 0.2)
+        bottom = int(height * 0.3)
 
         # Define 3 rectangular regions (start lamps) on the top part of the image
         lamp_positions = [

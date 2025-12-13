@@ -150,6 +150,10 @@ class RobotWebSocketClient:
     async def handle_binary_message(self, message: bytes):
         """Handle binary message from server (image data)"""
         try:
+            # Debug: Log receive timestamp for timing analysis
+            import datetime
+            receive_time = datetime.datetime.now().strftime("%H:%M:%S.%f")[:-3]
+
             # Save image to interactive directory using double-buffering
             # This allows rule-based controller to read the latest image
             rgb_now_file = data_manager.get_rgb_now_file(self.robot_id)
@@ -183,8 +187,11 @@ class RobotWebSocketClient:
                 image_path = self.data_manager.images_dir / frame_name
                 self.data_manager.save_image_bytes(image_path, message)
 
-            # Optional: Periodic logging (every 100 images to reduce spam)
+            # Debug logging (disabled to reduce overhead during start sequence)
+            # if self._image_count <= 50:
+            #     print(f"[{self.robot_id}] [{receive_time}] Image #{self._image_count} received: {len(message)} bytes")
             if self._image_count % 100 == 1:
+                # Optional: Periodic logging (every 100 images to reduce spam)
                 print(f"[{self.robot_id}] Image received: {len(message)} bytes (count={self._image_count})")
 
         except Exception as e:
@@ -223,6 +230,10 @@ class RobotWebSocketClient:
                 print(f"[{self.robot_id}] Unity log saved to {log_file}")
             else:
                 print(f"[{self.robot_id}] Warning: No Unity log in metadata")
+
+            # Save terminal_log.txt (Python stdout/stderr)
+            # This is handled by data_manager directly
+            self.data_manager.save_terminal_log_from_main()
 
         except Exception as e:
             print(f"[{self.robot_id}] Error saving metadata: {e}")

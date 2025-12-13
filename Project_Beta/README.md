@@ -58,10 +58,12 @@ Or download ZIP and extract it.
 ## 🔧 Step 2: Install Python & Libraries
 
 ### Python Installation
-* Download and install **Python 3.10 (64-bit)**:
-  [https://www.python.org/downloads/release/python-3100/](https://www.python.org/downloads/release/python-3100/)
+* Download and install **Python 3.12+ (64-bit)**:
+  [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
   ⚠️ **Important**: During installation, check "Add Python to PATH"
+
+  > 💡 Tested with Python 3.12 and 3.13. Python 3.10/3.11 may work but are not officially supported.
 
 ### Quick Setup (Recommended)
 📌 **Easiest way**: Simply double-click `setup_env.bat` in the Project_Beta folder.
