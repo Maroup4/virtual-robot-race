@@ -1,0 +1,1509 @@
+[DataManager] Terminal log getter registered
+[Main] Starting new architecture (Unity=Server, Python=Client)...
+[Main] Active robots: [1]
+[Main] Robot1 config loaded:
+  - ROBOT_ID: R1
+  - MODE: rule_based (MODE_NUM=3)
+  - NAME: Player0000
+  - RACE_FLAG: 0
+[Main] Launching Unity server: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Windows\VirtualRobotRace_Beta.exe
+[Main] Unity server launched (PID: 27856)
+[Main] Waiting for Unity server at ws://localhost:12346/robot...
+[Main] Unity server is ready!
+[DataManager] [R1] New run created → D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251214_095548
+[R1] DataManager initialized for image saving
+[R1] Connected to Unity server at ws://localhost:12346/robot
+[R1] Sending active_robots: [1]
+[R1] Handshake sent
+[Main] Robot1 (R1) connected
+[Main] All 1 robots connected.
+[Main] Preloading AI models for all AI-mode robots...
+[Main] AI model preloading complete.
+[Main] Starting control modules simultaneously...
+[Main] All control modules started at the same time
+[Main] Starting control module: rule_based (Robot1)
+[rule_based_input] Loaded from Robot1/
+[Main] Rule-based mode: Autonomous lane following
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=1 Lat=None Theta=None SOC=1.00
+[R1] Server response: success - Connected to Unity Server
+[R1] Image received: 6907 bytes (count=1)
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=2 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=3 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=4 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=5 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=6 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=7 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=8 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=9 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=10 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=11 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=12 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=13 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=14 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=15 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=16 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=17 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=18 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=19 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=20 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=21 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=22 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=23 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=24 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=25 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=26 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=27 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=28 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=29 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=30 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=31 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=32 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=33 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=34 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=35 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=36 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=37 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=38 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=39 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Hold LostAge=40 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=41 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=42 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=43 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=44 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=45 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=46 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=47 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=48 Lat=None Theta=None SOC=1.00
+[R1 RuleBased] Drive=+0.00 Steer=+0.000rad(+0.0°) | GO=False LaneOK=False, Search LostAge=49 Lat=None Theta=None SOC=1.00
+[StartSignal] GO!!
+[R1 RuleBased] START latched
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000074.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000074.jpg
+[R1 RuleBased] Drive=+0.44 Steer=+0.123rad(+7.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+1.3 Theta=+10.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000076.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000076.jpg
+[R1 RuleBased] Drive=+0.57 Steer=+0.172rad(+9.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+0.9 Theta=+12.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000077.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000077.jpg
+[R1 RuleBased] Drive=+0.61 Steer=+0.182rad(+10.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-0.8 Theta=+12.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000078.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000078.jpg
+[R1 RuleBased] Drive=+0.61 Steer=+0.205rad(+11.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-4.4 Theta=+15.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000080.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000080.jpg
+[R1 RuleBased] Drive=+0.61 Steer=+0.210rad(+12.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-17.7 Theta=+19.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000082.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000082.jpg
+[R1 RuleBased] Drive=+0.43 Steer=+0.181rad(+10.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-36.0 Theta=+23.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000084.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000084.jpg
+[R1 RuleBased] Drive=+0.45 Steer=-0.249rad(-14.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.4 Theta=-20.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000085.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000085.jpg
+[R1 RuleBased] Drive=+0.38 Steer=-0.366rad(-21.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-31.9 Theta=-15.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000087.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000087.jpg
+[R1 RuleBased] Drive=+0.51 Steer=-0.302rad(-17.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-28.1 Theta=-7.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000088.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000088.jpg
+[R1 RuleBased] Drive=+0.59 Steer=-0.225rad(-12.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.4 Theta=-5.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000090.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000090.jpg
+[R1 RuleBased] Drive=+0.42 Steer=+0.284rad(+16.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-32.6 Theta=+43.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000092.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000092.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.477rad(+27.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-12.8 Theta=+40.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000094.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000094.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.548rad(+31.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-26.9 Theta=+46.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000095.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000095.jpg
+[R1 RuleBased] Drive=+0.55 Steer=+0.289rad(+16.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-8.4 Theta=+14.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000096.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000096.jpg
+[R1 RuleBased] Drive=+0.61 Steer=+0.209rad(+12.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-3.8 Theta=+12.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000098.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000098.jpg
+[R1 RuleBased] Drive=+0.43 Steer=-0.377rad(-21.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+13.6 Theta=-44.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000100.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000100.jpg
+[R1 RuleBased] Drive=+0.37 Steer=-0.663rad(-38.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+1.1 Theta=-53.7 SOC=1.00
+[R1] Image received: 7247 bytes (count=101)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000101.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000101.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.420rad(-24.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-42.1 Theta=-5.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000103.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000103.jpg
+[R1 RuleBased] Drive=+0.53 Steer=-0.275rad(-15.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+2.2 Theta=-14.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000105.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000105.jpg
+[R1 RuleBased] Drive=+0.40 Steer=+0.241rad(+13.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-24.2 Theta=+37.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000106.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000106.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.404rad(+23.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-9.3 Theta=+33.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000108.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000108.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.444rad(+25.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-17.7 Theta=+35.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000110.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000110.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.274rad(+15.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-35.7 Theta=+25.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000112.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000112.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.362rad(+20.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+17.1 Theta=+19.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000113.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000113.jpg
+[R1 RuleBased] Drive=+0.44 Steer=+0.404rad(+23.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+11.1 Theta=+23.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000115.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000115.jpg
+[R1 RuleBased] Drive=+0.53 Steer=+0.316rad(+18.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-3.8 Theta=+19.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000117.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000117.jpg
+[R1 RuleBased] Drive=+0.40 Steer=+0.623rad(+35.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-29.6 Theta=+58.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000118.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000118.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.546rad(+31.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-41.6 Theta=+46.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000120.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000120.jpg
+[R1 RuleBased] Drive=+0.35 Steer=-0.386rad(-22.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-9.4 Theta=-47.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000121.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000121.jpg
+[R1 RuleBased] Drive=+0.11 Steer=-0.665rad(-38.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-28.2 Theta=-51.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000123.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000123.jpg
+[R1 RuleBased] Drive=+0.03 Steer=-0.749rad(-42.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-37.7 Theta=-46.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000124.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000124.jpg
+[R1 RuleBased] Drive=+0.01 Steer=-0.774rad(-44.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-29.8 Theta=-44.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000126.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000126.jpg
+[R1 RuleBased] Drive=+0.25 Steer=-0.674rad(-38.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-16.5 Theta=-34.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000127.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000127.jpg
+[R1 RuleBased] Drive=+0.32 Steer=-0.752rad(-43.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-18.8 Theta=-50.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000129.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000129.jpg
+[R1 RuleBased] Drive=+0.34 Steer=-0.775rad(-44.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-19.5 Theta=-51.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000130.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000130.jpg
+[R1 RuleBased] Drive=+0.10 Steer=-0.710rad(-40.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-15.8 Theta=-38.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000132.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000132.jpg
+[R1 RuleBased] Drive=+0.03 Steer=-0.267rad(-15.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-43.1 Theta=+9.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000133.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000133.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.372rad(+21.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-46.1 Theta=+56.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000135.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000135.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.661rad(+37.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-42.8 Theta=+67.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000137.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000137.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.748rad(+42.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-46.1 Theta=+66.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000138.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000138.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.774rad(+44.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-42.5 Theta=+69.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000140.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000140.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.768rad(+44.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-52.1 Theta=+66.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000141.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000141.jpg
+[R1 RuleBased] Drive=+0.55 Steer=+0.219rad(+12.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+4.4 Theta=-2.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000143.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000143.jpg
+[R1 RuleBased] Drive=+0.63 Steer=+0.147rad(+8.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-9.9 Theta=+10.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000145.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000145.jpg
+[R1 RuleBased] Drive=+0.68 Steer=+0.093rad(+5.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-10.1 Theta=+7.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000147.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000147.jpg
+[R1 RuleBased] Drive=+0.72 Steer=+0.043rad(+2.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-5.0 Theta=+3.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000148.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000148.jpg
+[R1 RuleBased] Drive=+0.73 Steer=+0.035rad(+2.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+0.6 Theta=+1.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000150.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000150.jpg
+[R1 RuleBased] Drive=+0.46 Steer=+0.341rad(+19.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+8.3 Theta=+27.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000151.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000151.jpg
+[R1 RuleBased] Drive=+0.49 Steer=+0.364rad(+20.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+7.8 Theta=+21.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000153.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000153.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.659rad(+37.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+2.6 Theta=+65.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000155.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000155.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.747rad(+42.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-6.6 Theta=+54.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000156.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000156.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.774rad(+44.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+39.6 Theta=+44.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000158.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000158.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.782rad(+44.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+23.0 Theta=+63.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000159.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000159.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+21.9 Theta=+60.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000161.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000161.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+39.5 Theta=+63.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000163.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000163.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+37.2 Theta=+63.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000164.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000164.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+17.6 Theta=+52.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000166.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000166.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+39.7 Theta=+63.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000168.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000168.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+79.7 Theta=+65.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000169.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000169.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+34.0 Theta=+46.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000171.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000171.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+46.2 Theta=+48.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000173.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000173.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+54.5 Theta=+49.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000174.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000174.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.637rad(+36.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+49.5 Theta=+19.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000176.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000176.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.741rad(+42.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+58.4 Theta=+48.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000178.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000178.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.772rad(+44.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+76.7 Theta=+47.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000180.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000180.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.781rad(+44.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+74.8 Theta=+37.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000181.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000181.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+74.5 Theta=+34.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000183.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000183.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+66.2 Theta=+30.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000185.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000185.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.770rad(+44.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+64.2 Theta=+26.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000186.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000186.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.715rad(+41.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+69.5 Theta=+20.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000188.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000188.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000190.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000191.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000193.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000193.jpg
+[R1 RuleBased] Drive=+0.07 Steer=+0.708rad(+40.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+41.2 Theta=+42.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000194.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000194.jpg
+[R1 RuleBased] Drive=+0.02 Steer=+0.762rad(+43.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+48.5 Theta=+44.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000196.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000196.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.778rad(+44.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+51.1 Theta=+43.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000198.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000198.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.783rad(+44.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+57.9 Theta=+48.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000199.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000199.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+58.2 Theta=+47.6 SOC=1.00
+[R1] Image received: 4824 bytes (count=201)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000201.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000201.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+61.8 Theta=+47.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000202.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000202.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+78.7 Theta=+55.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000204.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000204.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000206.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000206.jpg
+[R1 RuleBased] Drive=+0.06 Steer=+0.769rad(+44.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+74.1 Theta=+45.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000207.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000207.jpg
+[R1 RuleBased] Drive=+0.02 Steer=+0.780rad(+44.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+70.8 Theta=+46.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000209.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000209.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+65.5 Theta=+46.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000210.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000210.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+61.2 Theta=+47.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000212.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000212.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+61.4 Theta=+47.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000214.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000214.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+56.2 Theta=+44.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000215.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000215.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+53.2 Theta=+42.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000217.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000217.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+47.5 Theta=+43.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000219.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000219.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.520rad(+29.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+66.4 Theta=+3.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000221.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000221.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.705rad(+40.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+26.5 Theta=+47.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000222.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000222.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.761rad(+43.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+26.7 Theta=+46.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000224.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000224.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.463rad(+26.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+51.3 Theta=+3.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000226.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000226.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.575rad(+32.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-1.5 Theta=+40.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000227.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000227.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.569rad(+32.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-10.5 Theta=+39.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000229.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000229.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.485rad(+27.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-23.3 Theta=+36.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000230.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000230.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.475rad(+27.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-29.0 Theta=+39.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000232.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000232.jpg
+[R1 RuleBased] Drive=+0.60 Steer=+0.115rad(+6.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-1.0 Theta=-2.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000234.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000234.jpg
+[R1 RuleBased] Drive=+0.65 Steer=-0.055rad(-3.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-17.9 Theta=-2.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000236.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000236.jpg
+[R1 RuleBased] Drive=+0.67 Steer=-0.096rad(-5.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.0 Theta=-0.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000237.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000237.jpg
+[R1 RuleBased] Drive=+0.67 Steer=-0.117rad(-6.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.0 Theta=-1.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000239.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000239.jpg
+[R1 RuleBased] Drive=+0.67 Steer=-0.123rad(-7.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-15.0 Theta=-2.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000240.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000240.jpg
+[R1 RuleBased] Drive=+0.44 Steer=+0.209rad(+12.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-36.1 Theta=+34.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000242.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000242.jpg
+[R1 RuleBased] Drive=+0.38 Steer=+0.336rad(+19.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-24.5 Theta=+33.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000244.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000244.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.331rad(+18.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-34.6 Theta=+32.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000245.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000245.jpg
+[R1 RuleBased] Drive=+0.53 Steer=-0.060rad(-3.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-15.7 Theta=-9.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000247.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000247.jpg
+[R1 RuleBased] Drive=+0.40 Steer=-0.228rad(-13.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-32.5 Theta=-8.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000249.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000249.jpg
+[R1 RuleBased] Drive=+0.58 Steer=-0.170rad(-9.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-25.5 Theta=-0.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000250.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000250.jpg
+[R1 RuleBased] Drive=+0.42 Steer=-0.257rad(-14.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-32.5 Theta=-7.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000252.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000252.jpg
+[R1 RuleBased] Drive=+0.55 Steer=-0.227rad(-13.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.4 Theta=-6.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000254.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000254.jpg
+[R1 RuleBased] Drive=+0.41 Steer=+0.163rad(+9.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-33.5 Theta=+32.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000255.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000255.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.298rad(+17.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-25.0 Theta=+31.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000257.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000257.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.339rad(+19.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-25.7 Theta=+31.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000258.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000258.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.325rad(+18.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-32.1 Theta=+31.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000260.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000260.jpg
+[R1 RuleBased] Drive=+0.44 Steer=-0.080rad(-4.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.4 Theta=-9.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000262.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000262.jpg
+[R1 RuleBased] Drive=+0.38 Steer=-0.276rad(-15.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-34.3 Theta=-11.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000263.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000263.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.317rad(-18.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-35.3 Theta=-9.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000265.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000265.jpg
+[R1 RuleBased] Drive=+0.49 Steer=-0.303rad(-17.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-22.8 Theta=-11.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000267.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000267.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.114rad(+6.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-33.0 Theta=+29.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000268.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000268.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.279rad(+16.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-24.5 Theta=+30.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000270.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000270.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.315rad(+18.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-19.4 Theta=+27.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000272.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000272.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.291rad(+16.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-30.7 Theta=+28.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000273.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000273.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.231rad(+13.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-37.0 Theta=+25.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000275.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000275.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.188rad(-10.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-22.9 Theta=-15.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000276.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000276.jpg
+[R1 RuleBased] Drive=+0.46 Steer=-0.311rad(-17.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-23.9 Theta=-14.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000278.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000278.jpg
+[R1 RuleBased] Drive=+0.49 Steer=-0.354rad(-20.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-22.3 Theta=-16.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000279.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000279.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.023rad(+1.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-45.8 Theta=+27.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000281.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000281.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.219rad(+12.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-26.9 Theta=+28.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000282.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000282.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.286rad(+16.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-19.7 Theta=+26.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000284.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000284.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.279rad(+16.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-24.9 Theta=+26.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000286.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000286.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.214rad(+12.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-36.6 Theta=+24.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000288.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000288.jpg
+[R1 RuleBased] Drive=+0.34 Steer=-0.220rad(-12.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.4 Theta=-19.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000289.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000289.jpg
+[R1 RuleBased] Drive=+0.43 Steer=-0.367rad(-21.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.0 Theta=-20.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000290.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000290.jpg
+[R1 RuleBased] Drive=+0.46 Steer=-0.400rad(-22.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.4 Theta=-20.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000292.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000292.jpg
+[R1 RuleBased] Drive=+0.38 Steer=-0.010rad(-0.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-41.2 Theta=+24.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000293.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000293.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.180rad(+10.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-29.5 Theta=+26.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000295.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000295.jpg
+[R1 RuleBased] Drive=+0.50 Steer=+0.255rad(+14.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-16.3 Theta=+23.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000296.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000296.jpg
+[R1 RuleBased] Drive=+0.54 Steer=+0.282rad(+16.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.4 Theta=+25.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000298.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000298.jpg
+[R1 RuleBased] Drive=+0.58 Steer=+0.236rad(+13.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-28.3 Theta=+23.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000300.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000300.jpg
+[R1 RuleBased] Drive=+0.42 Steer=+0.158rad(+9.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-44.2 Theta=+23.0 SOC=1.00
+[R1] Image received: 5204 bytes (count=301)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000301.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000301.jpg
+[R1 RuleBased] Drive=+0.42 Steer=-0.298rad(-17.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-25.3 Theta=-22.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000303.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000303.jpg
+[R1 RuleBased] Drive=+0.37 Steer=-0.397rad(-22.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-39.6 Theta=-14.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000305.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000305.jpg
+[R1 RuleBased] Drive=+0.41 Steer=-0.462rad(-26.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-29.8 Theta=-21.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000306.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000306.jpg
+[R1 RuleBased] Drive=+0.46 Steer=-0.418rad(-24.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.0 Theta=-18.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000308.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000308.jpg
+[R1 RuleBased] Drive=+0.55 Steer=+0.043rad(+2.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-23.1 Theta=+23.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000310.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000310.jpg
+[R1 RuleBased] Drive=+0.58 Steer=+0.180rad(+10.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+1.8 Theta=+14.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000311.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000311.jpg
+[R1 RuleBased] Drive=+0.59 Steer=+0.218rad(+12.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+7.4 Theta=+12.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000312.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000312.jpg
+[R1 RuleBased] Drive=+0.58 Steer=+0.241rad(+13.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+9.2 Theta=+12.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000314.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000314.jpg
+[R1 RuleBased] Drive=+0.62 Steer=+0.186rad(+10.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+0.0 Theta=+10.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000315.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000315.jpg
+[R1 RuleBased] Drive=+0.62 Steer=+0.201rad(+11.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-5.0 Theta=+14.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000317.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000317.jpg
+[R1 RuleBased] Drive=+0.69 Steer=+0.036rad(+2.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.3 Theta=+4.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000318.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000318.jpg
+[R1 RuleBased] Drive=+0.71 Steer=-0.027rad(-1.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-25.8 Theta=+5.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000320.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000320.jpg
+[R1 RuleBased] Drive=+0.46 Steer=-0.087rad(-5.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-35.5 Theta=+4.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000322.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000322.jpg
+[R1 RuleBased] Drive=+0.38 Steer=-0.097rad(-5.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-37.4 Theta=+6.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000323.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000323.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.092rad(-5.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-35.1 Theta=+6.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000325.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000325.jpg
+[R1 RuleBased] Drive=+0.60 Steer=-0.070rad(-4.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-28.9 Theta=+6.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000326.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000326.jpg
+[R1 RuleBased] Drive=+0.69 Steer=-0.040rad(-2.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-24.8 Theta=+6.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000328.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000328.jpg
+[R1 RuleBased] Drive=+0.64 Steer=-0.150rad(-8.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.4 Theta=-5.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000330.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000330.jpg
+[R1 RuleBased] Drive=+0.60 Steer=-0.226rad(-12.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-13.9 Theta=-11.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000332.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000332.jpg
+[R1 RuleBased] Drive=+0.55 Steer=+0.163rad(+9.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+4.5 Theta=+19.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000333.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000333.jpg
+[R1 RuleBased] Drive=+0.53 Steer=+0.294rad(+16.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+17.8 Theta=+16.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000334.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000334.jpg
+[R1 RuleBased] Drive=+0.52 Steer=+0.332rad(+19.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+23.5 Theta=+14.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000336.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000336.jpg
+[R1 RuleBased] Drive=+0.47 Steer=+0.411rad(+23.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+24.4 Theta=+20.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000338.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000338.jpg
+[R1 RuleBased] Drive=+0.52 Steer=+0.339rad(+19.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+16.6 Theta=+13.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000339.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000339.jpg
+[R1 RuleBased] Drive=+0.40 Steer=+0.613rad(+35.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+20.4 Theta=+39.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000341.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000341.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.713rad(+40.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+14.4 Theta=+43.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000343.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000343.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.739rad(+42.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+44.5 Theta=+32.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000345.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000345.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.771rad(+44.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+29.3 Theta=+41.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000346.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000346.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.781rad(+44.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+19.7 Theta=+49.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000347.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000347.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.760rad(+43.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+7.2 Theta=+45.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000349.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000349.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.523rad(+30.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-13.7 Theta=+31.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000351.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000351.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.492rad(+28.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-18.0 Theta=+36.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000352.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000352.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.587rad(+33.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-10.9 Theta=+43.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000354.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000354.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.605rad(+34.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-17.1 Theta=+44.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000355.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000355.jpg
+[R1 RuleBased] Drive=+0.45 Steer=+0.334rad(+19.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-25.0 Theta=+22.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000357.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000357.jpg
+[R1 RuleBased] Drive=+0.38 Steer=+0.633rad(+36.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-24.5 Theta=+56.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000359.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000359.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.655rad(+37.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-21.2 Theta=+49.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000361.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000361.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.746rad(+42.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+2.9 Theta=+65.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000362.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000362.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.773rad(+44.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+4.0 Theta=+72.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000364.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000364.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.781rad(+44.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+29.2 Theta=+45.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000365.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000365.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+32.8 Theta=+50.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000367.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000367.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+36.3 Theta=+54.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000369.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000369.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+22.1 Theta=+53.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000370.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000370.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+21.8 Theta=+55.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000372.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000372.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+33.1 Theta=+56.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000373.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000373.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+16.6 Theta=+45.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000375.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000375.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+16.5 Theta=+59.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000376.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000376.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+12.1 Theta=+61.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000378.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000378.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+15.0 Theta=+67.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000379.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000379.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+13.3 Theta=+66.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000381.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000381.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+16.6 Theta=+61.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000383.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000383.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000384.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000384.jpg
+[R1 RuleBased] Drive=+0.06 Steer=+0.769rad(+44.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-17.7 Theta=+74.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000386.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000386.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000387.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000387.jpg
+[R1 RuleBased] Drive=+0.06 Steer=+0.767rad(+43.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-8.8 Theta=+72.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000389.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000389.jpg
+[R1 RuleBased] Drive=+0.26 Steer=+0.780rad(+44.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+5.0 Theta=+73.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000391.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000391.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.755rad(+43.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+22.7 Theta=+39.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000392.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000392.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.776rad(+44.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+19.9 Theta=+45.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000394.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000394.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.782rad(+44.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+24.6 Theta=+52.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000396.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000396.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+30.3 Theta=+58.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000397.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000397.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+28.3 Theta=+60.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000399.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000399.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+23.9 Theta=+58.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000400.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000400.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+25.4 Theta=+53.3 SOC=1.00
+[R1] Image received: 5898 bytes (count=401)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000402.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000402.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+20.1 Theta=+58.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000403.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000403.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+15.4 Theta=+55.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000405.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000405.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.767rad(+44.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+3.4 Theta=+47.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000406.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000406.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.675rad(+38.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-3.7 Theta=+41.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000408.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000408.jpg
+[R1 RuleBased] Drive=+0.41 Steer=+0.376rad(+21.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-13.3 Theta=+20.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000409.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000409.jpg
+[R1 RuleBased] Drive=+0.57 Steer=+0.227rad(+13.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-14.6 Theta=+15.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000411.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000411.jpg
+[R1 RuleBased] Drive=+0.49 Steer=-0.238rad(-13.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-20.7 Theta=-20.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000413.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000413.jpg
+[R1 RuleBased] Drive=+0.39 Steer=-0.621rad(-35.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-33.5 Theta=-70.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000414.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000414.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.634rad(-36.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-41.5 Theta=-26.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000416.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000416.jpg
+[R1 RuleBased] Drive=+0.35 Steer=-0.740rad(-42.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-34.7 Theta=-53.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000417.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000417.jpg
+[R1 RuleBased] Drive=+0.47 Steer=-0.464rad(-26.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-13.6 Theta=-17.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000419.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000419.jpg
+[R1 RuleBased] Drive=+0.54 Steer=-0.320rad(-18.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+12.3 Theta=-20.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000421.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000421.jpg
+[R1 RuleBased] Drive=+0.41 Steer=+0.193rad(+11.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+54.4 Theta=+7.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000423.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000423.jpg
+[R1 RuleBased] Drive=+0.48 Steer=+0.309rad(+17.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+27.3 Theta=+13.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000424.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000424.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.515rad(+29.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+33.3 Theta=+27.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000426.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000426.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.704rad(+40.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+56.2 Theta=+43.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000428.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000428.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.761rad(+43.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+68.7 Theta=+44.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000429.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000429.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.778rad(+44.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+64.7 Theta=+44.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000431.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000431.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.783rad(+44.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+51.4 Theta=+51.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000432.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000432.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+42.6 Theta=+53.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000434.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000434.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+68.0 Theta=+29.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000435.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000435.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+67.3 Theta=+30.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000437.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000437.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+67.1 Theta=+30.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000438.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000438.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+63.7 Theta=+28.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000440.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000440.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.730rad(+41.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+48.0 Theta=+28.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000441.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000441.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.687rad(+39.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+38.6 Theta=+29.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000443.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000443.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.593rad(+34.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+25.2 Theta=+26.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000445.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000445.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.541rad(+31.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+20.5 Theta=+26.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000447.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000447.jpg
+[R1 RuleBased] Drive=+0.40 Steer=+0.492rad(+28.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+14.9 Theta=+24.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000448.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000448.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.461rad(+26.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+8.3 Theta=+25.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000450.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000450.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.403rad(+23.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-10.1 Theta=+27.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000452.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000452.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.354rad(+20.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-31.3 Theta=+31.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000453.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000453.jpg
+[R1 RuleBased] Drive=+0.49 Steer=-0.106rad(-6.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.6 Theta=-13.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000455.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000455.jpg
+[R1 RuleBased] Drive=+0.39 Steer=-0.029rad(-1.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+33.9 Theta=-11.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000457.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000457.jpg
+[R1 RuleBased] Drive=+0.43 Steer=+0.309rad(+17.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+24.8 Theta=+20.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000458.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000458.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.075rad(+4.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+31.6 Theta=-12.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000460.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000460.jpg
+[R1 RuleBased] Drive=+0.63 Steer=+0.032rad(+1.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+19.6 Theta=-5.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000461.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000461.jpg
+[R1 RuleBased] Drive=+0.70 Steer=+0.036rad(+2.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+15.1 Theta=-2.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000463.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000463.jpg
+[R1 RuleBased] Drive=+0.62 Steer=-0.157rad(-9.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+6.7 Theta=-17.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000465.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000465.jpg
+[R1 RuleBased] Drive=+0.62 Steer=-0.185rad(-10.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-0.8 Theta=-12.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000467.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000467.jpg
+[R1 RuleBased] Drive=+0.55 Steer=-0.303rad(-17.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-4.1 Theta=-21.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000468.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000468.jpg
+[R1 RuleBased] Drive=+0.55 Steer=-0.305rad(-17.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-0.4 Theta=-19.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000469.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000469.jpg
+[R1 RuleBased] Drive=+0.62 Steer=-0.194rad(-11.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+7.1 Theta=-11.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000471.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000471.jpg
+[R1 RuleBased] Drive=+0.66 Steer=+0.016rad(+0.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+19.8 Theta=-0.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000473.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000473.jpg
+[R1 RuleBased] Drive=+0.44 Steer=+0.262rad(+15.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+31.0 Theta=+12.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000474.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000474.jpg
+[R1 RuleBased] Drive=+0.38 Steer=+0.360rad(+20.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+33.3 Theta=+14.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000476.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000476.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.442rad(-25.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+28.7 Theta=-60.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000478.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000478.jpg
+[R1 RuleBased] Drive=+0.11 Steer=-0.678rad(-38.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+12.0 Theta=-53.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000479.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000479.jpg
+[R1 RuleBased] Drive=+0.44 Steer=-0.372rad(-21.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+18.4 Theta=-21.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000481.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000481.jpg
+[R1 RuleBased] Drive=+0.38 Steer=-0.228rad(-13.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+33.1 Theta=-21.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000482.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000482.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.149rad(-8.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+39.7 Theta=-20.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000484.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000484.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.292rad(+16.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-5.2 Theta=+32.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000486.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000486.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.476rad(+27.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-4.8 Theta=+36.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000487.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000487.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.498rad(+28.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-9.1 Theta=+35.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000489.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000489.jpg
+[R1 RuleBased] Drive=+0.01 Steer=-0.400rad(-22.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+54.6 Theta=-70.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000490.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000490.jpg
+[R1 RuleBased] Drive=+0.25 Steer=-0.670rad(-38.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+49.0 Theta=-69.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000492.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000492.jpg
+[R1 RuleBased] Drive=+0.32 Steer=-0.750rad(-43.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+53.8 Theta=-70.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000493.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000493.jpg
+[R1 RuleBased] Drive=+0.34 Steer=-0.745rad(-42.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+56.0 Theta=-66.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000495.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000495.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.069rad(+4.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-10.3 Theta=+30.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000497.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000497.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.414rad(+23.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+6.6 Theta=+33.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000498.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000498.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.527rad(+30.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+12.0 Theta=+32.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000500.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000500.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.515rad(+29.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+8.2 Theta=+29.6 SOC=1.00
+[R1] Image received: 6717 bytes (count=501)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000502.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000502.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.484rad(+27.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+2.9 Theta=+29.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000503.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000503.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.502rad(+28.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+2.1 Theta=+31.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000505.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000505.jpg
+[R1 RuleBased] Drive=+0.56 Steer=+0.253rad(+14.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-0.6 Theta=+9.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000506.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000506.jpg
+[R1 RuleBased] Drive=+0.41 Steer=-0.474rad(-27.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+39.7 Theta=-65.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000508.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000508.jpg
+[R1 RuleBased] Drive=+0.37 Steer=-0.582rad(-33.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+31.2 Theta=-50.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000510.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000510.jpg
+[R1 RuleBased] Drive=+0.36 Steer=-0.724rad(-41.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+44.9 Theta=-69.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000511.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000511.jpg
+[R1 RuleBased] Drive=+0.50 Steer=-0.025rad(-1.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-2.9 Theta=+18.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000513.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000513.jpg
+[R1 RuleBased] Drive=+0.40 Steer=+0.371rad(+21.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+11.7 Theta=+30.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000514.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000514.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.661rad(+37.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-6.9 Theta=+55.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000516.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000516.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.748rad(+42.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-9.5 Theta=+55.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000518.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000518.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.571rad(+32.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-6.5 Theta=+33.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000519.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000519.jpg
+[R1 RuleBased] Drive=+0.03 Steer=-0.082rad(-4.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+11.0 Theta=-26.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000521.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000521.jpg
+[R1 RuleBased] Drive=+0.01 Steer=-0.574rad(-32.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+32.4 Theta=-62.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000522.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000522.jpg
+[R1 RuleBased] Drive=+0.25 Steer=-0.722rad(-41.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+33.7 Theta=-62.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000524.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000524.jpg
+[R1 RuleBased] Drive=+0.32 Steer=-0.766rad(-43.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+34.9 Theta=-63.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000526.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000526.jpg
+[R1 RuleBased] Drive=+0.34 Steer=-0.779rad(-44.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+38.1 Theta=-64.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000527.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000527.jpg
+[R1 RuleBased] Drive=+0.10 Steer=-0.751rad(-43.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+18.9 Theta=-53.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000529.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000529.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.023rad(+1.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+1.3 Theta=+22.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000530.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000530.jpg
+[R1 RuleBased] Drive=+0.47 Steer=+0.257rad(+14.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+11.5 Theta=+18.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000532.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000532.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.627rad(+35.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-7.9 Theta=+53.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000534.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000534.jpg
+[R1 RuleBased] Drive=+0.45 Steer=+0.481rad(+27.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+10.6 Theta=+23.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000535.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000535.jpg
+[R1 RuleBased] Drive=+0.51 Steer=+0.369rad(+21.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-4.1 Theta=+21.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000537.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000537.jpg
+[R1 RuleBased] Drive=+0.40 Steer=-0.341rad(-19.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-15.0 Theta=-36.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000538.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000538.jpg
+[R1 RuleBased] Drive=+0.59 Steer=-0.027rad(-1.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-10.7 Theta=+10.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000540.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000540.jpg
+[R1 RuleBased] Drive=+0.42 Steer=+0.221rad(+12.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-37.5 Theta=+33.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000542.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000542.jpg
+[R1 RuleBased] Drive=+0.61 Steer=+0.123rad(+7.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+19.4 Theta=-1.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000544.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000544.jpg
+[R1 RuleBased] Drive=+0.43 Steer=-0.075rad(-4.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-48.9 Theta=+6.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000545.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000545.jpg
+[R1 RuleBased] Drive=+0.58 Steer=+0.088rad(+5.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+11.9 Theta=+6.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000547.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000547.jpg
+[R1 RuleBased] Drive=+0.64 Steer=-0.068rad(-3.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+20.8 Theta=-15.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000549.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000549.jpg
+[R1 RuleBased] Drive=+0.63 Steer=-0.143rad(-8.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+13.8 Theta=-15.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000550.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000550.jpg
+[R1 RuleBased] Drive=+0.70 Steer=-0.025rad(-1.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+18.0 Theta=-4.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000552.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000552.jpg
+[R1 RuleBased] Drive=+0.57 Steer=+0.238rad(+13.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+28.7 Theta=+12.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000554.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000554.jpg
+[R1 RuleBased] Drive=+0.42 Steer=+0.621rad(+35.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-14.3 Theta=+72.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000555.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000555.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000557.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000558.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000558.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.722rad(+41.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+22.4 Theta=+40.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000560.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000560.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.766rad(+43.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+18.0 Theta=+53.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000562.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000562.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.779rad(+44.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+15.4 Theta=+56.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000563.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000563.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.783rad(+44.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+14.7 Theta=+57.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000565.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000565.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+5.7 Theta=+60.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000566.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000566.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-0.3 Theta=+65.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000568.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000568.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-11.9 Theta=+72.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000570.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000570.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-13.5 Theta=+73.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000571.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000571.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-5.4 Theta=+71.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000572.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000572.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-12.1 Theta=+69.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000574.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000574.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.668rad(+38.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+56.4 Theta=+20.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000576.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000576.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.652rad(+37.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+48.4 Theta=+24.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000578.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000578.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.446rad(+25.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+34.3 Theta=+11.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000579.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000579.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.420rad(+24.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+36.8 Theta=+13.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000580.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000580.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.496rad(+28.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+48.5 Theta=+17.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000582.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000582.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.322rad(+18.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+41.3 Theta=+1.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000584.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000584.jpg
+[R1 RuleBased] Drive=+0.50 Steer=+0.152rad(+8.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+21.2 Theta=-2.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000586.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000586.jpg
+[R1 RuleBased] Drive=+0.67 Steer=+0.055rad(+3.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+20.8 Theta=-6.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000587.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000587.jpg
+[R1 RuleBased] Drive=+0.45 Steer=+0.566rad(+32.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-23.3 Theta=+62.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000589.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000589.jpg
+[R1 RuleBased] Drive=+0.38 Steer=+0.536rad(+30.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-12.6 Theta=+37.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000590.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000590.jpg
+[R1 RuleBased] Drive=+0.62 Steer=+0.128rad(+7.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-15.4 Theta=+2.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000592.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000592.jpg
+[R1 RuleBased] Drive=+0.52 Steer=+0.316rad(+18.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+5.0 Theta=+23.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000593.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000593.jpg
+[R1 RuleBased] Drive=+0.40 Steer=+0.555rad(+31.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-29.9 Theta=+52.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000595.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000595.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.689rad(+39.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-29.2 Theta=+57.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000597.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000597.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.756rad(+43.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-21.7 Theta=+62.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000598.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000598.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.760rad(+43.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-25.7 Theta=+57.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000600.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000600.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.735rad(+42.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+28.6 Theta=+36.3 SOC=1.00
+[R1] Image received: 5099 bytes (count=601)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000601.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000601.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.770rad(+44.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+15.6 Theta=+60.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000603.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000603.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000605.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000606.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000606.jpg
+[R1 RuleBased] Drive=+0.31 Steer=+0.748rad(+42.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+32.5 Theta=+46.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000608.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000608.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.774rad(+44.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+34.2 Theta=+57.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000610.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000610.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.782rad(+44.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+3.8 Theta=+71.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000611.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000611.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000613.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000613.jpg
+[R1 RuleBased] Drive=+0.08 Steer=+0.768rad(+44.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+42.0 Theta=+40.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000614.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000614.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.780rad(+44.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+46.4 Theta=+39.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000616.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000616.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.762rad(+43.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+43.1 Theta=+33.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000617.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000617.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.752rad(+43.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+36.8 Theta=+35.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000619.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000619.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.775rad(+44.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+38.3 Theta=+37.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000621.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000621.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.782rad(+44.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+46.8 Theta=+40.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000622.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000622.jpg
+[R1 RuleBased] Drive=+0.48 Steer=+0.448rad(+25.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+29.1 Theta=+9.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000624.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000624.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.529rad(+30.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+49.2 Theta=+19.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000625.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000625.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000627.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000629.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000630.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000630.jpg
+[R1 RuleBased] Drive=+0.33 Steer=+0.545rad(+31.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+79.0 Theta=+10.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000632.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000632.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.621rad(+35.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+69.7 Theta=+17.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000633.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000633.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.619rad(+35.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+64.8 Theta=+17.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000635.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000635.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.690rad(+39.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+48.6 Theta=+29.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000637.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000637.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.708rad(+40.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+29.1 Theta=+35.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000639.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000639.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.655rad(+37.5°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+13.8 Theta=+35.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000640.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000640.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.622rad(+35.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+10.0 Theta=+35.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000642.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000642.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.601rad(+34.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+5.6 Theta=+35.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000644.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000644.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.547rad(+31.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-6.6 Theta=+35.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000645.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000645.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.492rad(+28.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-16.0 Theta=+35.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000647.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000647.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.396rad(+22.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-33.4 Theta=+34.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000648.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000648.jpg
+[R1 RuleBased] Drive=+0.46 Steer=+0.224rad(+12.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-30.0 Theta=+19.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000650.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000650.jpg
+[R1 RuleBased] Drive=+0.49 Steer=-0.184rad(-10.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-9.3 Theta=-19.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000652.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000652.jpg
+[R1 RuleBased] Drive=+0.39 Steer=-0.407rad(-23.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-16.2 Theta=-26.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000653.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000653.jpg
+[R1 RuleBased] Drive=+0.62 Steer=-0.161rad(-9.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-25.3 Theta=+5.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000655.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000655.jpg
+[R1 RuleBased] Drive=+0.43 Steer=+0.196rad(+11.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-20.6 Theta=+29.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000657.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000657.jpg
+[R1 RuleBased] Drive=+0.49 Steer=+0.310rad(+17.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-0.7 Theta=+23.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000658.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000658.jpg
+[R1 RuleBased] Drive=+0.52 Steer=+0.318rad(+18.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-2.2 Theta=+21.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000660.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000660.jpg
+[R1 RuleBased] Drive=+0.58 Steer=+0.244rad(+14.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-10.2 Theta=+17.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000662.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000662.jpg
+[R1 RuleBased] Drive=+0.65 Steer=+0.146rad(+8.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-13.7 Theta=+11.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000663.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000663.jpg
+[R1 RuleBased] Drive=+0.71 Steer=+0.054rad(+3.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-28.6 Theta=+10.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000665.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000665.jpg
+[R1 RuleBased] Drive=+0.46 Steer=+0.011rad(+0.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-31.5 Theta=+10.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000666.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000666.jpg
+[R1 RuleBased] Drive=+0.49 Steer=-0.257rad(-14.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.0 Theta=-17.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000668.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000668.jpg
+[R1 RuleBased] Drive=+0.39 Steer=-0.422rad(-24.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-5.9 Theta=-29.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000670.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000670.jpg
+[R1 RuleBased] Drive=+0.62 Steer=-0.153rad(-8.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-19.5 Theta=+4.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000672.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000672.jpg
+[R1 RuleBased] Drive=+0.43 Steer=+0.298rad(+17.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-18.6 Theta=+37.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000673.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000673.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.454rad(+26.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-11.4 Theta=+37.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000675.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000675.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.443rad(+25.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-16.8 Theta=+33.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000677.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000677.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.372rad(+21.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-38.5 Theta=+34.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000678.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000678.jpg
+[R1 RuleBased] Drive=+0.46 Steer=-0.041rad(-2.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-24.1 Theta=-5.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000680.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000680.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000681.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000683.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000683.jpg
+[R1 RuleBased] Drive=+0.62 Steer=-0.134rad(-7.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+3.0 Theta=-8.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000685.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000685.jpg
+[R1 RuleBased] Drive=+0.61 Steer=-0.198rad(-11.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-29.9 Theta=-4.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000686.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000686.jpg
+[R1 RuleBased] Drive=+0.61 Steer=-0.204rad(-11.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-25.4 Theta=-4.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000688.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000688.jpg
+[R1 RuleBased] Drive=+0.43 Steer=+0.192rad(+11.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-36.9 Theta=+35.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000690.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000690.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.314rad(+18.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-28.2 Theta=+33.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000691.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000691.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.328rad(+18.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-30.4 Theta=+31.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000693.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000693.jpg
+[R1 RuleBased] Drive=+0.51 Steer=-0.079rad(-4.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-17.5 Theta=-10.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000695.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000695.jpg
+[R1 RuleBased] Drive=+0.40 Steer=-0.256rad(-14.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-32.5 Theta=-10.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000696.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000696.jpg
+[R1 RuleBased] Drive=+0.54 Steer=-0.230rad(-13.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-13.5 Theta=-9.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000698.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000698.jpg
+[R1 RuleBased] Drive=+0.55 Steer=-0.278rad(-15.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-24.8 Theta=-10.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000700.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000700.jpg
+[R1 RuleBased] Drive=+0.41 Steer=+0.109rad(+6.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-37.5 Theta=+30.3 SOC=1.00
+[R1] Image received: 5120 bytes (count=701)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000701.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000701.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.262rad(+15.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-26.6 Theta=+29.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000703.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000703.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.318rad(+18.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-24.6 Theta=+30.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000704.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000704.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.298rad(+17.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-31.3 Theta=+29.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000706.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000706.jpg
+[R1 RuleBased] Drive=+0.42 Steer=-0.122rad(-7.0°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-19.0 Theta=-12.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000707.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000707.jpg
+[R1 RuleBased] Drive=+0.50 Steer=-0.253rad(-14.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-26.4 Theta=-10.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000709.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000709.jpg
+[R1 RuleBased] Drive=+0.49 Steer=-0.353rad(-20.2°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-26.8 Theta=-16.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000711.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000711.jpg
+[R1 RuleBased] Drive=+0.39 Steer=+0.018rad(+1.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-40.9 Theta=+25.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000712.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000712.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.160rad(+9.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-32.9 Theta=+25.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000714.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000714.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.238rad(+13.7°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-26.5 Theta=+26.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000716.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000716.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.220rad(+12.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-30.8 Theta=+24.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000718.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000718.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.175rad(+10.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-42.4 Theta=+24.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000719.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000719.jpg
+[R1 RuleBased] Drive=+0.37 Steer=-0.197rad(-11.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-16.9 Theta=-17.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000721.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000721.jpg
+[R1 RuleBased] Drive=+0.45 Steer=-0.330rad(-18.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-18.5 Theta=-18.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000722.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000722.jpg
+[R1 RuleBased] Drive=+0.48 Steer=-0.373rad(-21.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-19.0 Theta=-18.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000724.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000724.jpg
+[R1 RuleBased] Drive=+0.39 Steer=-0.014rad(-0.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-38.3 Theta=+22.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000726.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000726.jpg
+[R1 RuleBased] Drive=+0.54 Steer=+0.149rad(+8.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-14.7 Theta=+18.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000728.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000728.jpg
+[R1 RuleBased] Drive=+0.65 Steer=+0.102rad(+5.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-0.8 Theta=+5.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000730.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000730.jpg
+[R1 RuleBased] Drive=+0.69 Steer=-0.015rad(-0.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-1.9 Theta=-3.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000731.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000731.jpg
+[R1 RuleBased] Drive=+0.71 Steer=+0.029rad(+1.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-3.6 Theta=+4.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000733.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000733.jpg
+[R1 RuleBased] Drive=+0.72 Steer=+0.032rad(+1.8°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-2.1 Theta=+2.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000735.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000735.jpg
+[R1 RuleBased] Drive=+0.66 Steer=-0.107rad(-6.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+1.8 Theta=-11.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000736.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000736.jpg
+[R1 RuleBased] Drive=+0.65 Steer=-0.148rad(-8.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+2.1 Theta=-11.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000738.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000738.jpg
+[R1 RuleBased] Drive=+0.67 Steer=-0.116rad(-6.6°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+11.6 Theta=-10.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000740.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000740.jpg
+[R1 RuleBased] Drive=+0.62 Steer=+0.129rad(+7.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+29.5 Theta=+4.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000741.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000741.jpg
+[R1 RuleBased] Drive=+0.43 Steer=+0.151rad(+8.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+38.5 Theta=-2.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000743.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000743.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.313rad(+18.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+49.9 Theta=+7.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000745.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000745.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.463rad(+26.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+50.0 Theta=+16.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000746.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000746.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.522rad(+29.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+48.0 Theta=+18.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000748.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000748.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.523rad(+30.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+36.1 Theta=+21.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000750.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000750.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.547rad(+31.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+21.4 Theta=+28.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000751.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000751.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.541rad(+31.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+17.0 Theta=+28.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000753.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000753.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.552rad(+31.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+11.6 Theta=+31.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000755.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000755.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.562rad(+32.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+4.4 Theta=+34.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000756.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000756.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.534rad(+30.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+0.6 Theta=+33.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000758.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000758.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.531rad(+30.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+22.7 Theta=+25.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000759.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000759.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.505rad(+28.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+17.6 Theta=+25.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000761.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000761.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.427rad(+24.5°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+3.8 Theta=+23.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000762.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000762.jpg
+[R1 RuleBased] Drive=+0.47 Steer=+0.361rad(+20.7°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-1.9 Theta=+21.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000764.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000764.jpg
+[R1 RuleBased] Drive=+0.50 Steer=+0.353rad(+20.3°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-5.7 Theta=+24.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000766.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000766.jpg
+[R1 RuleBased] Drive=+0.40 Steer=+0.507rad(+29.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-4.5 Theta=+38.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000767.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000767.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.407rad(+23.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-20.6 Theta=+30.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000769.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000769.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.395rad(+22.6°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-36.2 Theta=+37.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000771.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000771.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.668rad(+38.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-10.4 Theta=+72.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000772.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000772.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.750rad(+43.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-4.0 Theta=+59.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000774.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000774.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.717rad(+41.1°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+29.4 Theta=+34.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000775.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000775.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.765rad(+43.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+24.5 Theta=+42.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000777.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000777.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.779rad(+44.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+18.8 Theta=+44.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000778.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000778.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.783rad(+44.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+22.1 Theta=+43.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000780.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000780.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+20.1 Theta=+47.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000781.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000781.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+17.0 Theta=+49.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000783.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000783.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+9.7 Theta=+55.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000784.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000784.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+3.5 Theta=+58.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000785.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000785.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+2.3 Theta=+64.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000787.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000787.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-6.3 Theta=+67.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000789.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000789.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.785rad(+45.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+1.0 Theta=+64.2 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000790.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000790.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.766rad(+43.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-4.2 Theta=+49.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000792.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000792.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.610rad(+34.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+53.5 Theta=+16.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000793.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000793.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.680rad(+38.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+60.0 Theta=+24.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000795.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000795.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.691rad(+39.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+57.1 Theta=+24.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000796.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000796.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.651rad(+37.3°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+55.6 Theta=+21.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000798.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000798.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.636rad(+36.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+60.1 Theta=+19.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000800.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000800.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.394rad(+22.5°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+51.2 Theta=+1.0 SOC=1.00
+[R1] Image received: 5886 bytes (count=801)
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000801.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000801.jpg
+[R1 RuleBased] Drive=+0.47 Steer=+0.024rad(+1.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+10.2 Theta=-12.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000803.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000803.jpg
+[R1 RuleBased] Drive=+0.60 Steer=-0.089rad(-5.1°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+13.4 Theta=-13.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000804.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000804.jpg
+[R1 RuleBased] Drive=+0.43 Steer=+0.365rad(+20.9°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-32.6 Theta=+46.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000806.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000806.jpg
+[R1 RuleBased] Drive=+0.37 Steer=+0.549rad(+31.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-34.5 Theta=+51.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000807.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000807.jpg
+[R1 RuleBased] Drive=+0.36 Steer=+0.440rad(+25.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-43.1 Theta=+39.8 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000809.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000809.jpg
+[R1 RuleBased] Drive=+0.11 Steer=+0.682rad(+39.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-30.7 Theta=+74.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000810.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000810.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000812.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000813.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000815.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000816.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000818.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000819.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000821.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000822.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000824.jpg
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000825.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000825.jpg
+[R1 RuleBased] Drive=+0.03 Steer=+0.636rad(+36.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+45.8 Theta=+52.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000827.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000827.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.740rad(+42.4°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+46.3 Theta=+49.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000828.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000828.jpg
+[R1 RuleBased] Drive=+0.25 Steer=+0.772rad(+44.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+43.9 Theta=+49.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000830.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000830.jpg
+[R1 RuleBased] Drive=+0.32 Steer=+0.781rad(+44.7°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+42.0 Theta=+41.7 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000831.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000831.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.784rad(+44.9°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+42.2 Theta=+43.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000833.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000833.jpg
+[R1 RuleBased] Drive=+0.10 Steer=+0.661rad(+37.8°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+33.2 Theta=+27.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000834.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000834.jpg
+[R1 RuleBased] Drive=+0.33 Steer=+0.540rad(+30.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=+25.8 Theta=+22.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000836.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000836.jpg
+[R1 RuleBased] Drive=+0.34 Steer=+0.673rad(+38.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=+15.9 Theta=+41.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000838.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000838.jpg
+[R1 RuleBased] Drive=+0.35 Steer=-0.220rad(-12.6°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-11.1 Theta=-34.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000839.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000839.jpg
+[R1 RuleBased] Drive=+0.35 Steer=+0.352rad(+20.2°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=+1.5 Theta=+37.5 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000841.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000841.jpg
+[R1 RuleBased] Drive=+0.10 Steer=-0.426rad(-24.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-41.6 Theta=-34.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000843.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000843.jpg
+[R1 RuleBased] Drive=+0.03 Steer=-0.072rad(-4.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-30.1 Theta=+15.3 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000844.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000844.jpg
+[R1 RuleBased] Drive=+0.01 Steer=+0.052rad(+3.0°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-33.1 Theta=+18.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000846.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000846.jpg
+[R1 RuleBased] Drive=+0.25 Steer=-0.425rad(-24.3°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-50.2 Theta=-22.9 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000847.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000847.jpg
+[R1 RuleBased] Drive=+0.32 Steer=-0.579rad(-33.2°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-51.9 Theta=-23.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000849.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000849.jpg
+[R1 RuleBased] Drive=+0.34 Steer=-0.663rad(-38.0°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-57.4 Theta=-25.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000851.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000851.jpg
+[R1 RuleBased] Drive=+0.10 Steer=-0.665rad(-38.1°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-58.1 Theta=-22.6 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000852.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000852.jpg
+[R1 RuleBased] Drive=+0.03 Steer=-0.513rad(-29.4°) | GO=True LaneOK=True, Pulse(OFF) LostAge=0 Lat=-45.4 Theta=-13.0 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000854.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000854.jpg
+[R1 RuleBased] Drive=+0.48 Steer=-0.067rad(-3.9°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-19.2 Theta=+14.4 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000856.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000856.jpg
+[R1 RuleBased] Drive=+0.55 Steer=+0.163rad(+9.4°) | GO=True LaneOK=True, Normal LostAge=0 Lat=-6.9 Theta=+19.1 SOC=1.00
+[DebugUtils] Saved D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000857.jpg
+[R1 RuleBased] Saved debug: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\debug\output\debug_frame_000857.jpg
+[R1 RuleBased] Drive=+0.41 Steer=+0.362rad(+20.8°) | GO=True LaneOK=True, Pulse(ON) LostAge=0 Lat=-2.6 Theta=+29.4 SOC=1.00
+[R1] Metadata received from Unity
+[R1] Metadata CSV saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251214_095548\metadata.csv (859 data rows)
+[R1] Unity log saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251214_095548\unity_log.txt

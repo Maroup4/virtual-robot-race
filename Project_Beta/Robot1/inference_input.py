@@ -68,7 +68,7 @@ except Exception as e:
             _percept_spec.loader.exec_module(_percept_module)
             return not _percept_module.detect_start_signal(pil_img)
         return False
-    def adjust_output(drive, steer, pil_img, soc):
+    def adjust_output(drive, steer, pil_img, soc, race_started=False):
         return drive, steer
     def on_race_start():
         pass
@@ -229,7 +229,8 @@ def update():
 
             # === Strategy: Adjust output ===
             # Delegates to ai_control_strategy.py
-            driveTorque, steerAngle = adjust_output(raw_drive, raw_steer, pil_img, soc)
+            # Pass race_started=True so Start Boost knows when race actually began
+            driveTorque, steerAngle = adjust_output(raw_drive, raw_steer, pil_img, soc, race_started=_race_started)
         else:
             # Dummy output if no model
             driveTorque = 0.0

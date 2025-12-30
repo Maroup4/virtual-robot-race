@@ -1,0 +1,41 @@
+{
+  "manifest_version": "1.0",
+  "created_at": "2025-12-14T07:54:44.324613",
+  "iteration": 1,
+  "description": "Dataset for iteration 1",
+  "filtering_config": {
+    "min_frames": 100,
+    "valid_final_status": [
+      "Finish",
+      "Lap2",
+      "Lap1"
+    ],
+    "exclude_fallen": true,
+    "exclude_force_end": false
+  },
+  "statistics": {
+    "total_runs": 3,
+    "total_frames": 1836,
+    "total_racing_frames": 856
+  },
+  "runs": [
+    {
+      "run_name": "run_20251214_065243",
+      "final_status": "Finish",
+      "racing_frames": 378,
+      "race_time_sec": 33.473
+    },
+    {
+      "run_name": "run_20251214_065331",
+      "final_status": "Finish",
+      "racing_frames": 287,
+      "race_time_sec": 28.618
+    },
+    {
+      "run_name": "run_20251214_065511",
+      "final_status": "Finish",
+      "racing_frames": 191,
+      "race_time_sec": 25.897
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+# VRR AI Training Pipeline Configuration
+# ========================================
+# This file defines all hyperparameters and settings for the training pipeline.
+# Modify this file to experiment with different configurations.
+
+# Experiment metadata
+experiment:
+  name: "vrr_imitation_learning"
+  description: "Behavior Cloning with DAgger-style iteration for VRR"
+  version: "1.0"
+
+# Random seed for reproducibility
+seed: 42
+
+# Model architecture settings
+model:
+  image_size: 224
+  cnn_channels: [32, 64, 128, 256]
+  mlp_hidden: [128, 64]
+  dropout_rates: [0.3, 0.2]
+
+# Training hyperparameters
+training:
+  batch_size: 32
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  epochs: 100
+  val_split: 0.2
+
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 15
+    min_delta: 0.0001
+
+  # Learning rate scheduler
+  scheduler:
+    type: "ReduceLROnPlateau"
+    patience: 10
+    factor: 0.5
+    min_lr: 0.000001
+
+# Data augmentation
+augmentation:
+  enabled: true
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.1
+    hue: 0.0
+  # Future: horizontal flip with steering sign flip
+  horizontal_flip: false
+
+# Data filtering rules
+data_filtering:
+  # Minimum frames required for a valid run
+  min_frames: 100
+
+  # Exclude StartSequence frames from training
+  exclude_start_sequence: true
+
+  # Include runs by final status
+  valid_final_status:
+    - "Finish"      # Completed 2 laps
+    - "Lap2"        # Completed 1 lap, in progress on 2nd
+    - "Lap1"        # At least started racing
+
+  # Exclude runs with these conditions
+  exclude_conditions:
+    fallen: true          # Exclude runs where robot fell
+    force_end: false      # Include manually ended runs (may have useful data)
+
+  # Quality thresholds
+  quality:
+    min_soc_at_end: 0.5   # Minimum battery at end of run
+    max_stationary_ratio: 0.3  # Max ratio of frames with zero movement
+
+# Iteration settings (DAgger-style)
+iteration:
+  max_iterations: 10
+
+  # Stop conditions (stop if ANY is met)
+  stop_conditions:
+    completion_rate: 0.8      # >80% completion rate
+    lap_time_improvement: 0.01  # <1% improvement between iterations
+    consecutive_no_improve: 3   # Stop after 3 iterations without improvement
+
+  # Rollouts per iteration
+  rollouts_per_iteration: 5
+
+  # Data aggregation strategy
+  aggregation:
+    keep_all_expert_data: true    # Always include original expert data
+    keep_successful_rollouts: true  # Include successful AI rollouts
+    keep_partial_rollouts: true     # Include partial (Lap1/Lap2) rollouts
+    discard_failed_rollouts: true   # Discard fallen/failed rollouts
+
+# Logging and checkpoints
+logging:
+  save_every_epoch: false
+  save_best_only: true
+  log_interval: 10  # Log every N batches
+
+  # Metrics to track
+  metrics:
+    - "train_loss"
+    - "val_loss"
+    - "torque_loss"
+    - "steer_loss"
+    - "learning_rate"
+
+# Paths (relative to Robot1/)
+paths:
+  training_data: "training_data"
+  experiments: "experiments"
+  models: "models"

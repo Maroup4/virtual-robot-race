@@ -1,0 +1,39 @@
+{
+  "iteration": 2,
+  "started_at": "2025-12-14T10:19:47.543429",
+  "status": "completed",
+  "manifest": {
+    "total_runs": 20,
+    "total_frames": 17257,
+    "total_racing_frames": 8773
+  },
+  "training": {
+    "total_epochs": 100,
+    "best_epoch": 97,
+    "best_val_loss": 0.056618414521217346,
+    "final_train_loss": 0.05350199373921162,
+    "final_val_loss": 0.05866484649479389,
+    "iteration": 2,
+    "total_samples": 7867,
+    "train_samples": 6294,
+    "val_samples": 1573,
+    "model_path": "D:\\AARACE\\GitProjects\\virtual-robot-race\\Project_Beta\\Robot1\\experiments\\iteration_002\\model.pth",
+    "seed": 42
+  },
+  "evaluation": {
+    "best_val_loss": 0.056618414521217346,
+    "best_epoch": 97,
+    "total_epochs": 100,
+    "total_samples": 7867,
+    "improvement_from_previous": 0.4787235231749913,
+    "previous_val_loss": 0.1086149424314499
+  },
+  "stop_check": {
+    "should_stop": false,
+    "reasons": [],
+    "max_iterations_reached": false,
+    "performance_target_met": false,
+    "no_improvement": false
+  },
+  "completed_at": "2025-12-14T11:16:35.607591"
+}

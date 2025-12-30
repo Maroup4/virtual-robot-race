@@ -1,0 +1,37 @@
+[DataManager] Terminal log getter registered
+[Main] Starting new architecture (Unity=Server, Python=Client)...
+[Main] Active robots: [1]
+[Main] Robot1 config loaded:
+  - ROBOT_ID: R1
+  - MODE: keyboard (MODE_NUM=1)
+  - NAME: Player0000
+  - RACE_FLAG: 0
+[Main] ✓ Robot1 will use keyboard control
+[Main] Launching Unity server: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Windows\VirtualRobotRace_Beta.exe
+[Main] Unity server launched (PID: 10976)
+[Main] Waiting for Unity server at ws://localhost:12346/robot...
+[Main] Unity server is ready!
+[DataManager] [R1] New run created → D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251227_152723
+[R1] DataManager initialized for image saving
+[R1] Connected to Unity server at ws://localhost:12346/robot
+[R1] Sending active_robots: [1]
+[R1] Handshake sent
+[Main] Robot1 (R1) connected
+[Main] All 1 robots connected.
+[Main] Preloading AI models for all AI-mode robots...
+[Main] AI model preloading complete.
+[Main] Starting control modules simultaneously...
+[Main] All control modules started at the same time
+[Main] Starting control module: keyboard (Robot1)
+[keyboard_input] Loaded from Robot1/
+[Keyboard] Listener started.
+[R1] Server response: success - Connected to Unity Server
+[R1] Image received: 6957 bytes (count=1)
+[R1] Image received: 7405 bytes (count=101)
+[R1] Image received: 5063 bytes (count=201)
+[R1] Image received: 5908 bytes (count=301)
+[R1] Image received: 4065 bytes (count=401)
+[R1] Image received: 5294 bytes (count=501)
+[R1] Metadata received from Unity
+[R1] Metadata CSV saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251227_152723\metadata.csv (560 data rows)
+[R1] Unity log saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251227_152723\unity_log.txt

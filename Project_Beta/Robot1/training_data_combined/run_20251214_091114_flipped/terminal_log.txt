@@ -1,0 +1,114 @@
+[DataManager] Terminal log getter registered
+[Main] Starting new architecture (Unity=Server, Python=Client)...
+[Main] Active robots: [1]
+[Main] Robot1 config loaded:
+  - ROBOT_ID: R1
+  - MODE: ai (MODE_NUM=4)
+  - NAME: Player0000
+  - RACE_FLAG: 0
+[Main] Launching Unity server: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Windows\VirtualRobotRace_Beta.exe
+[Main] Unity server launched (PID: 10208)
+[Main] Waiting for Unity server at ws://localhost:12346/robot...
+[Main] Unity server is ready!
+[DataManager] [R1] New run created → D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251214_091114
+[R1] DataManager initialized for image saving
+[R1] Connected to Unity server at ws://localhost:12346/robot
+[R1] Sending active_robots: [1]
+[R1] Handshake sent
+[Main] Robot1 (R1) connected
+[Main] All 1 robots connected.
+[Main] Preloading AI models for all AI-mode robots...
+[inference_input] Loaded from Robot1/
+[inference_input] Strategy loaded: hybrid
+[R1 Inference] Preloading AI model...
+[R1 Inference] Using device: cuda
+[R1 Inference] Model loaded from D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\models\model.pth
+[R1 Inference] Model preloaded successfully!
+[Main] AI model preloading complete.
+[Main] Starting control modules simultaneously...
+[Main] All control modules started at the same time
+[Main] Starting control module: ai (Robot1)
+[Main] Using preloaded inference module for Robot1
+[Main] AI mode: Autonomous driving with neural network
+[R1] Server response: success - Connected to Unity Server
+[R1] Image received: 6905 bytes (count=1)
+[StartSignal] GO!!
+[R1 Inference] RACE STARTED! (Strategy: hybrid)
+[Strategy] Race started! Executing race start protocol.
+[R1] Image received: 6933 bytes (count=101)
+[R1 Inference] Drive=+0.038, Steer=-0.083rad(-4.7deg), SOC=1.00
+[R1 Inference] Drive=+0.057, Steer=+0.013rad(+0.8deg), SOC=1.00
+[R1 Inference] Drive=+0.032, Steer=-0.015rad(-0.9deg), SOC=1.00
+[R1 Inference] Drive=-0.078, Steer=-0.185rad(-10.6deg), SOC=1.00
+[R1] Image received: 7069 bytes (count=201)
+[R1 Inference] Drive=-0.114, Steer=-0.181rad(-10.4deg), SOC=1.00
+[R1 Inference] Drive=-0.033, Steer=-0.259rad(-14.8deg), SOC=1.00
+[R1 Inference] Drive=+0.052, Steer=-0.236rad(-13.5deg), SOC=1.00
+[R1 Inference] Drive=-0.072, Steer=-0.277rad(-15.9deg), SOC=1.00
+[R1] Image received: 7114 bytes (count=301)
+[R1 Inference] Drive=-0.098, Steer=-0.280rad(-16.1deg), SOC=1.00
+[R1 Inference] Drive=+0.076, Steer=-0.206rad(-11.8deg), SOC=1.00
+[R1 Inference] Drive=-0.038, Steer=-0.210rad(-12.0deg), SOC=1.00
+[R1] Image received: 7296 bytes (count=401)
+[R1 Inference] Drive=-0.051, Steer=-0.266rad(-15.2deg), SOC=1.00
+[R1 Inference] Drive=+0.052, Steer=-0.229rad(-13.1deg), SOC=1.00
+[R1 Inference] Drive=+0.046, Steer=-0.296rad(-16.9deg), SOC=1.00
+[R1 Inference] Drive=-0.023, Steer=-0.309rad(-17.7deg), SOC=1.00
+[R1] Image received: 7339 bytes (count=501)
+[R1 Inference] Drive=-0.070, Steer=-0.333rad(-19.1deg), SOC=1.00
+[R1 Inference] Drive=-0.015, Steer=-0.319rad(-18.3deg), SOC=1.00
+[R1 Inference] Drive=-0.120, Steer=-0.260rad(-14.9deg), SOC=1.00
+[R1 Inference] Drive=+0.091, Steer=-0.274rad(-15.7deg), SOC=1.00
+[R1] Image received: 7318 bytes (count=601)
+[R1 Inference] Drive=+0.054, Steer=-0.248rad(-14.2deg), SOC=1.00
+[R1 Inference] Drive=-0.097, Steer=-0.491rad(-28.1deg), SOC=1.00
+[R1 Inference] Drive=+0.066, Steer=-0.214rad(-12.2deg), SOC=1.00
+[R1] Image received: 7379 bytes (count=701)
+[R1 Inference] Drive=+0.061, Steer=-0.270rad(-15.5deg), SOC=1.00
+[R1 Inference] Drive=-0.141, Steer=-0.274rad(-15.7deg), SOC=1.00
+[R1 Inference] Drive=+0.042, Steer=-0.222rad(-12.7deg), SOC=1.00
+[R1 Inference] Drive=+0.006, Steer=-0.315rad(-18.1deg), SOC=1.00
+[R1] Image received: 7398 bytes (count=801)
+[R1 Inference] Drive=+0.030, Steer=-0.308rad(-17.7deg), SOC=1.00
+[R1 Inference] Drive=+0.108, Steer=-0.284rad(-16.3deg), SOC=1.00
+[R1 Inference] Drive=+0.008, Steer=-0.366rad(-21.0deg), SOC=1.00
+[R1 Inference] Drive=-0.109, Steer=-0.349rad(-20.0deg), SOC=1.00
+[R1] Image received: 7369 bytes (count=901)
+[R1 Inference] Drive=+0.008, Steer=-0.435rad(-24.9deg), SOC=1.00
+[R1 Inference] Drive=-0.093, Steer=-0.398rad(-22.8deg), SOC=1.00
+[R1 Inference] Drive=+0.103, Steer=-0.344rad(-19.7deg), SOC=1.00
+[R1] Image received: 7363 bytes (count=1001)
+[R1 Inference] Drive=+0.031, Steer=-0.390rad(-22.3deg), SOC=1.00
+[R1 Inference] Drive=-0.105, Steer=-0.675rad(-38.7deg), SOC=1.00
+[R1 Inference] Drive=-0.042, Steer=-0.390rad(-22.4deg), SOC=1.00
+[R1 Inference] Drive=-0.187, Steer=-0.610rad(-34.9deg), SOC=1.00
+[R1] Image received: 7476 bytes (count=1101)
+[R1 Inference] Drive=-0.029, Steer=-0.592rad(-33.9deg), SOC=1.00
+[R1 Inference] Drive=-0.164, Steer=-0.607rad(-34.8deg), SOC=1.00
+[R1 Inference] Drive=+0.004, Steer=-0.449rad(-25.7deg), SOC=1.00
+[R1 Inference] Drive=+0.060, Steer=-0.581rad(-33.3deg), SOC=1.00
+[R1] Image received: 7224 bytes (count=1201)
+[R1 Inference] Drive=+0.054, Steer=-0.428rad(-24.5deg), SOC=1.00
+[R1 Inference] Drive=+0.103, Steer=-0.290rad(-16.6deg), SOC=1.00
+[R1 Inference] Drive=-0.007, Steer=-0.546rad(-31.3deg), SOC=1.00
+[R1 Inference] Drive=-0.030, Steer=-0.544rad(-31.2deg), SOC=1.00
+[R1] Image received: 7229 bytes (count=1301)
+[R1 Inference] Drive=+0.057, Steer=-0.541rad(-31.0deg), SOC=1.00
+[R1 Inference] Drive=-0.067, Steer=-0.536rad(-30.7deg), SOC=1.00
+[R1 Inference] Drive=+0.023, Steer=-0.389rad(-22.3deg), SOC=1.00
+[R1] Image received: 7216 bytes (count=1401)
+[R1 Inference] Drive=-0.085, Steer=-0.570rad(-32.7deg), SOC=1.00
+[R1 Inference] Drive=+0.052, Steer=-0.436rad(-25.0deg), SOC=1.00
+[R1 Inference] Drive=-0.027, Steer=-0.396rad(-22.7deg), SOC=1.00
+[R1 Inference] Drive=-0.025, Steer=-0.397rad(-22.8deg), SOC=1.00
+[R1] Image received: 7149 bytes (count=1501)
+[R1 Inference] Drive=+0.079, Steer=-0.333rad(-19.1deg), SOC=1.00
+[R1 Inference] Drive=-0.167, Steer=-0.516rad(-29.6deg), SOC=1.00
+[R1 Inference] Drive=+0.128, Steer=-0.428rad(-24.5deg), SOC=1.00
+[R1 Inference] Drive=+0.016, Steer=-0.368rad(-21.1deg), SOC=1.00
+[R1] Image received: 7298 bytes (count=1601)
+[R1 Inference] Drive=+0.057, Steer=-0.400rad(-22.9deg), SOC=1.00
+[R1 Inference] Drive=-0.059, Steer=-0.625rad(-35.8deg), SOC=1.00
+[R1] Metadata received from Unity
+[R1] Metadata CSV saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251214_091114\metadata.csv (1651 data rows)
+[R1] Unity log saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251214_091114\unity_log.txt

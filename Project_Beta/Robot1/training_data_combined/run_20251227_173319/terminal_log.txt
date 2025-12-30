@@ -1,0 +1,46 @@
+[DataManager] Terminal log getter registered
+[Main] Starting new architecture (Unity=Server, Python=Client)...
+[Main] Active robots: [1]
+[Main] Robot1 config loaded:
+  - ROBOT_ID: R1
+  - MODE: ai (MODE_NUM=4)
+  - NAME: Player0000
+  - RACE_FLAG: 0
+[Main] Launching Unity server: D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Windows\VirtualRobotRace_Beta.exe
+[Main] Unity server launched (PID: 37448)
+[Main] Waiting for Unity server at ws://localhost:12346/robot...
+[Main] Unity server is ready!
+[DataManager] [R1] New run created → D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251227_173319
+[R1] DataManager initialized for image saving
+[R1] Connected to Unity server at ws://localhost:12346/robot
+[R1] Sending active_robots: [1]
+[R1] Handshake sent
+[Main] Robot1 (R1) connected
+[Main] All 1 robots connected.
+[Main] Preloading AI models for all AI-mode robots...
+[inference_input] Loaded from Robot1/
+[inference_input] Strategy loaded: hybrid
+[R1 Inference] Preloading AI model...
+[R1 Inference] Using device: cuda
+[R1 Inference] Model loaded from D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\models\model.pth
+[R1 Inference] Model preloaded successfully!
+[Main] AI model preloading complete.
+[Main] Starting control modules simultaneously...
+[Main] All control modules started at the same time
+[Main] Starting control module: ai (Robot1)
+[Main] Using preloaded inference module for Robot1
+[Main] AI mode: Autonomous driving with neural network
+[R1] Server response: success - Connected to Unity Server
+[R1] Image received: 6909 bytes (count=1)
+[StartSignal] GO!!
+[R1 Inference] RACE STARTED! (Strategy: hybrid)
+[Strategy] Race started! Executing race start protocol.
+[Strategy] Race start detected! Start boost countdown begins.
+[R1] Image received: 6378 bytes (count=101)
+[R1 Inference] Drive=+0.419, Steer=-0.019rad(-1.1deg), SOC=1.00
+[Strategy] Start boost active (20/40): forcing drive=0.4
+[R1 Inference] Drive=+0.550, Steer=-0.003rad(-0.2deg), SOC=1.00
+[Strategy] Start boost active (40/40): forcing drive=0.4
+[R1] Metadata received from Unity
+[R1] Metadata CSV saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251227_173319\metadata.csv (139 data rows)
+[R1] Unity log saved to D:\AARACE\GitProjects\virtual-robot-race\Project_Beta\Robot1\training_data\run_20251227_173319\unity_log.txt

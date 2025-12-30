@@ -1,0 +1,13 @@
+{
+  "total_epochs": 79,
+  "best_epoch": 64,
+  "best_val_loss": 0.1086149424314499,
+  "final_train_loss": 0.11843487050603418,
+  "final_val_loss": 0.1161152720451355,
+  "iteration": 1,
+  "total_samples": 671,
+  "train_samples": 537,
+  "val_samples": 134,
+  "model_path": "D:\\AARACE\\GitProjects\\virtual-robot-race\\Project_Beta\\Robot1\\experiments\\iteration_001\\model.pth",
+  "seed": 42
+}

@@ -1,0 +1,143 @@
+{
+  "manifest_version": "1.0",
+  "created_at": "2025-12-14T10:19:47.809697",
+  "iteration": 2,
+  "description": "Dataset for iteration 2",
+  "filtering_config": {
+    "min_frames": 100,
+    "valid_final_status": [
+      "Finish",
+      "Lap2",
+      "Lap1"
+    ],
+    "exclude_fallen": true,
+    "exclude_force_end": false
+  },
+  "statistics": {
+    "total_runs": 20,
+    "total_frames": 17257,
+    "total_racing_frames": 8773
+  },
+  "runs": [
+    {
+      "run_name": "run_20251214_065243",
+      "final_status": "Finish",
+      "racing_frames": 378,
+      "race_time_sec": 33.473
+    },
+    {
+      "run_name": "run_20251214_065331",
+      "final_status": "Finish",
+      "racing_frames": 287,
+      "race_time_sec": 28.618
+    },
+    {
+      "run_name": "run_20251214_065511",
+      "final_status": "Finish",
+      "racing_frames": 191,
+      "race_time_sec": 25.897
+    },
+    {
+      "run_name": "run_20251214_085909",
+      "final_status": "Finish",
+      "racing_frames": 418,
+      "race_time_sec": 42.182
+    },
+    {
+      "run_name": "run_20251214_093642",
+      "final_status": "Finish",
+      "racing_frames": 479,
+      "race_time_sec": 48.254
+    },
+    {
+      "run_name": "run_20251214_093927",
+      "final_status": "Finish",
+      "racing_frames": 412,
+      "race_time_sec": 42.163
+    },
+    {
+      "run_name": "run_20251214_094432",
+      "final_status": "Finish",
+      "racing_frames": 446,
+      "race_time_sec": 46.363
+    },
+    {
+      "run_name": "run_20251214_094534",
+      "final_status": "Finish",
+      "racing_frames": 460,
+      "race_time_sec": 45.244
+    },
+    {
+      "run_name": "run_20251214_094634",
+      "final_status": "Finish",
+      "racing_frames": 535,
+      "race_time_sec": 50.798
+    },
+    {
+      "run_name": "run_20251214_094740",
+      "final_status": "Finish",
+      "racing_frames": 491,
+      "race_time_sec": 46.3
+    },
+    {
+      "run_name": "run_20251214_094842",
+      "final_status": "Finish",
+      "racing_frames": 543,
+      "race_time_sec": 52.018
+    },
+    {
+      "run_name": "run_20251214_094949",
+      "final_status": "Finish",
+      "racing_frames": 447,
+      "race_time_sec": 44.331
+    },
+    {
+      "run_name": "run_20251214_095049",
+      "final_status": "Finish",
+      "racing_frames": 521,
+      "race_time_sec": 46.679
+    },
+    {
+      "run_name": "run_20251214_095151",
+      "final_status": "Finish",
+      "racing_frames": 481,
+      "race_time_sec": 44.357
+    },
+    {
+      "run_name": "run_20251214_095252",
+      "final_status": "Finish",
+      "racing_frames": 444,
+      "race_time_sec": 42.963
+    },
+    {
+      "run_name": "run_20251214_095350",
+      "final_status": "Finish",
+      "racing_frames": 427,
+      "race_time_sec": 41.751
+    },
+    {
+      "run_name": "run_20251214_095447",
+      "final_status": "Finish",
+      "racing_frames": 484,
+      "race_time_sec": 45.788
+    },
+    {
+      "run_name": "run_20251214_095548",
+      "final_status": "Finish",
+      "racing_frames": 432,
+      "race_time_sec": 42.763
+    },
+    {
+      "run_name": "run_20251214_095646",
+      "final_status": "Finish",
+      "racing_frames": 469,
+      "race_time_sec": 46.497
+    },
+    {
+      "run_name": "run_20251214_095748",
+      "final_status": "Finish",
+      "racing_frames": 428,
+      "race_time_sec": 45.236
+    }
+  ]
+}

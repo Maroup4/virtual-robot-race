@@ -16,12 +16,20 @@ packaging==25.0
 opencv-python==4.11.0.86
 pillow==11.1.0
 
-# Deep Learning
+# Deep Learning (CUDA 12.4)
+# Install with: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+# For CPU-only: pip install torch torchvision
 torch==2.6.0
 torchvision==0.21.0
 
 # Networking
 websockets==14.1
+
+# Configuration
+pyyaml==6.0.2
+
+# Visualization (for AI training analysis)
+matplotlib==3.10.0
 
 # Video I/O (for make_video.py)
 imageio==2.37.0

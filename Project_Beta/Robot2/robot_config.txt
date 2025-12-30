@@ -13,7 +13,7 @@ NAME=Player4321
 # 2 = table (CSV playback)
 # 3 = rule_based (autonomous lane following)
 # 4 = ai (neural network inference)
-MODE_NUM=3
+MODE_NUM=1
 
 # Race participation flag:
 # 1 = Participate in race (results will be posted)

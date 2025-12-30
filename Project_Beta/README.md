@@ -96,6 +96,30 @@ If you prefer manual control or setup_env.bat doesn't work:
 
 ✅ You'll see `(.venv)` at the start of your command line when virtual environment is active.
 
+### 🚀 GPU Acceleration (Recommended for AI Training)
+
+If you have an **NVIDIA GPU** and want faster AI model training, install the CUDA-enabled PyTorch:
+
+```bash
+# First, activate the virtual environment
+.venv\Scripts\activate
+
+# Uninstall CPU version and install CUDA version
+pip uninstall torch torchvision -y
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+```
+
+**Verify GPU is detected:**
+```bash
+python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
+```
+
+If you see `CUDA available: True`, GPU acceleration is working!
+
+> 💡 **No GPU?** The default CPU version works fine for inference (running the AI). GPU mainly speeds up training.
+
+> ⚠️ **CUDA version**: This project uses CUDA 12.4. If you have an older GPU or driver, try `cu118` instead of `cu124`.
+
 ---
 
 ## 🧠 AI Model Download (Optional)
