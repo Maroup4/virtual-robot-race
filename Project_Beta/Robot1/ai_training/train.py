@@ -60,7 +60,7 @@ class DrivingDataset(Dataset):
     Supports loading from manifest or directory list.
     """
 
-    VALID_RACING_STATUS = ["Lap1", "Lap2", "Finish"]
+    VALID_RACING_STATUS = ["Lap0", "Lap1", "Lap2", "Finish"]
 
     def __init__(
         self,
