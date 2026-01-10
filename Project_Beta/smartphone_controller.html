@@ -198,17 +198,17 @@
         <div id="camera-status" class="scanning">SCANNING...</div>
     </div>
 
-    <!-- Left Joystick (Steering) -->
+    <!-- Left Joystick (Throttle) -->
     <div class="joystick-container" id="left-joystick">
-        <div class="joystick-label">STEERING</div>
+        <div class="joystick-label">THROTTLE</div>
         <div class="joystick-base">
             <div class="joystick-stick" id="left-stick"></div>
         </div>
     </div>
 
-    <!-- Right Joystick (Throttle) -->
+    <!-- Right Joystick (Steering) -->
     <div class="joystick-container" id="right-joystick">
-        <div class="joystick-label">THROTTLE</div>
+        <div class="joystick-label">STEERING</div>
         <div class="joystick-base">
             <div class="joystick-stick" id="right-stick"></div>
         </div>
@@ -454,11 +454,11 @@
         }
 
         function updateControlValues() {
-            // Left joystick: X axis = steering (-1 left, +1 right)
-            steerAngle = applyDeadZone(joysticks.left.x);
+            // Left joystick: Y axis = throttle (+1 forward, -1 backward)
+            driveTorque = applyDeadZone(joysticks.left.y);
 
-            // Right joystick: Y axis = throttle (+1 forward, -1 backward)
-            driveTorque = applyDeadZone(joysticks.right.y);
+            // Right joystick: X axis = steering (-1 left, +1 right)
+            steerAngle = applyDeadZone(joysticks.right.x);
 
             // Update display
             steerValue.textContent = steerAngle.toFixed(2);
