@@ -66,6 +66,20 @@ class RobotWebSocketClient:
         await self.send_json(handshake)
         print(f"[{self.robot_id}] Handshake sent")
 
+    async def send_ready_signal(self):
+        """
+        Send ready signal to Unity after AI model initialization is complete.
+        Unity will wait for all robots to send ready before starting the race.
+        This prevents race start during CUDA warmup (10+ second delay).
+        """
+        ready_msg = {
+            "type": "ready",
+            "robot_id": self.robot_id,
+            "message": "AI model loaded and CUDA warmed up"
+        }
+        await self.send_json(ready_msg)
+        print(f"[{self.robot_id}] Ready signal sent to Unity")
+
     def _get_mode_string(self) -> str:
         """Convert MODE_NUM to mode string"""
         mode_num = self.robot_config.get("MODE_NUM", 1)

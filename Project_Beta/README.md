@@ -11,6 +11,21 @@ You can race against a friend or against your own AI algorithms, then share your
 
 ## 🆕 What's New in Beta
 
+### 🔧 Beta 1.2 - Training Data Integrity Fix (2026-01-10)
+**CRITICAL FIX**: Resolves training data corruption that prevented AI models from learning properly.
+
+- **Problem Identified**: Image filenames saved by Python didn't match Unity's metadata.csv
+  - Unity: `tick=329` → `frame_000329.jpg` (tick-based naming)
+  - Python: 1st image → `frame_000001.jpg` (sequential counting)
+  - Result: 328-frame offset causing complete training failure
+- **Solution**: Official training data correction tool (`scripts/data_manager_post.py`)
+  - Sequential renaming to align images with metadata
+  - Automatic backup system for safety
+  - Multi-robot support (Robot1-5)
+  - Dry-run verification before applying changes
+- **Impact**: Enables proper AI training and significantly improves model performance
+- **Documentation**: See [scripts/README_fix_training_data.md](scripts/README_fix_training_data.md)
+
 ### 🚗 Torque Steer Driving (Like a Real Car!)
 - **Alpha**: Differential drive (tank-style steering)
 - **Beta**: Torque steer dynamics (realistic car physics with acceleration and steering)
@@ -95,6 +110,30 @@ If you prefer manual control or setup_env.bat doesn't work:
    ```
 
 ✅ You'll see `(.venv)` at the start of your command line when virtual environment is active.
+
+### 🚀 GPU Acceleration (Recommended for AI Training)
+
+If you have an **NVIDIA GPU** and want faster AI model training, install the CUDA-enabled PyTorch:
+
+```bash
+# First, activate the virtual environment
+.venv\Scripts\activate
+
+# Uninstall CPU version and install CUDA version
+pip uninstall torch torchvision -y
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+```
+
+**Verify GPU is detected:**
+```bash
+python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
+```
+
+If you see `CUDA available: True`, GPU acceleration is working!
+
+> 💡 **No GPU?** The default CPU version works fine for inference (running the AI). GPU mainly speeds up training.
+
+> ⚠️ **CUDA version**: This project uses CUDA 12.4. If you have an older GPU or driver, try `cu118` instead of `cu124`.
 
 ---
 

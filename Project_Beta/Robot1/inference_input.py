@@ -68,7 +68,7 @@ except Exception as e:
             _percept_spec.loader.exec_module(_percept_module)
             return not _percept_module.detect_start_signal(pil_img)
         return False
-    def adjust_output(drive, steer, pil_img, soc):
+    def adjust_output(drive, steer, pil_img, soc, race_started=False):
         return drive, steer
     def on_race_start():
         pass
@@ -110,6 +110,44 @@ def preload_model():
         print(f"[{robot_id} Inference] Model preloaded successfully!")
     else:
         print(f"[{robot_id} Inference] WARNING: Model preload failed (will use dummy output)")
+
+
+def warmup_cuda():
+    """
+    Warm up CUDA context with dummy inference.
+    This initializes GPU memory allocation and kernels BEFORE the race starts,
+    eliminating the 10+ second delay on first inference.
+
+    CRITICAL: Must be called AFTER preload_model() and BEFORE race start.
+    """
+    global _model, _transform, _device
+
+    if _model is None:
+        print(f"[{robot_id} Inference] CUDA warmup skipped: Model not loaded")
+        return
+
+    if _device is None or _device.type != 'cuda':
+        print(f"[{robot_id} Inference] CUDA warmup skipped: Using CPU")
+        return
+
+    print(f"[{robot_id} Inference] Warming up CUDA context...")
+
+    try:
+        # Create dummy input tensors matching real inference shape
+        dummy_img = Image.new('RGB', (640, 480), color='black')
+        dummy_tensor = _transform(dummy_img).unsqueeze(0).to(_device)  # [1, 3, 224, 224]
+        dummy_soc = torch.tensor([[1.0]], dtype=torch.float32).to(_device)  # [1, 1]
+
+        # Run dummy inference to initialize CUDA kernels
+        with torch.no_grad():
+            _ = _model(dummy_tensor, dummy_soc)
+
+        print(f"[{robot_id} Inference] CUDA warmup complete! Ready for race.")
+
+    except Exception as e:
+        print(f"[{robot_id} Inference] CUDA warmup failed: {e}")
+        import traceback
+        traceback.print_exc()
 
 
 def saturate(value, min_val=-1.0, max_val=1.0):
@@ -229,7 +267,8 @@ def update():
 
             # === Strategy: Adjust output ===
             # Delegates to ai_control_strategy.py
-            driveTorque, steerAngle = adjust_output(raw_drive, raw_steer, pil_img, soc)
+            # Pass race_started=True so Start Boost knows when race actually began
+            driveTorque, steerAngle = adjust_output(raw_drive, raw_steer, pil_img, soc, race_started=_race_started)
         else:
             # Dummy output if no model
             driveTorque = 0.0

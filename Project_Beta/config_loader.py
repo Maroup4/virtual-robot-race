@@ -22,9 +22,6 @@ DEFAULT_ROBOT_CONFIG = {
     "NAME": "Player0000",   # Player name (up to 10 alphanumeric chars)
     "RACE_FLAG": 1,         # 1: participate (POST), 0: watch only
     "DATA_SAVE": 1,         # 1: Save images, 0: Do not save
-    "AUTO_MAKE_VIDEO": 1,   # 1=auto make mp4 after run
-    "VIDEO_FPS": 20,        # default video fps
-    "INFER_FPS": 1,         # 1=estimate fps from timestamps
 }
 
 # Keys that should be parsed as integers
@@ -34,9 +31,6 @@ INT_KEYS = {
     "DEBUG_MODE",
     "DATA_SAVE",
     "RACE_FLAG",
-    "AUTO_MAKE_VIDEO",
-    "VIDEO_FPS",
-    "INFER_FPS",
 }
 
 # Global config storage
@@ -121,6 +115,17 @@ def load_robot_config(robot_num: int) -> dict:
     # Override ROBOT_ID based on robot number if not explicitly set
     if robot_config.get("ROBOT_ID") == "R1":  # Default value
         robot_config["ROBOT_ID"] = f"R{robot_num}"
+
+    # Auto-enable video creation when DATA_SAVE=1
+    # Fixed parameters (advanced users can modify these constants in this file)
+    if robot_config.get("DATA_SAVE", 1) == 1:
+        robot_config["AUTO_MAKE_VIDEO"] = 1
+        robot_config["VIDEO_FPS"] = 20
+        robot_config["INFER_FPS"] = 1
+    else:
+        robot_config["AUTO_MAKE_VIDEO"] = 0
+        robot_config["VIDEO_FPS"] = 20  # Set defaults even when not used
+        robot_config["INFER_FPS"] = 1
 
     return robot_config
 

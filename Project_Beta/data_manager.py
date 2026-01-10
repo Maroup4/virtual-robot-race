@@ -384,3 +384,48 @@ class DataManager:
             print(f"[DataManager] [{self.robot_id}] Terminal log saved → {log_path}")
         except Exception as e:
             print(f"[DataManager] [{self.robot_id}] Failed to save terminal log: {e}")
+
+    # -------------------------
+    # Force end (q key) handling
+    # -------------------------
+    def save_force_end_metadata(self) -> None:
+        """
+        Save minimal metadata.csv and terminal log when force-ended with 'q' key.
+        This ensures logs are preserved even when Unity doesn't send final metadata.
+        """
+        if self.current_run_dir is None:
+            print(f"[DataManager] [{self.robot_id}] Cannot save force-end metadata: no run directory.")
+            return
+
+        print(f"[DataManager] [{self.robot_id}] Saving force-end metadata...")
+
+        # Save minimal metadata.csv with "Force end" status
+        meta_csv = self.current_run_dir / "metadata.csv"
+        try:
+            with open(meta_csv, "w", newline="", encoding="utf-8") as fp:
+                w = csv.writer(fp)
+                # Write header
+                w.writerow([
+                    "tick", "session_time_ms", "race_time_ms", "filename", "soc",
+                    "drive_torque", "steer_angle",
+                    "drive_valid", "steer_valid",
+                    "status", "pos_x", "pos_y", "pos_z",
+                    "yaw_deg", "error_code"
+                ])
+                # Write single row indicating force end
+                w.writerow([
+                    0, 0, 0, "force_end.jpg", 0.0,
+                    0.0, 0.0,
+                    0, 0,
+                    "Force end", 0.0, 0.0, 0.0,
+                    0.0, 0
+                ])
+            print(f"[DataManager] [{self.robot_id}] Force-end metadata.csv written → {meta_csv}")
+        except Exception as e:
+            print(f"[DataManager] [{self.robot_id}] Failed to write force-end metadata: {e}")
+
+        # Save terminal log
+        self.save_terminal_log_from_main()
+
+        # Copy Unity log if available
+        self._copy_unity_log()
