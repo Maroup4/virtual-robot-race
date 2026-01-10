@@ -60,7 +60,7 @@ class DrivingDataset(Dataset):
     Supports loading from manifest or directory list.
     """
 
-    VALID_RACING_STATUS = ["Lap1", "Lap2", "Finish"]
+    VALID_RACING_STATUS = ["Lap0", "Lap1", "Lap2", "Finish"]
 
     def __init__(
         self,
@@ -650,7 +650,7 @@ def create_iteration_folder(robot_dir: Path, data_source: str) -> Path:
     Returns:
         Path to created iteration directory
     """
-    script_path = robot_dir / "scripts" / "create_iteration.py"
+    script_path = robot_dir / "ai_training" / "create_iteration.py"
 
     print(f"\n[Train] Auto-creating iteration folder from {data_source}...")
     result = subprocess.run(
