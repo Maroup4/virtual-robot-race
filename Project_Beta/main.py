@@ -488,6 +488,15 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
 
                 await asyncio.sleep(0.05)  # 20Hz
 
+        elif mode == "smartphone":
+            # Smartphone mode: Control is handled by smartphone_server
+            # This mode just keeps the connection alive while smartphone_server forwards control
+            print("[Main] Smartphone mode: Control via smartphone (waiting for smartphone_server)")
+
+            # Keep alive - control is forwarded by smartphone_server
+            while not stop_event.is_set():
+                await asyncio.sleep(0.1)
+
         else:
             print(f"[Main] Unknown MODE: {mode}")
 
@@ -631,6 +640,25 @@ async def main() -> None:
             except Exception as e:
                 print(f"[Main] WARNING: Failed to send ready signal for {robot_id}: {e}")
         print("[Main] All ready signals sent. Waiting for Unity to start race...")
+
+        # Phase 1.8: Start smartphone server if any robot uses smartphone mode
+        smartphone_server = None
+        smartphone_modes = {robot_id: mode for robot_id, (mode, _, _) in robot_modes.items() if mode == "smartphone"}
+
+        if smartphone_modes:
+            print(f"[Main] Starting smartphone server for {len(smartphone_modes)} robot(s)...")
+            from smartphone_server import SmartphoneServer
+
+            smartphone_server = SmartphoneServer(port=8080)
+
+            # Register robots that use smartphone mode
+            for robot_id in smartphone_modes.keys():
+                client = robot_clients[robot_id]
+                smartphone_server.register_robot(robot_id, client)
+
+            # Start server
+            await smartphone_server.start()
+            print("[Main] Smartphone server started and ready for connections")
 
         print("[Main] Starting control modules simultaneously...")
 

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Robot {{ROBOT_ID}} Controller</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        /* Camera display as background */
+        #camera-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a0a;
+            overflow: hidden;
+        }
+
+        #camera-feed {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+
+        .no-signal {
+            color: #666;
+            font-size: 20px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Status overlay */
+        #status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #0f0;
+            font-size: 14px;
+            z-index: 100;
+            text-align: center;
+            border-bottom: 1px solid #0f0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-connected {
+            background: #0f0;
+        }
+
+        .status-disconnected {
+            background: #f00;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Joystick containers */
+        .joystick-container {
+            position: absolute;
+            bottom: 40px;
+            width: 140px;
+            height: 140px;
+            z-index: 10;
+        }
+
+        #left-joystick {
+            left: 30px;
+        }
+
+        #right-joystick {
+            right: 30px;
+        }
+
+        /* Joystick background circle */
+        .joystick-base {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            border: 2px solid rgba(255,255,255,0.4);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Joystick stick */
+        .joystick-stick {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(200,200,200,0.6));
+            border: 2px solid rgba(255,255,255,0.9);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: all 0.05s ease-out;
+        }
+
+        /* Joystick labels */
+        .joystick-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
+        }
+
+        /* Debug info */
+        #debug-info {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 11px;
+            z-index: 100;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        /* Camera overlay text */
+        #camera-status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 16px;
+            z-index: 5;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .scanning {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Status Bar -->
+    <div id="status-bar">
+        <span class="status-indicator status-disconnected" id="status-indicator"></span>
+        <span id="status-text">CONNECTING...</span>
+    </div>
+
+    <!-- Camera Display -->
+    <div id="camera-container">
+        <img id="camera-feed" style="display:none;" alt="Robot Camera">
+        <div id="camera-status" class="scanning">SCANNING...</div>
+    </div>
+
+    <!-- Left Joystick (Steering) -->
+    <div class="joystick-container" id="left-joystick">
+        <div class="joystick-label">STEERING</div>
+        <div class="joystick-base">
+            <div class="joystick-stick" id="left-stick"></div>
+        </div>
+    </div>
+
+    <!-- Right Joystick (Throttle) -->
+    <div class="joystick-container" id="right-joystick">
+        <div class="joystick-label">THROTTLE</div>
+        <div class="joystick-base">
+            <div class="joystick-stick" id="right-stick"></div>
+        </div>
+    </div>
+
+    <!-- Debug Info -->
+    <div id="debug-info">
+        Steer: <span id="steer-value">0.00</span> |
+        Torque: <span id="torque-value">0.00</span> |
+        FPS: <span id="fps-value">0</span>
+    </div>
+
+    <script>
+        // Configuration
+        const ROBOT_ID = '{{ROBOT_ID}}';
+        const WS_URL = `ws://${window.location.host}/ws/${ROBOT_ID}`;
+        const CONTROL_UPDATE_RATE = 50; // 20Hz = 50ms
+        const DEAD_ZONE = 0.1;
+
+        // WebSocket connection
+        let ws = null;
+        let isConnected = false;
+
+        // Control state
+        let steerAngle = 0.0;
+        let driveTorque = 0.0;
+
+        // Camera state
+        let frameCount = 0;
+        let lastFrameTime = Date.now();
+
+        // Joystick state
+        const joysticks = {
+            left: { x: 0, y: 0, active: false, touchId: null },
+            right: { x: 0, y: 0, active: false, touchId: null }
+        };
+
+        // DOM elements
+        const statusIndicator = document.getElementById('status-indicator');
+        const statusText = document.getElementById('status-text');
+        const cameraFeed = document.getElementById('camera-feed');
+        const cameraStatus = document.getElementById('camera-status');
+        const leftStick = document.getElementById('left-stick');
+        const rightStick = document.getElementById('right-stick');
+        const steerValue = document.getElementById('steer-value');
+        const torqueValue = document.getElementById('torque-value');
+        const fpsValue = document.getElementById('fps-value');
+
+        // Initialize WebSocket
+        function connectWebSocket() {
+            ws = new WebSocket(WS_URL);
+
+            ws.onopen = () => {
+                console.log('WebSocket connected');
+                isConnected = true;
+                updateStatus(true, `ROBOT ${ROBOT_ID} - LIVE`);
+                cameraStatus.textContent = 'LIVE: ~0.5s DELAY';
+                cameraStatus.classList.remove('scanning');
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+
+                    if (data.type === 'camera') {
+                        updateCameraFeed(data.image);
+                    } else if (data.type === 'pong') {
+                        console.log('Pong received');
+                    }
+                } catch (e) {
+                    console.error('Message parse error:', e);
+                }
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket closed');
+                isConnected = false;
+                updateStatus(false, 'DISCONNECTED');
+                cameraFeed.style.display = 'none';
+                cameraStatus.textContent = 'NO SIGNAL';
+                cameraStatus.classList.add('scanning');
+
+                // Reconnect after 2 seconds
+                setTimeout(connectWebSocket, 2000);
+            };
+        }
+
+        // Update connection status
+        function updateStatus(connected, text) {
+            if (connected) {
+                statusIndicator.classList.remove('status-disconnected');
+                statusIndicator.classList.add('status-connected');
+            } else {
+                statusIndicator.classList.remove('status-connected');
+                statusIndicator.classList.add('status-disconnected');
+            }
+            statusText.textContent = text;
+        }
+
+        // Update camera feed
+        function updateCameraFeed(base64Image) {
+            cameraFeed.src = `data:image/jpeg;base64,${base64Image}`;
+            cameraFeed.style.display = 'block';
+            cameraStatus.style.display = 'none';
+
+            // Update FPS counter
+            frameCount++;
+            const now = Date.now();
+            const elapsed = (now - lastFrameTime) / 1000;
+            if (elapsed >= 1.0) {
+                fpsValue.textContent = Math.round(frameCount / elapsed);
+                frameCount = 0;
+                lastFrameTime = now;
+            }
+        }
+
+        // Send control message
+        function sendControl() {
+            if (!isConnected || !ws) return;
+
+            const message = {
+                type: 'control',
+                steerAngle: steerAngle,
+                driveTorque: driveTorque
+            };
+
+            try {
+                ws.send(JSON.stringify(message));
+            } catch (e) {
+                console.error('Failed to send control:', e);
+            }
+        }
+
+        // Apply dead zone
+        function applyDeadZone(value) {
+            return Math.abs(value) < DEAD_ZONE ? 0 : value;
+        }
+
+        // Update joystick visuals
+        function updateJoystickVisual(stick, x, y) {
+            const maxOffset = 40; // pixels
+            stick.style.transform = `translate(calc(-50% + ${x * maxOffset}px), calc(-50% + ${y * maxOffset}px))`;
+        }
+
+        // Handle touch events
+        function handleTouchStart(e) {
+            e.preventDefault();
+
+            for (let touch of e.changedTouches) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const side = e.currentTarget.id === 'left-joystick' ? 'left' : 'right';
+
+                if (!joysticks[side].active) {
+                    joysticks[side].active = true;
+                    joysticks[side].touchId = touch.identifier;
+                    updateJoystickPosition(touch, side, rect);
+                }
+            }
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+
+            for (let touch of e.changedTouches) {
+                for (let side in joysticks) {
+                    if (joysticks[side].touchId === touch.identifier) {
+                        const container = document.getElementById(`${side}-joystick`);
+                        const rect = container.getBoundingClientRect();
+                        updateJoystickPosition(touch, side, rect);
+                    }
+                }
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+
+            for (let touch of e.changedTouches) {
+                for (let side in joysticks) {
+                    if (joysticks[side].touchId === touch.identifier) {
+                        joysticks[side].active = false;
+                        joysticks[side].touchId = null;
+                        joysticks[side].x = 0;
+                        joysticks[side].y = 0;
+
+                        const stick = document.getElementById(`${side}-stick`);
+                        updateJoystickVisual(stick, 0, 0);
+                        updateControlValues();
+                    }
+                }
+            }
+        }
+
+        function updateJoystickPosition(touch, side, rect) {
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const dx = touch.clientX - centerX;
+            const dy = touch.clientY - centerY;
+
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxRadius = rect.width / 2;
+
+            let x = dx / maxRadius;
+            let y = dy / maxRadius;
+
+            // Clamp to circle
+            if (distance > maxRadius) {
+                const angle = Math.atan2(dy, dx);
+                x = Math.cos(angle);
+                y = Math.sin(angle);
+            }
+
+            joysticks[side].x = x;
+            joysticks[side].y = -y; // Invert Y for intuitive control
+
+            const stick = document.getElementById(`${side}-stick`);
+            updateJoystickVisual(stick, x, -y);
+            updateControlValues();
+        }
+
+        function updateControlValues() {
+            // Left joystick: X axis = steering (-1 left, +1 right)
+            steerAngle = applyDeadZone(joysticks.left.x);
+
+            // Right joystick: Y axis = throttle (+1 forward, -1 backward)
+            driveTorque = applyDeadZone(joysticks.right.y);
+
+            // Update display
+            steerValue.textContent = steerAngle.toFixed(2);
+            torqueValue.textContent = driveTorque.toFixed(2);
+        }
+
+        // Setup touch event listeners
+        function setupJoysticks() {
+            const leftJoystick = document.getElementById('left-joystick');
+            const rightJoystick = document.getElementById('right-joystick');
+
+            [leftJoystick, rightJoystick].forEach(joystick => {
+                joystick.addEventListener('touchstart', handleTouchStart, { passive: false });
+                joystick.addEventListener('touchmove', handleTouchMove, { passive: false });
+                joystick.addEventListener('touchend', handleTouchEnd, { passive: false });
+                joystick.addEventListener('touchcancel', handleTouchEnd, { passive: false });
+            });
+        }
+
+        // Initialize
+        function init() {
+            console.log(`Initializing controller for ${ROBOT_ID}`);
+            connectWebSocket();
+            setupJoysticks();
+
+            // Start control update loop (20Hz)
+            setInterval(sendControl, CONTROL_UPDATE_RATE);
+
+            // Periodic ping to keep connection alive
+            setInterval(() => {
+                if (isConnected && ws) {
+                    ws.send(JSON.stringify({ type: 'ping' }));
+                }
+            }, 5000);
+        }
+
+        // Start when page loads
+        window.addEventListener('load', init);
+
+        // Prevent scrolling and zooming
+        document.addEventListener('touchmove', (e) => {
+            if (e.target.closest('.joystick-container')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+    </script>
+</body>
+</html>
