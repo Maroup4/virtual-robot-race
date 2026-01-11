@@ -4,14 +4,33 @@ Smartphone Controller Server for Virtual Robot Race Beta 1.3
 This server provides:
 1. HTTP server for serving controller web page
 2. WebSocket endpoints for each robot (R1-R5)
-3. Camera frame streaming @ 5fps
+3. Camera frame streaming (configurable FPS)
 4. Joystick control input from smartphone
 
 Architecture:
 - Each robot has a dedicated WebSocket endpoint: /ws/R1, /ws/R2, etc.
 - Control input from smartphone is forwarded to Unity via existing RobotWebSocketClient
-- Camera frames from Robot{N}/data_interactive/ are streamed to smartphone @ 5fps
+- Camera frames from Robot{N}/data_interactive/ are streamed to smartphone
 """
+
+# Streaming settings
+STREAM_MODE = "soc"  # "camera" for video, "soc" for SOC data only
+SOC_UPDATE_INTERVAL = 0.5  # SOC update interval in seconds (2 updates per second)
+
+# Camera streaming settings (only used if STREAM_MODE = "camera")
+CAMERA_FPS = 15  # FPS for streaming (5-20 recommended)
+CAMERA_OPTIMIZE = False  # Set True to re-compress images (adds CPU overhead)
+CAMERA_QUALITY = 50  # JPEG quality if CAMERA_OPTIMIZE=True (1-100)
+CAMERA_MAX_WIDTH = None  # Max width if CAMERA_OPTIMIZE=True (None = no resize)
+
+# QR code colors per robot (for easy identification)
+QR_COLORS = {
+    'R1': '#CC0000',  # Red for Robot1
+    'R2': '#00AA00',  # Green for Robot2
+    'R3': '#0000CC',  # Blue for Robot3
+    'R4': '#CC6600',  # Orange for Robot4
+    'R5': '#6600CC',  # Purple for Robot5
+}
 
 import asyncio
 import base64
@@ -49,16 +68,17 @@ class RobotController:
     Handles control input forwarding and camera streaming.
     """
 
-    def __init__(self, robot_id: str, robot_websocket_client=None):
+    def __init__(self, robot_id: str, robot_websocket_client=None, server=None):
         self.robot_id = robot_id  # e.g., "R1"
         self.robot_num = int(robot_id[1])  # Extract number from "R1" -> 1
         self.ws_client = robot_websocket_client  # Unity WebSocket client
         self.smartphone_ws = None  # Smartphone WebSocket connection
-        self.camera_task = None
+        self.stream_task = None  # Camera or SOC streaming task
         self.is_streaming = True
+        self.server = server  # Reference to SmartphoneServer
 
         # Connection readiness state
-        self.is_ready = False  # True when dual-input test passed
+        self.is_ready = False  # True when dual-button press confirmed
         self.ready_event = asyncio.Event()  # Signals when ready
 
         # Paths for camera image access
@@ -74,12 +94,41 @@ class RobotController:
 
     async def handle_smartphone_connection(self, websocket):
         """Handle WebSocket connection from smartphone"""
+        # Close existing connection if any (e.g., when another phone scans same QR)
+        if self.smartphone_ws and not self.smartphone_ws.closed:
+            logger.info(f"[{self.robot_id}] Closing previous smartphone connection")
+            try:
+                await self.smartphone_ws.close()
+            except Exception as e:
+                logger.warning(f"[{self.robot_id}] Error closing old connection: {e}")
+
         self.smartphone_ws = websocket
         logger.info(f"[{self.robot_id}] Smartphone connected")
 
-        # Start camera streaming task
+        # Reset ready state for new connection (allows reconnect)
+        self.is_ready = False
+        self.ready_event.clear()
+
+        # Close this robot's QR popup when smartphone connects
+        if self.server:
+            self.server.close_qr_popup(self.robot_id)
+
+        # Send reset message to smartphone to show L+R confirmation screen
+        try:
+            await websocket.send_str(json.dumps({
+                'type': 'reset',
+                'message': 'Please press L+R buttons to confirm connection.'
+            }))
+            logger.info(f"[{self.robot_id}] Reset signal sent to smartphone (reconnection)")
+        except Exception as e:
+            logger.warning(f"[{self.robot_id}] Failed to send reset on connect: {e}")
+
+        # Start streaming task (camera or SOC based on STREAM_MODE)
         self.is_streaming = True
-        self.camera_task = asyncio.create_task(self._camera_stream_loop())
+        if STREAM_MODE == "camera":
+            self.stream_task = asyncio.create_task(self._camera_stream_loop())
+        else:
+            self.stream_task = asyncio.create_task(self._soc_stream_loop())
 
         try:
             async for msg in websocket:
@@ -108,6 +157,19 @@ class RobotController:
                 # Respond to ping for connection check
                 await self._send_to_smartphone({'type': 'pong'})
 
+            elif msg_type == 'connect_confirm':
+                # Dual button press confirmation from smartphone
+                if not self.is_ready:
+                    self.is_ready = True
+                    self.ready_event.set()
+                    logger.info(f"[{self.robot_id}] ✓ Connection confirmed (dual button press)")
+
+                    # Notify smartphone
+                    await self._send_to_smartphone({
+                        'type': 'ready_confirmed',
+                        'message': 'Connection confirmed! Race starting soon.'
+                    })
+
             elif msg_type == 'camera_control':
                 # Handle camera on/off
                 self.is_streaming = data.get('enabled', True)
@@ -124,24 +186,15 @@ class RobotController:
             logger.warning(f"[{self.robot_id}] No Unity WebSocket client available")
             return
 
+        # DO NOT forward control to Unity until connection is confirmed via dual button press
+        if not self.is_ready:
+            # Silently ignore control input before confirmation
+            return
+
         steer_angle = control_data.get('steerAngle', 0.0)
         drive_torque = control_data.get('driveTorque', 0.0)
 
-        # Check for readiness test (dual input: both steer and torque > threshold)
-        if not self.is_ready:
-            threshold = 0.3  # Both must be > 0.3 to count as intentional
-            if abs(steer_angle) > threshold and abs(drive_torque) > threshold:
-                self.is_ready = True
-                self.ready_event.set()
-                logger.info(f"[{self.robot_id}] ✓ Readiness test PASSED (dual input detected)")
-                logger.info(f"[{self.robot_id}]   Steer={steer_angle:.2f}, Torque={drive_torque:.2f}")
-
-                # Notify smartphone
-                await self._send_to_smartphone({
-                    'type': 'ready_confirmed',
-                    'message': 'Connection test passed! Race will start soon.'
-                })
-
+        # Only forward control AFTER connection is confirmed
         # Create control message for Unity (matching existing format)
         control_msg = {
             "type": "control",
@@ -159,8 +212,8 @@ class RobotController:
             logger.error(f"[{self.robot_id}] Failed to forward control: {e}")
 
     async def _camera_stream_loop(self):
-        """Stream camera frames @ 5fps to smartphone"""
-        frame_interval = 0.2  # 5 fps = 200ms
+        """Stream camera frames to smartphone"""
+        frame_interval = 1.0 / CAMERA_FPS  # Convert FPS to interval
 
         while self.is_streaming and self.smartphone_ws:
             try:
@@ -168,16 +221,17 @@ class RobotController:
                     jpeg_data = self._read_latest_camera_frame()
 
                     if jpeg_data:
-                        # Encode to Base64
-                        b64_image = base64.b64encode(jpeg_data).decode('utf-8')
+                        # Optionally compress/resize for streaming
+                        if CAMERA_OPTIMIZE:
+                            jpeg_data = self._optimize_image(jpeg_data)
 
-                        # Send to smartphone
+                        # Encode to Base64 and send
+                        b64_image = base64.b64encode(jpeg_data).decode('utf-8')
                         message = {
                             'type': 'camera',
                             'image': b64_image,
                             'robot_id': self.robot_id
                         }
-
                         await self._send_to_smartphone(message)
 
                 await asyncio.sleep(frame_interval)
@@ -188,6 +242,65 @@ class RobotController:
             except Exception as e:
                 logger.error(f"[{self.robot_id}] Camera stream error: {e}")
                 await asyncio.sleep(frame_interval)
+
+    async def _soc_stream_loop(self):
+        """Stream SOC (battery) data to smartphone"""
+        while self.is_streaming and self.smartphone_ws:
+            try:
+                if not self.smartphone_ws.closed:
+                    soc = self._read_latest_soc()
+
+                    # Send SOC data to smartphone
+                    message = {
+                        'type': 'soc',
+                        'soc': soc,
+                        'robot_id': self.robot_id
+                    }
+                    await self._send_to_smartphone(message)
+
+                await asyncio.sleep(SOC_UPDATE_INTERVAL)
+
+            except asyncio.CancelledError:
+                logger.info(f"[{self.robot_id}] SOC stream cancelled")
+                break
+            except Exception as e:
+                logger.error(f"[{self.robot_id}] SOC stream error: {e}")
+                await asyncio.sleep(SOC_UPDATE_INTERVAL)
+
+    def _read_latest_soc(self) -> Optional[float]:
+        """Read latest SOC value from file"""
+        try:
+            soc_file = self.data_dir / "latest_SOC.txt"
+            if soc_file.exists():
+                soc_str = soc_file.read_text(encoding="utf-8").strip()
+                return float(soc_str)
+            return None
+        except Exception:
+            return None
+
+    def _optimize_image(self, jpeg_data: bytes) -> Optional[bytes]:
+        """Optimize image for streaming (resize and compress)"""
+        try:
+            from PIL import Image
+            from io import BytesIO
+
+            # Load image from bytes
+            img = Image.open(BytesIO(jpeg_data))
+
+            # Resize if needed
+            if CAMERA_MAX_WIDTH and img.width > CAMERA_MAX_WIDTH:
+                ratio = CAMERA_MAX_WIDTH / img.width
+                new_height = int(img.height * ratio)
+                img = img.resize((CAMERA_MAX_WIDTH, new_height), Image.LANCZOS)
+
+            # Re-encode with lower quality
+            output = BytesIO()
+            img.save(output, format='JPEG', quality=CAMERA_QUALITY, optimize=True)
+            return output.getvalue()
+
+        except Exception as e:
+            logger.debug(f"[{self.robot_id}] Image optimization error: {e}")
+            return jpeg_data  # Return original if optimization fails
 
     def _read_latest_camera_frame(self) -> Optional[bytes]:
         """
@@ -238,11 +351,11 @@ class RobotController:
         """Cleanup resources on disconnect"""
         logger.info(f"[{self.robot_id}] Smartphone disconnected")
 
-        # Cancel camera streaming
-        if self.camera_task and not self.camera_task.done():
-            self.camera_task.cancel()
+        # Cancel streaming task (camera or SOC)
+        if self.stream_task and not self.stream_task.done():
+            self.stream_task.cancel()
             try:
-                await self.camera_task
+                await self.stream_task
             except asyncio.CancelledError:
                 pass
 
@@ -260,6 +373,10 @@ class SmartphoneServer:
         self.port = port
         self.app = web.Application()
         self.controllers: Dict[str, RobotController] = {}
+
+        # QR popup state
+        self._qr_window = None
+        self._qr_close_requested = False
 
         # Setup routes
         self._setup_routes()
@@ -283,23 +400,43 @@ class SmartphoneServer:
     def register_robot(self, robot_id: str, websocket_client=None):
         """Register a robot controller"""
         if robot_id not in self.controllers:
-            self.controllers[robot_id] = RobotController(robot_id, websocket_client)
+            self.controllers[robot_id] = RobotController(robot_id, websocket_client, server=self)
             logger.info(f"Registered robot: {robot_id}")
         else:
             self.controllers[robot_id].set_websocket_client(websocket_client)
 
-    async def wait_for_all_ready(self, timeout: float = 300.0):
+    async def wait_for_all_ready(self, timeout: float = 300.0, stop_event=None):
         """
         Wait for all registered robots to pass the readiness test.
-        Returns True if all ready, False if timeout.
+        Returns True if all ready, False if timeout or cancelled.
         """
+        # Reset all controllers and notify smartphones to reset UI
+        for robot_id, ctrl in self.controllers.items():
+            ctrl.is_ready = False
+            ctrl.ready_event.clear()
+            # Send reset message to smartphone if connected
+            if ctrl.smartphone_ws and not ctrl.smartphone_ws.closed:
+                try:
+                    await ctrl.smartphone_ws.send_str(json.dumps({
+                        'type': 'reset',
+                        'message': 'New race starting. Press L+R buttons again.'
+                    }))
+                    logger.info(f"[{robot_id}] Reset signal sent to smartphone")
+                except Exception as e:
+                    logger.warning(f"[{robot_id}] Failed to send reset: {e}")
+
         logger.info(f"Waiting for {len(self.controllers)} robot(s) to confirm connection...")
-        logger.info("Please scan QR code and perform dual-input test:")
-        logger.info("  → Touch BOTH joysticks simultaneously (e.g., forward + right)")
+        logger.info("Please scan QR code and press BOTH L+R buttons:")
 
         start_time = asyncio.get_event_loop().time()
+        last_progress = -1
 
         while True:
+            # Check if stop_event is set (user pressed 'q')
+            if stop_event and stop_event.is_set():
+                logger.info("Cancelled by user")
+                return False
+
             # Check if all are ready
             all_ready = all(ctrl.is_ready for ctrl in self.controllers.values())
 
@@ -315,8 +452,10 @@ class SmartphoneServer:
                 logger.warning(f"Only {ready_count}/{len(self.controllers)} robots are ready")
                 return False
 
-            # Show progress every 5 seconds
-            if int(elapsed) % 5 == 0 and int(elapsed) > 0:
+            # Show progress every 5 seconds (only once per interval)
+            current_5s = int(elapsed) // 5
+            if current_5s > last_progress:
+                last_progress = current_5s
                 ready_count = sum(1 for ctrl in self.controllers.values() if ctrl.is_ready)
                 logger.info(f"Progress: {ready_count}/{len(self.controllers)} ready ({int(elapsed)}s elapsed)")
 
@@ -413,7 +552,7 @@ class SmartphoneServer:
         local_ip = self._get_local_ip()
         controller_url = f"http://{local_ip}:{self.port}/controller?robot={robot_id}"
 
-        # Generate QR code
+        # Generate QR code with robot-specific color
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -423,8 +562,9 @@ class SmartphoneServer:
         qr.add_data(controller_url)
         qr.make(fit=True)
 
-        # Create PNG image
-        img = qr.make_image(fill_color="black", back_color="white")
+        # Create PNG image with robot-specific color
+        qr_color = QR_COLORS.get(robot_id, 'black')
+        img = qr.make_image(fill_color=qr_color, back_color="white")
 
         # Save to bytes
         from io import BytesIO
@@ -494,7 +634,7 @@ class SmartphoneServer:
         for robot_id in self.controllers.keys():
             controller_url = f"http://{local_ip}:{self.port}/controller?robot={robot_id}"
 
-            # Generate QR code
+            # Generate QR code with robot-specific color
             qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -504,8 +644,9 @@ class SmartphoneServer:
             qr.add_data(controller_url)
             qr.make(fit=True)
 
-            # Create image
-            img = qr.make_image(fill_color="black", back_color="white")
+            # Create image with robot-specific color
+            qr_color = QR_COLORS.get(robot_id, 'black')
+            img = qr.make_image(fill_color=qr_color, back_color="white")
 
             # Save to file
             qr_file = qr_dir / f"{robot_id}_controller.png"
@@ -515,92 +656,173 @@ class SmartphoneServer:
 
         logger.info(f"All QR codes saved to {qr_dir}/")
 
-        # Display QR code in popup window (Windows)
-        self._show_qr_popup(qr_dir, local_ip)
+        # Display QR code popup windows (one per robot)
+        self._show_qr_popups(qr_dir, local_ip)
 
-    def _show_qr_popup(self, qr_dir: Path, local_ip: str):
-        """Show QR codes in a popup window"""
+    def _show_qr_popups(self, qr_dir: Path, local_ip: str):
+        """Show separate QR code windows for each robot (closes individually on connection)"""
         try:
-            from PIL import Image, ImageDraw, ImageFont
+            from PIL import Image, ImageDraw, ImageFont, ImageTk
+            import tkinter as tk
             import threading
 
-            def show_popup():
-                """Show QR code in a window (runs in separate thread)"""
+            # Store window references per robot
+            self._qr_windows = {}  # {robot_id: {'window': Toplevel, 'close_requested': False}}
+            self._tk_root = None
+            self._tk_images = {}  # Keep references to prevent garbage collection
+
+            def run_tk_loop():
+                """Run tkinter main loop in a separate thread"""
                 try:
-                    # Get all QR code files
-                    qr_files = sorted(qr_dir.glob("*_controller.png"))
+                    # Create hidden root window
+                    root = tk.Tk()
+                    root.withdraw()  # Hide the root window
+                    self._tk_root = root
 
-                    if not qr_files:
-                        logger.warning("No QR code files found to display")
-                        return
+                    # Create a Toplevel window for each registered robot
+                    for idx, robot_id in enumerate(self.controllers.keys()):
+                        qr_file = qr_dir / f"{robot_id}_controller.png"
+                        if not qr_file.exists():
+                            logger.warning(f"QR code file not found for {robot_id}")
+                            continue
 
-                    # Create a combined image with all QR codes
-                    qr_images = [Image.open(f) for f in qr_files]
+                        # Load QR code image
+                        qr_img = Image.open(qr_file)
+                        qr_width, qr_height = qr_img.size
 
-                    # Calculate layout
-                    qr_width, qr_height = qr_images[0].size
-                    num_robots = len(qr_images)
+                        # Calculate layout
+                        padding = 30
+                        text_height = 70
+                        total_width = qr_width + padding * 2
+                        total_height = qr_height + text_height + padding * 2 + 30
 
-                    # Layout: vertical stack
-                    padding = 40
-                    text_height = 80
-                    total_width = qr_width + padding * 2
-                    total_height = (qr_height + text_height + padding) * num_robots + padding
+                        # Create canvas
+                        canvas = Image.new('RGB', (total_width, total_height), 'white')
+                        draw = ImageDraw.Draw(canvas)
 
-                    # Create canvas
-                    canvas = Image.new('RGB', (total_width, total_height), 'white')
-                    draw = ImageDraw.Draw(canvas)
+                        # Try to load font (fallback to default if not available)
+                        try:
+                            title_font = ImageFont.truetype("arial.ttf", 28)
+                            url_font = ImageFont.truetype("arial.ttf", 12)
+                        except:
+                            title_font = ImageFont.load_default()
+                            url_font = ImageFont.load_default()
 
-                    # Try to load font (fallback to default if not available)
-                    try:
-                        title_font = ImageFont.truetype("arial.ttf", 24)
-                        url_font = ImageFont.truetype("arial.ttf", 14)
-                    except:
-                        title_font = ImageFont.load_default()
-                        url_font = ImageFont.load_default()
-
-                    # Draw each QR code with label
-                    y_offset = padding
-                    for idx, (qr_img, qr_file) in enumerate(zip(qr_images, qr_files)):
-                        robot_id = qr_file.stem.replace('_controller', '')
+                        # Get robot color for title
+                        color_map = {'R1': 'red', 'R2': 'green', 'R3': 'blue', 'R4': 'orange', 'R5': 'purple'}
+                        title_color = color_map.get(robot_id, 'black')
 
                         # Draw title
-                        title = f"Robot {robot_id} Controller"
-                        draw.text((padding, y_offset), title, fill='black', font=title_font)
+                        title = f"Robot {robot_id}"
+                        draw.text((padding, padding), title, fill=title_color, font=title_font)
 
                         # Draw URL
                         url = f"http://{local_ip}:{self.port}/controller?robot={robot_id}"
-                        draw.text((padding, y_offset + 30), url, fill='blue', font=url_font)
+                        draw.text((padding, padding + 35), url, fill='blue', font=url_font)
 
                         # Draw QR code
-                        canvas.paste(qr_img, (padding, y_offset + text_height))
+                        canvas.paste(qr_img, (padding, padding + text_height))
 
-                        y_offset += qr_height + text_height + padding
+                        # Draw instruction
+                        draw.text(
+                            (padding, total_height - 25),
+                            "Scan QR -> Press L+R buttons",
+                            fill='gray',
+                            font=url_font
+                        )
 
-                    # Add footer instructions
-                    draw.text(
-                        (padding, total_height - 35),
-                        "Scan with smartphone camera to connect",
-                        fill='green',
-                        font=url_font
-                    )
+                        # Create Toplevel window (not Tk)
+                        window = tk.Toplevel(root)
+                        window.title(f"QR Code - {robot_id}")
+                        window.resizable(False, False)
 
-                    # Show image
-                    canvas.show(title="Virtual Robot Race - QR Codes")
+                        # Position windows side by side
+                        x_offset = 100 + idx * (total_width + 50)
+                        y_offset = 100
+                        window.geometry(f"+{x_offset}+{y_offset}")
 
-                    logger.info("QR code popup window opened")
+                        # Convert PIL image to tkinter PhotoImage
+                        tk_image = ImageTk.PhotoImage(canvas)
+                        self._tk_images[robot_id] = tk_image  # Keep reference
+
+                        # Create label with image
+                        label = tk.Label(window, image=tk_image)
+                        label.pack()
+
+                        # Store reference to window
+                        self._qr_windows[robot_id] = {
+                            'window': window,
+                            'close_requested': False
+                        }
+
+                        # Handle window close button
+                        def make_on_close(rid):
+                            def on_close():
+                                if rid in self._qr_windows:
+                                    self._qr_windows[rid]['window'].destroy()
+                                    del self._qr_windows[rid]
+                                # Quit if all windows closed
+                                if not self._qr_windows:
+                                    root.quit()
+                            return on_close
+
+                        window.protocol("WM_DELETE_WINDOW", make_on_close(robot_id))
+
+                        logger.info(f"QR code popup window opened for {robot_id}")
+
+                    # Periodic check for close requests
+                    def check_close_requests():
+                        for rid in list(self._qr_windows.keys()):
+                            if self._qr_windows[rid]['close_requested']:
+                                self._qr_windows[rid]['window'].destroy()
+                                del self._qr_windows[rid]
+                                logger.info(f"QR code popup closed for {rid}")
+                        # Quit if all windows closed
+                        if not self._qr_windows:
+                            root.quit()
+                        else:
+                            root.after(100, check_close_requests)
+
+                    root.after(100, check_close_requests)
+
+                    # Start tkinter main loop
+                    root.mainloop()
 
                 except Exception as e:
-                    logger.error(f"Failed to show QR popup: {e}")
+                    logger.error(f"Failed to show QR popups: {e}")
 
-            # Run in separate thread to not block main loop
-            popup_thread = threading.Thread(target=show_popup, daemon=True)
+            # Run tkinter in a separate thread
+            popup_thread = threading.Thread(target=run_tk_loop, daemon=True)
             popup_thread.start()
 
-        except ImportError:
-            logger.warning("PIL not available for QR popup display")
+        except ImportError as e:
+            logger.warning(f"Required library not available for QR popup display: {e}")
         except Exception as e:
-            logger.error(f"Error creating QR popup: {e}")
+            logger.error(f"Error creating QR popups: {e}")
+
+    def close_qr_popup(self, robot_id: str = None):
+        """Close QR code popup window(s) (thread-safe)
+
+        Args:
+            robot_id: Specific robot ID to close, or None to close all
+        """
+        if robot_id:
+            # Close specific robot's window
+            if hasattr(self, '_qr_windows') and robot_id in self._qr_windows:
+                try:
+                    self._qr_windows[robot_id]['close_requested'] = True
+                    logger.info(f"QR code popup close requested for {robot_id}")
+                except Exception as e:
+                    logger.warning(f"Error requesting QR popup close for {robot_id}: {e}")
+        else:
+            # Close all windows (legacy behavior)
+            if hasattr(self, '_qr_windows'):
+                for rid in list(self._qr_windows.keys()):
+                    try:
+                        self._qr_windows[rid]['close_requested'] = True
+                    except:
+                        pass
+                logger.info("QR code popup close requested for all")
 
     @staticmethod
     def _get_local_ip() -> str:

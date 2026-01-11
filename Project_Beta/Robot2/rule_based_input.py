@@ -138,11 +138,13 @@ def update():
             lateral = getattr(sw, "lateral_px", None) if lane_ok else None
             theta = getattr(sw, "theta_deg", None) if lane_ok else None
             img_w = getattr(sw, "img_width", None) or pil_img.size[0]
+            single_side = bool(getattr(sw, "single_side", False))
         else:
             lane_ok = False
             lateral, theta = None, None
             img_w = pil_img.size[0]
             sw = None
+            single_side = False
 
         # === Determine lane_mode from lane state ===
         if lane_ok:
@@ -162,6 +164,7 @@ def update():
             valid_lane=lane_ok,
             lane_mode=lane_mode,
             lost_age=_lost_age,
+            single_side=single_side,
         )
 
         driveTorque = saturate(drive)
@@ -173,6 +176,14 @@ def update():
                 frame_name = data_manager.get_latest_frame_name(robot_id)
                 debug_dir = Path(__file__).parent / "debug"
 
+                # Determine display mode (include Pulse state)
+                debug_use_pulse = _driver.last_debug.get("use_pulse", False)
+                debug_pulse_phase = _driver.last_debug.get("pulse_phase", "")
+                if debug_use_pulse:
+                    display_mode = f"Pulse({debug_pulse_phase})"
+                else:
+                    display_mode = MODE_LABELS.get((lane_mode or "").lower(), lane_mode)
+
                 if sw is not None and getattr(sw, "canvas_bgr", None) is not None:
                     # 1) If SW canvas exists, annotate and save
                     outp = annotate_and_save_canvas(
@@ -182,7 +193,7 @@ def update():
                         theta_deg=theta,
                         drive_torque=driveTorque,
                         steer_angle=steerAngle,
-                        mode=lane_mode,
+                        mode=display_mode,
                         frame_name=frame_name,
                         src_path=str(rgb_path),
                         jpeg_quality=85,
@@ -205,6 +216,11 @@ def update():
         # === Logging (every 20 frames = ~1 second) ===
         if _lost_age % 20 == 0 or not start_go:
             mode_label = MODE_LABELS.get((lane_mode or "").lower(), str(lane_mode))
+            # Check if pulse mode is active
+            use_pulse = _driver.last_debug.get("use_pulse", False)
+            pulse_phase = _driver.last_debug.get("pulse_phase", "")
+            if use_pulse:
+                mode_label = f"Pulse({pulse_phase})"
             lat_str = "None" if (lateral is None) else f"{lateral:+.1f}"
             tht_str = "None" if (theta is None) else f"{theta:+.1f}"
             soc_str = "None" if (soc is None) else f"{float(soc):.2f}"

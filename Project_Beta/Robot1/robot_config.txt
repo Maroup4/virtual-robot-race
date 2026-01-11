@@ -6,7 +6,7 @@
 ROBOT_ID=R1
 
 # Player name (up to 10 alphanumeric characters, used for leaderboard)
-NAME=Player0000
+NAME=Player_AI
 
 # Control mode:
 # 1 = keyboard
@@ -14,7 +14,7 @@ NAME=Player0000
 # 3 = rule_based (autonomous lane following)
 # 4 = ai (neural network inference)
 # 5 = smartphone (smartphone controller via QR code)
-MODE_NUM=5
+MODE_NUM=3
 
 # Data saving:
 # 1 = Save CSV and JPEG images during run (also auto-creates MP4 video)
