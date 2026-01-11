@@ -11,6 +11,18 @@ You can race against a friend or against your own AI algorithms, then share your
 
 ## 🆕 What's New in Beta
 
+### 📱 Beta 1.3 - Smartphone Controller & UI Improvements (2026-01-11)
+- **New**: Smartphone controller mode (MODE_NUM=5) - Control your robot using your phone as a gamepad!
+  - Dual virtual joysticks: Left=Throttle, Right=Steering
+  - Real-time camera feed from robot
+  - QR code connection for easy setup
+- **New**: PanelManager for dynamic camera panel layout
+  - 1 robot: centered at bottom
+  - 2 robots: arranged horizontally at bottom
+  - Auto-adjusts on window resize
+- **Improve**: InputVectorScope circle rendering (128px resolution, anti-aliasing, thicker ring)
+- **Refactor**: Robot visibility management moved from WebSocketServer to GameManager
+
 ### 🔧 Beta 1.2 - Training Data Integrity Fix (2026-01-10)
 **CRITICAL FIX**: Resolves training data corruption that prevented AI models from learning properly.
 
@@ -230,7 +242,7 @@ DEBUG_MODE=0         # 0=Auto-launch Unity (recommended), 1=Manual (advanced)
 
 ```ini
 # Control mode
-MODE_NUM=1           # 1=keyboard, 2=table, 3=rule_based, 4=ai
+MODE_NUM=1           # 1=keyboard, 2=table, 3=rule_based, 4=ai, 5=smartphone
 
 # Robot identifier
 ROBOT_ID=R1          # R1, R2, etc.
@@ -285,6 +297,18 @@ Autonomous driving using:
 
 ### 4. Neural Network AI (MODE_NUM=4)
 AI-powered control using trained PyTorch models.
+
+### 5. Smartphone Controller (MODE_NUM=5)
+Use your smartphone as a wireless gamepad:
+1. Set `MODE_NUM=5` in robot_config.txt
+2. Run `python main.py` - a QR code will appear
+3. Scan the QR code with your phone
+4. Use dual virtual joysticks to control your robot
+   - **Left joystick**: Throttle (up=forward, down=reverse)
+   - **Right joystick**: Steering (left/right)
+5. Press both L+R buttons simultaneously to start
+
+> 💡 Your phone and PC must be on the same WiFi network
 
 ---
 
@@ -458,6 +482,16 @@ Please share your test results with us via Discord or GitHub Issues. 😊
 ---
 
 ## Changelog
+
+### v1.3 (2026-01-11)
+- **New**: Smartphone controller mode (MODE_NUM=5) with dual joysticks and camera feed
+- **New**: PanelManager for dynamic camera panel layout based on active robot count
+- **Improve**: InputVectorScope anti-aliased rendering for smoother visuals
+- **Refactor**: Robot visibility management consolidated in GameManager
+
+### v1.2 (2026-01-10)
+- **Fix**: Training data integrity - image filenames now align correctly with metadata.csv
+- **New**: Data correction tool (`scripts/data_manager_post.py`)
 
 ### v1.1 (2025-12-13)
 - **New**: Input Vector Scope UI - real-time visualization of drive/steer inputs with motion trail
