@@ -488,12 +488,94 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
 
                 await asyncio.sleep(0.05)  # 20Hz
 
+        elif mode == "smartphone":
+            # Smartphone mode: Control is handled by smartphone_server
+            # This mode just keeps the connection alive while smartphone_server forwards control
+            print("[Main] Smartphone mode: Control via smartphone (waiting for smartphone_server)")
+
+            # Keep alive - control is forwarded by smartphone_server
+            while not stop_event.is_set():
+                await asyncio.sleep(0.1)
+
         else:
             print(f"[Main] Unknown MODE: {mode}")
 
     finally:
         # Cleanup is handled automatically with importlib approach
         pass
+
+
+async def keyboard_monitor() -> None:
+    """Monitor keyboard for 'q' key press in background"""
+    import sys
+
+    print("[Main] ========================================")
+    print("[Main] Keyboard Monitor Starting")
+    print("[Main] Press 'q' at any time to force stop")
+    print("[Main] ========================================")
+
+    # Try keyboard library first (requires admin on Windows sometimes)
+    keyboard_lib_works = False
+    try:
+        import keyboard
+        print("[Main] [KeyMon] Testing keyboard library...")
+        # Test if keyboard library works
+        try:
+            keyboard.is_pressed("q")
+            keyboard_lib_works = True
+            print("[Main] [KeyMon] ✓ keyboard library working")
+        except Exception as e:
+            print(f"[Main] [KeyMon] ✗ keyboard library test failed: {e}")
+            print("[Main] [KeyMon] Will use msvcrt instead")
+    except ImportError:
+        print("[Main] [KeyMon] keyboard library not installed")
+
+    if keyboard_lib_works:
+        print("[Main] [KeyMon] Using keyboard library for monitoring")
+        check_count = 0
+        while not stop_event.is_set():
+            try:
+                if keyboard.is_pressed("q"):
+                    print("[Main] [KeyMon] ✓✓✓ 'q' KEY DETECTED ✓✓✓")
+                    print("[Main] [KeyMon] Setting stop_event...")
+                    stop_event.set()
+                    break
+                # Debug: Print heartbeat every 100 checks (~5 seconds)
+                check_count += 1
+                if check_count % 100 == 0:
+                    print(f"[Main] [KeyMon] Heartbeat: {check_count} checks, still monitoring...")
+            except Exception as e:
+                print(f"[Main] [KeyMon] ERROR during monitoring: {e}")
+                break
+            await asyncio.sleep(0.05)  # Check every 50ms
+
+    # Fallback: Use msvcrt on Windows
+    if not stop_event.is_set() and not keyboard_lib_works:
+        try:
+            if sys.platform == 'win32':
+                import msvcrt
+                print("[Main] [KeyMon] Using msvcrt for monitoring (Windows fallback)")
+                check_count = 0
+                while not stop_event.is_set():
+                    if msvcrt.kbhit():
+                        key = msvcrt.getch()
+                        print(f"[Main] [KeyMon] Key pressed: {key}")
+                        if key == b'q' or key == b'Q':
+                            print("[Main] [KeyMon] ✓✓✓ 'q' KEY DETECTED ✓✓✓")
+                            print("[Main] [KeyMon] Setting stop_event...")
+                            stop_event.set()
+                            break
+                    # Debug: Print heartbeat every 100 checks (~5 seconds)
+                    check_count += 1
+                    if check_count % 100 == 0:
+                        print(f"[Main] [KeyMon] Heartbeat: {check_count} checks, still monitoring...")
+                    await asyncio.sleep(0.05)
+            else:
+                print("[Main] [KeyMon] Not on Windows - no fallback available")
+        except Exception as e:
+            print(f"[Main] [KeyMon] ERROR: {e}")
+
+    print("[Main] [KeyMon] Monitor stopped")
 
 
 async def main() -> None:
@@ -622,7 +704,57 @@ async def main() -> None:
                         print(f"[Main] WARNING: CUDA warmup failed for Robot{robot_num}: {e}")
         print("[Main] CUDA warmup complete.")
 
-        # Phase 1.7: Send ready signals to Unity
+        # Start keyboard monitor early (before smartphone wait)
+        print("[Main] Starting keyboard monitor...")
+        keyboard_task = asyncio.create_task(keyboard_monitor())
+        all_tasks.append(keyboard_task)
+
+        # Phase 1.7: Start smartphone server if any robot uses smartphone mode
+        # NOTE: This must happen BEFORE sending ready signals to Unity
+        smartphone_server = None
+        smartphone_modes = {robot_id: mode for robot_id, (mode, _, _) in robot_modes.items() if mode == "smartphone"}
+
+        if smartphone_modes:
+            print(f"[Main] Starting smartphone server for {len(smartphone_modes)} robot(s)...")
+            from smartphone_server import SmartphoneServer
+
+            smartphone_server = SmartphoneServer(port=8080)
+
+            # Register robots that use smartphone mode
+            for robot_id in smartphone_modes.keys():
+                client = robot_clients[robot_id]
+                smartphone_server.register_robot(robot_id, client)
+
+            # Start server
+            await smartphone_server.start()
+            print("[Main] Smartphone server started and ready for connections")
+
+            # Wait for all smartphone controllers to pass readiness test
+            print("[Main] " + "=" * 50)
+            print("[Main] Waiting for smartphone connection confirmation...")
+            print("[Main] Instructions:")
+            print("[Main]   1. Scan QR code with your smartphone")
+            print("[Main]   2. Press BOTH L+R buttons at the same time")
+            print("[Main]   3. Race will start automatically when confirmed")
+            print("[Main]   (Press 'q' to cancel)")
+            print("[Main] " + "=" * 50)
+
+            all_ready = await smartphone_server.wait_for_all_ready(timeout=300.0, stop_event=stop_event)
+
+            if stop_event.is_set():
+                print("[Main] Cancelled by user ('q' key pressed)")
+                raise KeyboardInterrupt("User cancelled with 'q' key")
+
+            if not all_ready:
+                print("[Main] ERROR: Not all robots confirmed connection within timeout")
+                print("[Main] Proceeding anyway, but connection may be unstable")
+            else:
+                print("[Main] ✓ All smartphones confirmed! Starting race sequence...")
+                print("[Main] Waiting 3 seconds before starting...")
+                await asyncio.sleep(3.0)
+
+        # Phase 1.8: Send ready signals to Unity
+        # For smartphone mode, this happens AFTER smartphone connection is confirmed
         # Unity will wait for all robots to be ready before starting the race
         print("[Main] Sending ready signals to Unity...")
         for robot_id, client in robot_clients.items():
@@ -630,7 +762,7 @@ async def main() -> None:
                 await client.send_ready_signal()
             except Exception as e:
                 print(f"[Main] WARNING: Failed to send ready signal for {robot_id}: {e}")
-        print("[Main] All ready signals sent. Waiting for Unity to start race...")
+        print("[Main] All ready signals sent. Unity will start race now...")
 
         print("[Main] Starting control modules simultaneously...")
 
@@ -649,6 +781,7 @@ async def main() -> None:
             all_tasks.extend([control_task, receive_task])
 
         print(f"[Main] All control modules started at the same time")
+        print(f"[Main] Keyboard monitor active - Press 'q' to force stop")
 
         # 6) Wait for stop_event or any client to stop
         force_ended = False  # Track if ended with 'q' key
@@ -661,28 +794,22 @@ async def main() -> None:
 
             await asyncio.sleep(0.1)
 
-            # Optional: hotkey 'q' to force stop
-            try:
-                import keyboard
-                if keyboard.is_pressed("q"):
-                    print("[Main] 'q' pressed → Sending force-end signal to Unity...")
-                    force_ended = True
+        # Check if we stopped because of 'q' key
+        if stop_event.is_set():
+            print("[Main] Stop event detected → Sending force-end signal to Unity...")
+            force_ended = True
 
-                    # Send force_end message to Unity to trigger metadata send
-                    for robot_id, client in robot_clients.items():
-                        try:
-                            force_end_msg = {
-                                "type": "force_end",
-                                "robot_id": robot_id,
-                                "message": "Python client force-ended with 'q' key"
-                            }
-                            await client.send_json(force_end_msg)
-                        except Exception as e:
-                            print(f"[Main] Failed to send force_end to {robot_id}: {e}")
-
-                    break
-            except Exception:
-                pass
+            # Send force_end message to Unity to trigger metadata send
+            for robot_id, client in robot_clients.items():
+                try:
+                    force_end_msg = {
+                        "type": "force_end",
+                        "robot_id": robot_id,
+                        "message": "Python client force-ended with 'q' key"
+                    }
+                    await client.send_json(force_end_msg)
+                except Exception as e:
+                    print(f"[Main] Failed to send force_end to {robot_id}: {e}")
 
         # 7) Cleanup
         print("[Main] Shutting down...")

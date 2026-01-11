@@ -40,3 +40,6 @@ Robot*/make_promotion_video.py
 nul
 Windows/runtime_log.txt
 unity_log.txt
+
+# QR codes (generated at runtime)
+qr_codes/

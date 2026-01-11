@@ -17,7 +17,7 @@ DEFAULT_CONFIG = {
 
 # Default values for robot-specific config (Robot{N}/robot_config.txt)
 DEFAULT_ROBOT_CONFIG = {
-    "MODE_NUM": 1,          # 1: keyboard, 2: table, 3: rule_based, 4: ai
+    "MODE_NUM": 1,          # 1: keyboard, 2: table, 3: rule_based, 4: ai, 5: smartphone
     "ROBOT_ID": "R1",       # Robot ID (e.g., R1, R2, ...)
     "NAME": "Player0000",   # Player name (up to 10 alphanumeric chars)
     "RACE_FLAG": 1,         # 1: participate (POST), 0: watch only
@@ -171,7 +171,7 @@ def get_robot_config(robot_num: int) -> dict:
 
 def get_mode_string(mode_num: int) -> str:
     """Convert MODE_NUM to mode string."""
-    MODE_MAP = {1: "keyboard", 2: "table", 3: "rule_based", 4: "ai"}
+    MODE_MAP = {1: "keyboard", 2: "table", 3: "rule_based", 4: "ai", 5: "smartphone"}
     return MODE_MAP.get(mode_num, "keyboard")
 
 

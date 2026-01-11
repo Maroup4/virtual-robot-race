@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Robot {{ROBOT_ID}} Controller</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        /* Background */
+        #camera-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+        }
+
+        #camera-feed {
+            display: none;
+        }
+
+        /* SOC (Battery) Display */
+        #soc-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 5;
+        }
+
+        #soc-value {
+            font-size: 80px;
+            font-weight: bold;
+            color: #0f0;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        #soc-label {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+        }
+
+        #soc-bar-container {
+            width: 200px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            margin: 20px auto 0;
+            overflow: hidden;
+        }
+
+        #soc-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #f00 0%, #ff0 50%, #0f0 100%);
+            border-radius: 13px;
+            transition: width 0.3s ease;
+        }
+
+        .soc-critical { color: #f00 !important; text-shadow: 0 0 20px rgba(255, 0, 0, 0.5) !important; }
+        .soc-low { color: #ff0 !important; text-shadow: 0 0 20px rgba(255, 255, 0, 0.5) !important; }
+        .soc-good { color: #0f0 !important; text-shadow: 0 0 20px rgba(0, 255, 0, 0.5) !important; }
+
+        .no-signal {
+            color: #666;
+            font-size: 20px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Status overlay */
+        #status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #0f0;
+            font-size: 14px;
+            z-index: 100;
+            text-align: center;
+            border-bottom: 1px solid #0f0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-connected {
+            background: #0f0;
+        }
+
+        .status-disconnected {
+            background: #f00;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Joystick containers */
+        .joystick-container {
+            position: absolute;
+            bottom: 80px;
+            width: 140px;
+            height: 140px;
+            z-index: 10;
+        }
+
+        #left-joystick {
+            left: 30px;
+        }
+
+        #right-joystick {
+            right: 30px;
+        }
+
+        /* Joystick background circle */
+        .joystick-base {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            border: 2px solid rgba(255,255,255,0.4);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Joystick stick */
+        .joystick-stick {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(200,200,200,0.6));
+            border: 2px solid rgba(255,255,255,0.9);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: all 0.05s ease-out;
+        }
+
+        /* Joystick labels */
+        .joystick-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
+        }
+
+        /* Debug info */
+        #debug-info {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 11px;
+            z-index: 100;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        /* Camera overlay text */
+        #camera-status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 16px;
+            z-index: 5;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .scanning {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Connect buttons container */
+        #connect-buttons {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 200;
+        }
+
+        .connect-btn {
+            width: 120px;
+            height: 50px;
+            border-radius: 10px;
+            border: 3px solid #0ff;
+            background: rgba(0, 255, 255, 0.2);
+            color: #0ff;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .connect-btn:active, .connect-btn.pressed {
+            background: rgba(0, 255, 255, 0.5);
+            transform: scale(0.95);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+        }
+
+        .connect-btn.ready {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.3);
+            color: #0f0;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .connect-btn.camera-on {
+            border-color: #0f0;
+            background: rgba(0, 255, 0, 0.3);
+            color: #0f0;
+        }
+
+        .connect-btn.camera-off {
+            border-color: #f00;
+            background: rgba(255, 0, 0, 0.3);
+            color: #f00;
+        }
+
+        /* Value display (replacing buttons after race starts) */
+        .value-display {
+            width: 120px;
+            height: 50px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .value-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2px;
+        }
+
+        .value-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #0ff;
+        }
+
+        .value-number.positive {
+            color: #0f0;
+        }
+
+        .value-number.negative {
+            color: #f80;
+        }
+
+        .btn-icon {
+            font-size: 16px;
+        }
+
+        .btn-text {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* Connection instruction overlay */
+        #connect-instruction {
+            position: absolute;
+            top: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #0ff;
+            border-radius: 10px;
+            padding: 15px 25px;
+            color: #0ff;
+            font-size: 14px;
+            text-align: center;
+            z-index: 200;
+            animation: pulse-border 1.5s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: #0ff; box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+            50% { border-color: #fff; box-shadow: 0 0 20px rgba(0, 255, 255, 0.8); }
+        }
+
+        #connect-instruction.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Status Bar -->
+    <div id="status-bar">
+        <span class="status-indicator status-disconnected" id="status-indicator"></span>
+        <span id="status-text">CONNECTING...</span>
+    </div>
+
+    <!-- Connect Buttons (top area) -->
+    <div id="connect-buttons">
+        <button class="connect-btn" id="left-connect-btn">
+            <span class="btn-icon">L</span>
+            <span class="btn-text">CONNECT</span>
+        </button>
+        <button class="connect-btn" id="right-connect-btn">
+            <span class="btn-icon">R</span>
+            <span class="btn-text">CONNECT</span>
+        </button>
+    </div>
+
+    <!-- Connection Instruction -->
+    <div id="connect-instruction">
+        Press BOTH buttons<br>at the same time!
+    </div>
+
+    <!-- Background Container -->
+    <div id="camera-container">
+        <img id="camera-feed" style="display:none;" alt="Robot Camera">
+        <!-- SOC Display -->
+        <div id="soc-display">
+            <div id="soc-value" class="soc-good">--</div>
+            <div id="soc-label">BATTERY %</div>
+            <div id="soc-bar-container">
+                <div id="soc-bar" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="camera-status" class="scanning">PRESS L + R BUTTONS</div>
+    </div>
+
+    <!-- Left Joystick (Throttle) -->
+    <div class="joystick-container" id="left-joystick">
+        <div class="joystick-label">THROTTLE</div>
+        <div class="joystick-base">
+            <div class="joystick-stick" id="left-stick"></div>
+        </div>
+    </div>
+
+    <!-- Right Joystick (Steering) -->
+    <div class="joystick-container" id="right-joystick">
+        <div class="joystick-label">STEERING</div>
+        <div class="joystick-base">
+            <div class="joystick-stick" id="right-stick"></div>
+        </div>
+    </div>
+
+    <!-- Debug Info -->
+    <div id="debug-info">
+        Steer: <span id="steer-value">0.00</span> |
+        Torque: <span id="torque-value">0.00</span>
+    </div>
+
+    <script>
+        // Configuration
+        const ROBOT_ID = '{{ROBOT_ID}}';
+        const WS_URL = `ws://${window.location.host}/ws/${ROBOT_ID}`;
+        const CONTROL_UPDATE_RATE = 50; // 20Hz = 50ms
+        const DEAD_ZONE = 0.1;
+
+        // WebSocket connection
+        let ws = null;
+        let isConnected = false;
+        let isReady = false;  // True after dual-button press confirmed
+
+        // Control state
+        let steerAngle = 0.0;
+        let driveTorque = 0.0;
+
+        // Camera state
+        let frameCount = 0;
+        let lastFrameTime = Date.now();
+        let cameraEnabled = true;  // Camera ON/OFF toggle (after race starts)
+
+        // Connect button state
+        const connectButtons = {
+            left: false,
+            right: false
+        };
+
+        // Joystick state
+        const joysticks = {
+            left: { x: 0, y: 0, active: false, touchId: null },
+            right: { x: 0, y: 0, active: false, touchId: null }
+        };
+
+        // DOM elements
+        const statusIndicator = document.getElementById('status-indicator');
+        const statusText = document.getElementById('status-text');
+        const cameraFeed = document.getElementById('camera-feed');
+        const cameraStatus = document.getElementById('camera-status');
+        const leftStick = document.getElementById('left-stick');
+        const rightStick = document.getElementById('right-stick');
+        const steerValue = document.getElementById('steer-value');
+        const torqueValue = document.getElementById('torque-value');
+        const fpsValue = document.getElementById('fps-value');
+        const leftConnectBtn = document.getElementById('left-connect-btn');
+        const rightConnectBtn = document.getElementById('right-connect-btn');
+        const connectInstruction = document.getElementById('connect-instruction');
+        const socValue = document.getElementById('soc-value');
+        const socBar = document.getElementById('soc-bar');
+        const socDisplay = document.getElementById('soc-display');
+
+        // Initialize WebSocket
+        function connectWebSocket() {
+            ws = new WebSocket(WS_URL);
+
+            ws.onopen = () => {
+                console.log('WebSocket connected');
+                isConnected = true;
+
+                if (!isReady) {
+                    updateStatus(true, `CONNECTED - PRESS BOTH BUTTONS`);
+                    cameraStatus.textContent = 'PRESS L + R BUTTONS';
+                    cameraStatus.classList.add('scanning');
+                    connectInstruction.classList.remove('hidden');
+                } else {
+                    updateStatus(true, `ROBOT ${ROBOT_ID} - LIVE`);
+                    cameraStatus.textContent = 'LIVE: ~0.5s DELAY';
+                    cameraStatus.classList.remove('scanning');
+                    connectInstruction.classList.add('hidden');
+                }
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+
+                    if (data.type === 'camera') {
+                        updateCameraFeed(data.image);
+                    } else if (data.type === 'soc') {
+                        updateSOC(data.soc);
+                    } else if (data.type === 'pong') {
+                        console.log('Pong received');
+                    } else if (data.type === 'ready_confirmed') {
+                        isReady = true;
+                        updateStatus(true, `READY - RACE STARTING SOON`);
+                        cameraStatus.textContent = data.message || 'Race will start soon!';
+                        cameraStatus.classList.remove('scanning');
+                        connectInstruction.classList.add('hidden');
+
+                        // Update buttons to camera toggle mode
+                        switchButtonsToCameraMode();
+
+                        // Show success for 3 seconds
+                        setTimeout(() => {
+                            updateStatus(true, `ROBOT ${ROBOT_ID} - LIVE`);
+                            cameraStatus.textContent = 'LIVE: ~0.5s DELAY';
+                        }, 3000);
+                    } else if (data.type === 'reset') {
+                        // Reset UI for new race
+                        console.log('Reset received:', data.message);
+                        resetToConnectMode();
+                    }
+                } catch (e) {
+                    console.error('Message parse error:', e);
+                }
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket closed');
+                isConnected = false;
+                updateStatus(false, 'DISCONNECTED');
+                cameraFeed.style.display = 'none';
+                cameraStatus.textContent = 'NO SIGNAL';
+                cameraStatus.classList.add('scanning');
+
+                // Reconnect after 2 seconds
+                setTimeout(connectWebSocket, 2000);
+            };
+        }
+
+        // Update connection status
+        function updateStatus(connected, text) {
+            if (connected) {
+                statusIndicator.classList.remove('status-disconnected');
+                statusIndicator.classList.add('status-connected');
+            } else {
+                statusIndicator.classList.remove('status-connected');
+                statusIndicator.classList.add('status-disconnected');
+            }
+            statusText.textContent = text;
+        }
+
+        // Update camera feed with frame skipping for smoother display
+        let pendingFrame = null;
+        let isRendering = false;
+
+        function updateCameraFeed(base64Image) {
+            // Only update if camera is enabled
+            if (!cameraEnabled) return;
+
+            // Store latest frame (skip old frames if rendering is busy)
+            pendingFrame = base64Image;
+
+            // If already rendering, skip (the pending frame will be used next)
+            if (isRendering) return;
+
+            renderFrame();
+        }
+
+        function renderFrame() {
+            if (!pendingFrame) return;
+
+            isRendering = true;
+            const imageToRender = pendingFrame;
+            pendingFrame = null;
+
+            // Use requestAnimationFrame for smooth rendering
+            requestAnimationFrame(() => {
+                cameraFeed.src = `data:image/jpeg;base64,${imageToRender}`;
+                cameraFeed.style.display = 'block';
+                cameraStatus.style.display = 'none';
+
+                // Update FPS counter
+                frameCount++;
+                const now = Date.now();
+                const elapsed = (now - lastFrameTime) / 1000;
+                if (elapsed >= 1.0) {
+                    fpsValue.textContent = Math.round(frameCount / elapsed);
+                    frameCount = 0;
+                    lastFrameTime = now;
+                }
+
+                isRendering = false;
+
+                // Render next pending frame if available
+                if (pendingFrame) {
+                    renderFrame();
+                }
+            });
+        }
+
+        // Update SOC (battery) display
+        function updateSOC(soc) {
+            if (soc === null || soc === undefined) {
+                socValue.textContent = '--';
+                socBar.style.width = '0%';
+                return;
+            }
+
+            // Display SOC value (convert 0.0-1.0 to 0-100%)
+            const socPercent = Math.round(soc * 100);
+            socValue.textContent = socPercent;
+            socBar.style.width = `${socPercent}%`;
+
+            // Update color based on SOC level
+            socValue.classList.remove('soc-critical', 'soc-low', 'soc-good');
+            if (socPercent <= 20) {
+                socValue.classList.add('soc-critical');
+            } else if (socPercent <= 50) {
+                socValue.classList.add('soc-low');
+            } else {
+                socValue.classList.add('soc-good');
+            }
+
+            // Hide camera status when SOC is active
+            cameraStatus.style.display = 'none';
+        }
+
+        // Send control message
+        function sendControl() {
+            if (!isConnected || !ws) return;
+
+            const message = {
+                type: 'control',
+                steerAngle: steerAngle,
+                driveTorque: driveTorque
+            };
+
+            try {
+                ws.send(JSON.stringify(message));
+            } catch (e) {
+                console.error('Failed to send control:', e);
+            }
+        }
+
+        // Apply dead zone
+        function applyDeadZone(value) {
+            return Math.abs(value) < DEAD_ZONE ? 0 : value;
+        }
+
+        // Update joystick visuals
+        function updateJoystickVisual(stick, x, y) {
+            const maxOffset = 40; // pixels
+            stick.style.transform = `translate(calc(-50% + ${x * maxOffset}px), calc(-50% + ${y * maxOffset}px))`;
+        }
+
+        // Handle touch events
+        function handleTouchStart(e) {
+            e.preventDefault();
+
+            for (let touch of e.changedTouches) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const side = e.currentTarget.id === 'left-joystick' ? 'left' : 'right';
+
+                if (!joysticks[side].active) {
+                    joysticks[side].active = true;
+                    joysticks[side].touchId = touch.identifier;
+                    updateJoystickPosition(touch, side, rect);
+                }
+            }
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+
+            for (let touch of e.changedTouches) {
+                for (let side in joysticks) {
+                    if (joysticks[side].touchId === touch.identifier) {
+                        const container = document.getElementById(`${side}-joystick`);
+                        const rect = container.getBoundingClientRect();
+                        updateJoystickPosition(touch, side, rect);
+                    }
+                }
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+
+            for (let touch of e.changedTouches) {
+                for (let side in joysticks) {
+                    if (joysticks[side].touchId === touch.identifier) {
+                        joysticks[side].active = false;
+                        joysticks[side].touchId = null;
+                        joysticks[side].x = 0;
+                        joysticks[side].y = 0;
+
+                        const stick = document.getElementById(`${side}-stick`);
+                        updateJoystickVisual(stick, 0, 0);
+                        updateControlValues();
+                    }
+                }
+            }
+        }
+
+        function updateJoystickPosition(touch, side, rect) {
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const dx = touch.clientX - centerX;
+            const dy = touch.clientY - centerY;
+
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxRadius = rect.width / 2;
+
+            let x = dx / maxRadius;
+            let y = dy / maxRadius;
+
+            // Clamp to circle
+            if (distance > maxRadius) {
+                const angle = Math.atan2(dy, dx);
+                x = Math.cos(angle);
+                y = Math.sin(angle);
+            }
+
+            joysticks[side].x = x;
+            joysticks[side].y = -y; // Invert Y for intuitive control
+
+            const stick = document.getElementById(`${side}-stick`);
+            updateJoystickVisual(stick, x, y);  // Use raw y for visual (already inverted in joysticks[side].y)
+            updateControlValues();
+        }
+
+        function updateControlValues() {
+            // Left joystick: Y axis = throttle (+1 forward, -1 backward)
+            driveTorque = applyDeadZone(joysticks.left.y);
+
+            // Right joystick: X axis = steering (-1 left, +1 right)
+            steerAngle = applyDeadZone(joysticks.right.x);
+
+            // Update debug display
+            steerValue.textContent = steerAngle.toFixed(2);
+            torqueValue.textContent = driveTorque.toFixed(2);
+
+            // Update top value display (if in race mode)
+            if (isReady) {
+                updateValueDisplay();
+            }
+        }
+
+        // Setup touch event listeners
+        function setupJoysticks() {
+            const leftJoystick = document.getElementById('left-joystick');
+            const rightJoystick = document.getElementById('right-joystick');
+
+            [leftJoystick, rightJoystick].forEach(joystick => {
+                joystick.addEventListener('touchstart', handleTouchStart, { passive: false });
+                joystick.addEventListener('touchmove', handleTouchMove, { passive: false });
+                joystick.addEventListener('touchend', handleTouchEnd, { passive: false });
+                joystick.addEventListener('touchcancel', handleTouchEnd, { passive: false });
+            });
+        }
+
+        // Setup connect button event listeners
+        function setupConnectButtons() {
+            // Handle button press
+            function handleButtonPress(side) {
+                connectButtons[side] = true;
+                const btn = side === 'left' ? leftConnectBtn : rightConnectBtn;
+                btn.classList.add('pressed');
+
+                // Check if both buttons are pressed
+                checkDualButtonPress();
+            }
+
+            // Handle button release
+            function handleButtonRelease(side) {
+                connectButtons[side] = false;
+                const btn = side === 'left' ? leftConnectBtn : rightConnectBtn;
+                btn.classList.remove('pressed');
+            }
+
+            // Check if both buttons are pressed simultaneously
+            function checkDualButtonPress() {
+                if (!isReady && connectButtons.left && connectButtons.right) {
+                    console.log('Both buttons pressed - sending connect signal');
+
+                    // Send connect confirmation to server
+                    if (isConnected && ws) {
+                        ws.send(JSON.stringify({
+                            type: 'connect_confirm',
+                            message: 'dual_button_press'
+                        }));
+                    }
+
+                    // Visual feedback
+                    leftConnectBtn.classList.add('ready');
+                    rightConnectBtn.classList.add('ready');
+                    connectInstruction.textContent = 'CONFIRMED!';
+                }
+            }
+
+            // Left button events
+            leftConnectBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleButtonPress('left');
+            }, { passive: false });
+
+            leftConnectBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                handleButtonRelease('left');
+            }, { passive: false });
+
+            leftConnectBtn.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                handleButtonRelease('left');
+            }, { passive: false });
+
+            // Right button events
+            rightConnectBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleButtonPress('right');
+            }, { passive: false });
+
+            rightConnectBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                handleButtonRelease('right');
+            }, { passive: false });
+
+            rightConnectBtn.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                handleButtonRelease('right');
+            }, { passive: false });
+
+            // Mouse events for desktop testing
+            leftConnectBtn.addEventListener('mousedown', () => handleButtonPress('left'));
+            leftConnectBtn.addEventListener('mouseup', () => handleButtonRelease('left'));
+            leftConnectBtn.addEventListener('mouseleave', () => handleButtonRelease('left'));
+
+            rightConnectBtn.addEventListener('mousedown', () => handleButtonPress('right'));
+            rightConnectBtn.addEventListener('mouseup', () => handleButtonRelease('right'));
+            rightConnectBtn.addEventListener('mouseleave', () => handleButtonRelease('right'));
+        }
+
+        // Switch buttons to value display mode after race starts
+        function switchButtonsToCameraMode() {
+            // Remove connect button classes
+            leftConnectBtn.classList.remove('pressed', 'ready', 'connect-btn');
+            rightConnectBtn.classList.remove('pressed', 'ready', 'connect-btn');
+
+            // Add value display class
+            leftConnectBtn.classList.add('value-display');
+            rightConnectBtn.classList.add('value-display');
+
+            // Left = Throttle value, Right = Steering value
+            leftConnectBtn.innerHTML = '<span class="value-label">THROTTLE</span><span class="value-number" id="throttle-display">0.00</span>';
+            rightConnectBtn.innerHTML = '<span class="value-label">STEERING</span><span class="value-number" id="steering-display">0.00</span>';
+
+            // Remove click handlers (no longer buttons)
+            leftConnectBtn.onclick = null;
+            rightConnectBtn.onclick = null;
+
+            // Disable pointer events (display only)
+            leftConnectBtn.style.pointerEvents = 'none';
+            rightConnectBtn.style.pointerEvents = 'none';
+        }
+
+        // Update value display during race
+        function updateValueDisplay() {
+            const throttleDisplay = document.getElementById('throttle-display');
+            const steeringDisplay = document.getElementById('steering-display');
+
+            if (throttleDisplay && steeringDisplay) {
+                // Update throttle display
+                throttleDisplay.textContent = driveTorque.toFixed(2);
+                throttleDisplay.classList.remove('positive', 'negative');
+                if (driveTorque > 0.01) {
+                    throttleDisplay.classList.add('positive');
+                } else if (driveTorque < -0.01) {
+                    throttleDisplay.classList.add('negative');
+                }
+
+                // Update steering display
+                steeringDisplay.textContent = steerAngle.toFixed(2);
+                steeringDisplay.classList.remove('positive', 'negative');
+                if (steerAngle > 0.01) {
+                    steeringDisplay.classList.add('positive');
+                } else if (steerAngle < -0.01) {
+                    steeringDisplay.classList.add('negative');
+                }
+            }
+        }
+
+        // Set camera enabled/disabled
+        function setCameraEnabled(enabled) {
+            cameraEnabled = enabled;
+
+            if (cameraEnabled) {
+                cameraFeed.style.display = 'block';
+                cameraStatus.style.display = 'none';
+            } else {
+                cameraFeed.style.display = 'none';
+                cameraStatus.textContent = 'CAMERA OFF';
+                cameraStatus.style.display = 'block';
+            }
+
+            console.log('Camera:', cameraEnabled ? 'ON' : 'OFF');
+        }
+
+        // Reset UI to connect mode (for new race)
+        function resetToConnectMode() {
+            isReady = false;
+            cameraEnabled = true;
+
+            // Reset button state
+            connectButtons.left = false;
+            connectButtons.right = false;
+
+            // Reset button appearance to connect mode
+            leftConnectBtn.innerHTML = '<span class="btn-icon">L</span><span class="btn-text">CONNECT</span>';
+            rightConnectBtn.innerHTML = '<span class="btn-icon">R</span><span class="btn-text">CONNECT</span>';
+            leftConnectBtn.classList.remove('pressed', 'ready', 'camera-on', 'camera-off', 'value-display');
+            rightConnectBtn.classList.remove('pressed', 'ready', 'camera-on', 'camera-off', 'value-display');
+            leftConnectBtn.classList.add('connect-btn');
+            rightConnectBtn.classList.add('connect-btn');
+
+            // Re-enable pointer events
+            leftConnectBtn.style.pointerEvents = '';
+            rightConnectBtn.style.pointerEvents = '';
+
+            // Remove handlers
+            leftConnectBtn.onclick = null;
+            rightConnectBtn.onclick = null;
+
+            // Show instruction
+            connectInstruction.textContent = 'Press BOTH buttons\nat the same time!';
+            connectInstruction.classList.remove('hidden');
+
+            // Update status
+            updateStatus(true, `CONNECTED - PRESS BOTH BUTTONS`);
+            cameraStatus.textContent = 'PRESS L + R BUTTONS';
+            cameraStatus.style.display = 'block';
+            cameraStatus.classList.add('scanning');
+
+            console.log('UI reset to connect mode');
+        }
+
+        // Initialize
+        function init() {
+            console.log(`Initializing controller for ${ROBOT_ID}`);
+            connectWebSocket();
+            setupJoysticks();
+            setupConnectButtons();
+
+            // Start control update loop (20Hz)
+            setInterval(sendControl, CONTROL_UPDATE_RATE);
+
+            // Periodic ping to keep connection alive
+            setInterval(() => {
+                if (isConnected && ws) {
+                    ws.send(JSON.stringify({ type: 'ping' }));
+                }
+            }, 5000);
+        }
+
+        // Start when page loads
+        window.addEventListener('load', init);
+
+        // Prevent scrolling and zooming
+        document.addEventListener('touchmove', (e) => {
+            if (e.target.closest('.joystick-container')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+    </script>
+</body>
+</html>

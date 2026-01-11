@@ -155,6 +155,12 @@ class RobotWebSocketClient:
                 print(f"[{self.robot_id}] Metadata received from Unity")
                 await self.save_metadata(data)
 
+            elif msg_type == "soc":
+                # Receive SOC (battery) data - write to file for AI/rule-based inference
+                soc = data.get("soc", 1.0)
+                soc_file = data_manager.get_soc_file(self.robot_id)
+                soc_file.write_text(str(soc), encoding="utf-8")
+
             else:
                 print(f"[{self.robot_id}] Unknown message type: {msg_type}")
 

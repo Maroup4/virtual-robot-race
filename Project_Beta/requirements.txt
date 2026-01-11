@@ -24,6 +24,10 @@ torchvision==0.21.0
 
 # Networking
 websockets==14.1
+aiohttp==3.11.11
+
+# QR Code Generation (for smartphone controller)
+qrcode[pil]==8.0
 
 # Configuration
 pyyaml==6.0.2

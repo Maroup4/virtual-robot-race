@@ -6,20 +6,21 @@
 ROBOT_ID=R1
 
 # Player name (up to 10 alphanumeric characters, used for leaderboard)
-NAME=Player0000
+NAME=Player_AI
 
 # Control mode:
 # 1 = keyboard
 # 2 = table (CSV playback)
 # 3 = rule_based (autonomous lane following)
 # 4 = ai (neural network inference)
-MODE_NUM=4
+# 5 = smartphone (smartphone controller via QR code)
+MODE_NUM=3
 
 # Data saving:
 # 1 = Save CSV and JPEG images during run (also auto-creates MP4 video)
 # 0 = Do not save data (faster, less disk usage, no video)
 # Note: Video settings (FPS, etc.) are fixed in Python code for advanced users
-DATA_SAVE=1
+DATA_SAVE=0
 
 # Race participation flag:
 # 1 = Participate in race (results will be posted)

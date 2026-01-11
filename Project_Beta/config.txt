@@ -11,7 +11,7 @@ PORT=12346
 # Beta version supports up to 2 robots maximum
 # Example: ACTIVE_ROBOTS=1      → Robot1 only
 # Example: ACTIVE_ROBOTS=1,2    → Robot1, Robot2
-ACTIVE_ROBOTS=1
+ACTIVE_ROBOTS=1,2
 
 # Per-robot settings are managed in Robot1/robot_config.txt, Robot2/robot_config.txt, etc.
 
