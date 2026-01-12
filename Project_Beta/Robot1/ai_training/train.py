@@ -60,12 +60,45 @@ def set_seed(seed: int):
     torch.backends.cudnn.benchmark = False
 
 
+def calculate_frame_reward(row: Dict, run_score: float, total_frames: int) -> float:
+    """
+    Calculate reward for a single frame.
+
+    Args:
+        row: DataFrame row with frame data
+        run_score: Total score for this run (from run_scorer)
+        total_frames: Total number of frames in this run
+
+    Returns:
+        Reward value for this frame
+    """
+    # Base reward: distribute run score across frames
+    base_reward = run_score / max(total_frames, 1)
+
+    # Frame-level adjustments
+    reward = base_reward
+
+    # Bonus for Finish frames (terminal success)
+    status = row.get("status", "")
+    if status == "Finish":
+        reward += 1.0
+
+    # Small bonus for later frames (survived longer = better)
+    # Normalized by total frames
+    frame_progress = row.get("race_time_ms", 0) / 30000.0  # Normalize by ~30 seconds
+    reward += frame_progress * 0.1
+
+    return reward
+
+
 class DrivingDataset(Dataset):
     """
     Dataset for driving imitation learning.
 
     Loads image + SOC as input, drive_torque + steer_angle as targets.
     Supports loading from manifest or directory list.
+
+    For Reward-Weighted BC mode, also loads per-frame rewards.
     """
 
     VALID_RACING_STATUS = ["Lap0", "Lap1", "Lap2", "Finish"]
@@ -75,7 +108,9 @@ class DrivingDataset(Dataset):
         data_dirs: List[Path],
         transform=None,
         exclude_start_sequence: bool = True,
-        valid_status: Optional[List[str]] = None
+        valid_status: Optional[List[str]] = None,
+        run_scores: Optional[Dict[str, float]] = None,
+        compute_rewards: bool = False
     ):
         """
         Initialize dataset.
@@ -85,10 +120,13 @@ class DrivingDataset(Dataset):
             transform: Image transforms
             exclude_start_sequence: Skip StartSequence frames
             valid_status: List of valid status values (default: Lap1, Lap2, Finish)
+            run_scores: Dict mapping run_name to score (for RW-BC mode)
+            compute_rewards: Whether to compute per-frame rewards
         """
         self.samples = []
         self.transform = transform
         self.valid_status = valid_status or self.VALID_RACING_STATUS
+        self.compute_rewards = compute_rewards
 
         for data_dir in data_dirs:
             data_dir = Path(data_dir)
@@ -100,6 +138,11 @@ class DrivingDataset(Dataset):
 
             df = pd.read_csv(csv_path)
             images_dir = data_dir / "images"
+
+            # Get run score if available
+            run_name = data_dir.name
+            run_score = run_scores.get(run_name, 1000.0) if run_scores else 1000.0
+            total_frames = len(df)
 
             loaded = 0
             skipped = 0
@@ -120,18 +163,35 @@ class DrivingDataset(Dataset):
                 if not img_path.exists():
                     continue
 
-                self.samples.append({
+                sample = {
                     "image_path": str(img_path),
                     "soc": float(row["soc"]),
                     "drive_torque": float(row["drive_torque"]),
                     "steer_angle": float(row["steer_angle"]),
-                    "run_name": data_dir.name,
-                })
+                    "run_name": run_name,
+                }
+
+                # Compute reward if requested
+                if compute_rewards:
+                    sample["reward"] = calculate_frame_reward(
+                        row.to_dict(), run_score, total_frames
+                    )
+
+                self.samples.append(sample)
                 loaded += 1
 
-            print(f"[Dataset] {data_dir.name}: {loaded} samples loaded, {skipped} skipped")
+            print(f"[Dataset] {run_name}: {loaded} samples, score={run_score:.0f}")
 
         print(f"[Dataset] Total: {len(self.samples)} samples")
+
+        # Normalize rewards if computing them
+        if compute_rewards and self.samples:
+            rewards = [s["reward"] for s in self.samples]
+            min_r, max_r = min(rewards), max(rewards)
+            if max_r > min_r:
+                for s in self.samples:
+                    s["reward"] = (s["reward"] - min_r) / (max_r - min_r)
+            print(f"[Dataset] Rewards normalized: min={min_r:.3f}, max={max_r:.3f}")
 
     def __len__(self):
         return len(self.samples)
@@ -149,7 +209,13 @@ class DrivingDataset(Dataset):
             sample["steer_angle"]
         ], dtype=torch.float32)
 
-        return {"image": image, "soc": soc, "targets": targets}
+        result = {"image": image, "soc": soc, "targets": targets}
+
+        # Include reward if available
+        if self.compute_rewards and "reward" in sample:
+            result["reward"] = torch.tensor([sample["reward"]], dtype=torch.float32)
+
+        return result
 
 
 class EarlyStopping:
@@ -331,13 +397,30 @@ def train_one_epoch(
     dataloader: DataLoader,
     criterion: nn.Module,
     optimizer: optim.Optimizer,
-    device: torch.device
+    device: torch.device,
+    use_reward_weighting: bool = False,
+    temperature: float = 1.0
 ) -> Dict[str, float]:
-    """Train for one epoch."""
+    """
+    Train for one epoch.
+
+    Args:
+        model: Neural network model
+        dataloader: Training data loader
+        criterion: Loss function (MSELoss)
+        optimizer: Optimizer
+        device: Compute device
+        use_reward_weighting: If True, use reward-weighted loss (RW-BC mode)
+        temperature: Temperature for reward weighting (higher = more uniform)
+
+    Returns:
+        Dict with loss metrics
+    """
     model.train()
     total_loss = 0.0
     total_torque_loss = 0.0
     total_steer_loss = 0.0
+    total_weight = 0.0
 
     for batch in dataloader:
         images = batch["image"].to(device)
@@ -346,7 +429,22 @@ def train_one_epoch(
 
         optimizer.zero_grad()
         outputs = model(images, soc)
-        loss = criterion(outputs, targets)
+
+        if use_reward_weighting and "reward" in batch:
+            # Reward-Weighted BC: weight loss by exp(reward / temperature)
+            rewards = batch["reward"].to(device)  # Shape: [batch, 1]
+            weights = torch.exp(rewards / temperature).squeeze()  # Shape: [batch]
+
+            # Compute per-sample loss
+            per_sample_loss = ((outputs - targets) ** 2).mean(dim=1)  # Shape: [batch]
+
+            # Weighted loss
+            loss = (weights * per_sample_loss).mean()
+            total_weight += weights.sum().item()
+        else:
+            # Standard BC
+            loss = criterion(outputs, targets)
+
         loss.backward()
         optimizer.step()
 
@@ -359,11 +457,16 @@ def train_one_epoch(
             total_steer_loss += steer_loss.item()
 
     n = len(dataloader)
-    return {
+    result = {
         "loss": total_loss / n,
         "torque_loss": total_torque_loss / n,
         "steer_loss": total_steer_loss / n
     }
+
+    if use_reward_weighting:
+        result["avg_weight"] = total_weight / (n * dataloader.batch_size)
+
+    return result
 
 
 def validate(
@@ -493,7 +596,10 @@ def train(
     robot_dir: Path,
     data_source_dir: Optional[Path] = None,
     min_score: Optional[float] = None,
-    top_percent: Optional[float] = None
+    top_percent: Optional[float] = None,
+    mode: str = "bc",
+    finetune_path: Optional[Path] = None,
+    temperature: float = 1.0
 ) -> Dict:
     """
     Main training function.
@@ -505,10 +611,22 @@ def train(
         data_source_dir: Optional training data source directory
         min_score: Only use runs with score >= this value
         top_percent: Only use top N% of runs by score
+        mode: Training mode - "bc" (Behavioral Cloning) or "rw" (Reward-Weighted BC)
+        finetune_path: Path to existing model for fine-tuning (optional)
+        temperature: Temperature for reward weighting in RW mode (default: 1.0)
 
     Returns:
         Training results dictionary
     """
+    use_reward_weighting = (mode == "rw")
+    print(f"[Train] Mode: {mode.upper()}" + (" (Reward-Weighted)" if use_reward_weighting else " (Behavioral Cloning)"))
+
+    if finetune_path:
+        print(f"[Train] Fine-tuning from: {finetune_path}")
+
+    if use_reward_weighting:
+        print(f"[Train] Temperature: {temperature}")
+
     # Setup paths
     training_data_dir = robot_dir / config['paths']['training_data']
 
@@ -547,12 +665,22 @@ def train(
     # Create transforms
     train_transform, val_transform = get_transforms(config)
 
+    # Get run scores for RW-BC mode
+    run_scores = None
+    if use_reward_weighting and SCORER_AVAILABLE:
+        print(f"[Train] Computing run scores for reward weighting...")
+        score_results = score_all_runs(data_load_dir)
+        run_scores = {r['run_name']: r['total_score'] for r in score_results if r['valid']}
+        print(f"[Train] Loaded scores for {len(run_scores)} runs")
+
     # Create dataset
     train_config = config.get('training', {})
     dataset = DrivingDataset(
         data_dirs,
         transform=train_transform,
-        exclude_start_sequence=config.get('data_filtering', {}).get('exclude_start_sequence', True)
+        exclude_start_sequence=config.get('data_filtering', {}).get('exclude_start_sequence', True),
+        run_scores=run_scores,
+        compute_rewards=use_reward_weighting
     )
 
     if len(dataset) == 0:
@@ -594,9 +722,24 @@ def train(
     total_params = sum(p.numel() for p in model.parameters())
     print(f"[Train] Model parameters: {total_params:,}")
 
+    # Load pretrained weights for fine-tuning
+    if finetune_path:
+        if finetune_path.exists():
+            model.load_state_dict(torch.load(str(finetune_path), map_location=device))
+            print(f"[Train] Loaded pretrained weights from {finetune_path}")
+        else:
+            print(f"[Train] WARNING: Finetune path not found: {finetune_path}")
+            print(f"[Train] Starting from scratch...")
+
     # Loss and optimizer
     criterion = nn.MSELoss()
     lr = train_config.get('learning_rate', 1e-4)
+
+    # Use smaller learning rate for fine-tuning
+    if finetune_path:
+        lr = train_config.get('finetune_learning_rate', lr * 0.1)
+        print(f"[Train] Using fine-tune learning rate: {lr}")
+
     weight_decay = train_config.get('weight_decay', 1e-4)
     optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
@@ -637,7 +780,11 @@ def train(
 
     for epoch in range(epochs):
         # Train
-        train_metrics = train_one_epoch(model, train_loader, criterion, optimizer, device)
+        train_metrics = train_one_epoch(
+            model, train_loader, criterion, optimizer, device,
+            use_reward_weighting=use_reward_weighting,
+            temperature=temperature
+        )
 
         # Validate
         val_metrics = validate(model, val_loader, criterion, device)
@@ -770,6 +917,14 @@ def main():
     parser.add_argument("--top-percent", type=float, default=None,
                         help="Only use top N%% of runs by score (e.g., 50 for top 50%%)")
 
+    # Reward-Weighted BC options
+    parser.add_argument("--mode", type=str, default="bc", choices=["bc", "rw"],
+                        help="Training mode: bc (Behavioral Cloning) or rw (Reward-Weighted BC)")
+    parser.add_argument("--finetune", type=str, default=None,
+                        help="Path to existing model for fine-tuning (loads weights, uses smaller LR)")
+    parser.add_argument("--temperature", type=float, default=1.0,
+                        help="Temperature for reward weighting (higher = more uniform, default: 1.0)")
+
     args = parser.parse_args()
 
     # Determine paths
@@ -837,6 +992,21 @@ def main():
             sys.exit(1)
         print(f"[Train] Using existing iteration: {iteration_dir}")
 
+    # Prepare finetune path if specified
+    finetune_path = None
+    if args.finetune:
+        finetune_path = Path(args.finetune)
+        if not finetune_path.exists():
+            print(f"[Train] ERROR: Finetune model not found: {finetune_path}")
+            sys.exit(1)
+        print(f"[Train] Fine-tuning from: {finetune_path}")
+
+    # Print training mode info
+    if args.mode == "rw":
+        print(f"[Train] Mode: Reward-Weighted BC (temperature={args.temperature})")
+    else:
+        print(f"[Train] Mode: Standard Behavioral Cloning")
+
     # Run training
     try:
         results = train(
@@ -845,7 +1015,10 @@ def main():
             robot_dir,
             data_source_dir=None,
             min_score=args.min_score,
-            top_percent=args.top_percent
+            top_percent=args.top_percent,
+            mode=args.mode,
+            finetune_path=finetune_path,
+            temperature=args.temperature
         )
         print(f"\n[Train] Results: {json.dumps(results, indent=2)}")
     except Exception as e:
