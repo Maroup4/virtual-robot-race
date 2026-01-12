@@ -497,6 +497,60 @@ async def run_control_module(client: RobotWebSocketClient, mode: str, robot_num:
             while not stop_event.is_set():
                 await asyncio.sleep(0.1)
 
+        elif mode == "rl_training":
+            # Reinforcement Learning Training mode
+            # Load rl_training_input from Robot{N}/ directory
+            module_file = robot_dir / "rl_training_input.py"
+            try:
+                spec = importlib.util.spec_from_file_location(
+                    f"Robot{robot_num}.rl_training_input",
+                    module_file
+                )
+                rl_training_input = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(rl_training_input)
+                rl_training_input.preload_model()
+                rl_training_input.warmup_cuda()
+            except Exception as e:
+                print(f"[Main] Failed to load rl_training_input: {e}")
+                import traceback
+                traceback.print_exc()
+                return
+
+            print("[Main] RL Training mode: Reinforcement learning with policy updates")
+
+            # Poll RL training and send to Unity
+            while not stop_event.is_set():
+                try:
+                    # Update RL model (runs policy, calculates reward, updates weights)
+                    if not rl_training_input.update():
+                        print("[Main] RL training requested stop")
+                        break
+
+                    # Get latest command
+                    cmd = rl_training_input.get_latest_command()
+                    drive = cmd.get("driveTorque", 0.0)
+                    steer = cmd.get("steerAngle", 0.0)
+
+                    # Send control command to Unity
+                    control_msg = {
+                        "type": "control",
+                        "robot_id": client.robot_id,
+                        "driveTorque": drive,
+                        "steerAngle": steer
+                    }
+                    await client.send_json(control_msg)
+
+                except Exception as e:
+                    print(f"[Main] RL training control error: {e}")
+
+                await asyncio.sleep(0.05)  # 20Hz
+
+            # Save model at end of episode
+            try:
+                rl_training_input.save_model()
+            except Exception as e:
+                print(f"[Main] Failed to save RL model: {e}")
+
         else:
             print(f"[Main] Unknown MODE: {mode}")
 

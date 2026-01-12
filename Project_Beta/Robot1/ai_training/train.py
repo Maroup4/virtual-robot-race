@@ -38,6 +38,14 @@ import yaml
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from model import DrivingNetwork
 
+# Import run scorer for score-based filtering
+try:
+    from run_scorer import score_all_runs, filter_runs_by_score, get_top_runs
+    SCORER_AVAILABLE = True
+except ImportError:
+    SCORER_AVAILABLE = False
+    print("[Train] Warning: run_scorer not available, score-based filtering disabled")
+
 
 def set_seed(seed: int):
     """Set random seed for reproducibility."""
@@ -425,13 +433,57 @@ def load_data_dirs_from_manifest(manifest_path: Path, training_data_dir: Path) -
     return data_dirs
 
 
-def find_data_directories(base_path: Path) -> List[Path]:
-    """Find all run_* directories containing training data."""
+def find_data_directories(
+    base_path: Path,
+    min_score: Optional[float] = None,
+    top_percent: Optional[float] = None
+) -> List[Path]:
+    """
+    Find all run_* directories containing training data.
+
+    Args:
+        base_path: Directory containing run_* folders
+        min_score: Only include runs with score >= this value
+        top_percent: Only include top N% of runs by score
+
+    Returns:
+        List of run directory paths
+    """
     data_dirs = []
+
+    # First, find all valid run directories
+    all_runs = []
     for d in sorted(base_path.iterdir()):
         if d.is_dir() and d.name.startswith("run_"):
             if (d / "metadata.csv").exists():
-                data_dirs.append(d)
+                all_runs.append(d)
+
+    # Apply score-based filtering if requested
+    if (min_score is not None or top_percent is not None) and SCORER_AVAILABLE:
+        print(f"[Train] Scoring {len(all_runs)} runs for data selection...")
+        results = score_all_runs(base_path)
+
+        if min_score is not None:
+            results = filter_runs_by_score(results, min_score)
+            print(f"[Train] Filtered to {len(results)} runs with score >= {min_score}")
+
+        if top_percent is not None:
+            results = get_top_runs(results, top_percent)
+            print(f"[Train] Filtered to top {top_percent}% ({len(results)} runs)")
+
+        # Extract paths from filtered results
+        for r in results:
+            if r['valid']:
+                data_dirs.append(Path(r['path']))
+
+        # Print score summary
+        if results:
+            scores = [r['total_score'] for r in results if r['valid']]
+            if scores:
+                print(f"[Train] Score range: {min(scores):.1f} - {max(scores):.1f}")
+    else:
+        data_dirs = all_runs
+
     return data_dirs
 
 
@@ -439,7 +491,9 @@ def train(
     config: Dict,
     iteration_dir: Path,
     robot_dir: Path,
-    data_source_dir: Optional[Path] = None
+    data_source_dir: Optional[Path] = None,
+    min_score: Optional[float] = None,
+    top_percent: Optional[float] = None
 ) -> Dict:
     """
     Main training function.
@@ -449,6 +503,8 @@ def train(
         iteration_dir: Path to iteration directory
         robot_dir: Path to Robot1 directory
         data_source_dir: Optional training data source directory
+        min_score: Only use runs with score >= this value
+        top_percent: Only use top N% of runs by score
 
     Returns:
         Training results dictionary
@@ -462,7 +518,7 @@ def train(
         print(f"[Train] Using data from iteration data_sources: {data_load_dir}")
     elif data_source_dir:
         data_load_dir = data_source_dir
-        print(f"[Train] Using data from: {data_load_dir}")
+        print(f"[Train] Using data from: {data_source_dir}")
     else:
         data_load_dir = training_data_dir
         print(f"[Train] Using data from: {data_load_dir}")
@@ -476,8 +532,12 @@ def train(
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"[Train] Device: {device}")
 
-    # Load data directories from data_load_dir
-    data_dirs = find_data_directories(data_load_dir)
+    # Load data directories from data_load_dir (with optional score filtering)
+    data_dirs = find_data_directories(
+        data_load_dir,
+        min_score=min_score,
+        top_percent=top_percent
+    )
 
     if not data_dirs:
         raise ValueError(f"No training data found in {data_load_dir}")
@@ -704,6 +764,12 @@ def main():
     parser.add_argument("--seed", type=int, default=None,
                         help="Override random seed")
 
+    # Score-based data filtering (DAgger+)
+    parser.add_argument("--min-score", type=float, default=None,
+                        help="Only use runs with score >= this value")
+    parser.add_argument("--top-percent", type=float, default=None,
+                        help="Only use top N%% of runs by score (e.g., 50 for top 50%%)")
+
     args = parser.parse_args()
 
     # Determine paths
@@ -773,7 +839,14 @@ def main():
 
     # Run training
     try:
-        results = train(config, iteration_dir, robot_dir, data_source_dir=None)
+        results = train(
+            config,
+            iteration_dir,
+            robot_dir,
+            data_source_dir=None,
+            min_score=args.min_score,
+            top_percent=args.top_percent
+        )
         print(f"\n[Train] Results: {json.dumps(results, indent=2)}")
     except Exception as e:
         print(f"\n[Train] ERROR: {e}")
