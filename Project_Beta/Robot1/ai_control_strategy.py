@@ -92,7 +92,7 @@ START_BOOST_STEER_THRESHOLD = 0.50  # rad - If steer demand exceeds this, disabl
 MAX_STEER_DELTA_PER_FRAME = 0.50   # rad/frame - Original robustness setting (0.05 made it worse)
 
 # Drive torque limits
-MAX_DRIVE_TORQUE = 0.32           # Overall speed limit
+MAX_DRIVE_TORQUE = 1.0            # No limit - use model output directly
 MAX_STEER_RAD = 0.524             # Maximum steering angle (~30 deg, matches Unity)
 
 # Corner-aware drive torque cap
