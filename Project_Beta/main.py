@@ -888,6 +888,10 @@ async def main() -> None:
         except Exception:
             pass
 
+        # Shutdown smartphone server first (to stop streaming tasks)
+        if smartphone_server is not None:
+            await smartphone_server.shutdown()
+
         # Close all clients
         for robot_id, client in robot_clients.items():
             await client.close()

@@ -68,7 +68,7 @@ _driver = DriverModel(DriverConfig(
     v_max=0.75,
     k_theta=0.90,
     k_lateral=0.60,
-    steer_limit=0.785,  # ~45 degrees max
+    steer_limit=0.524,  # ~30 degrees max (matches Unity)
     alpha_smooth=0.30,
     torque_limit=1.00,
     theta_hard_limit_deg=80.0,
@@ -168,7 +168,7 @@ def update():
         )
 
         driveTorque = saturate(drive)
-        steerAngle = saturate(steer, -0.785, 0.785)  # Limit steer to ~±45 deg
+        steerAngle = saturate(steer, -0.524, 0.524)  # Limit steer to ~±30 deg (matches Unity)
 
         # === Debug overlay save (per frame, after GO) ===
         if SAVE_DEBUG_OVERLAYS and start_go:

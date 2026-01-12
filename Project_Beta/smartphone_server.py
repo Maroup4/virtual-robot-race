@@ -461,6 +461,36 @@ class SmartphoneServer:
 
             await asyncio.sleep(0.5)
 
+    async def shutdown(self):
+        """
+        Gracefully shutdown the smartphone server.
+        Cancels all streaming tasks and closes all connections.
+        """
+        logger.info("Shutting down smartphone server...")
+
+        # Cancel all streaming tasks and close connections for each controller
+        for robot_id, controller in self.controllers.items():
+            # Stop streaming flag first
+            controller.is_streaming = False
+
+            # Cancel streaming task
+            if controller.stream_task and not controller.stream_task.done():
+                controller.stream_task.cancel()
+                try:
+                    await controller.stream_task
+                except asyncio.CancelledError:
+                    pass
+                logger.info(f"[{robot_id}] Streaming task cancelled")
+
+            # Close smartphone WebSocket connection
+            if controller.smartphone_ws and not controller.smartphone_ws.closed:
+                try:
+                    await controller.smartphone_ws.close()
+                except Exception as e:
+                    logger.warning(f"[{robot_id}] Error closing smartphone connection: {e}")
+
+        logger.info("Smartphone server shutdown complete")
+
     async def handle_index(self, request):
         """Handle root path"""
         html = """

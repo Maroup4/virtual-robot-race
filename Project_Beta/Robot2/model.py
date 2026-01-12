@@ -108,12 +108,12 @@ class DrivingNetwork(nn.Module):
 
         Returns:
             drive_torque: clamped to [-1, 1]
-            steer_angle: clamped to [-0.785, 0.785] (~45 degrees)
+            steer_angle: clamped to [-0.524, 0.524] (~30 degrees, matches Unity)
         """
         with torch.no_grad():
             output = self.forward(image, soc)
             drive_torque = torch.clamp(output[:, 0], -1.0, 1.0)
-            steer_angle = torch.clamp(output[:, 1], -0.785, 0.785)
+            steer_angle = torch.clamp(output[:, 1], -0.524, 0.524)
 
         return drive_torque, steer_angle
 

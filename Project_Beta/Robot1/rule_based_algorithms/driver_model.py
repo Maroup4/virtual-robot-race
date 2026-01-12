@@ -38,7 +38,7 @@ class DriverConfig:
     # Note: Reduced gains for torque-steer type (was differential drive gains)
     k_theta: float = 0.45          # Gain for theta (was 0.90)
     k_lateral: float = 0.30        # Gain for lateral offset (was 0.60)
-    steer_limit: float = 0.785     # Max steer angle (radians, ~45 deg)
+    steer_limit: float = 0.524     # Max steer angle (radians, ~30 deg, matches Unity)
 
     # Output shaping
     torque_limit: float = 1.00

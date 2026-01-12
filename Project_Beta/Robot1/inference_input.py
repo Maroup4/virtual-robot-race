@@ -263,7 +263,7 @@ def update():
 
             # Apply saturation
             raw_drive = saturate(raw_drive, -1.0, 1.0)
-            raw_steer = saturate(raw_steer, -0.785, 0.785)  # ~±45 deg limit
+            raw_steer = saturate(raw_steer, -0.524, 0.524)  # ~±30 deg limit (matches Unity)
 
             # === Strategy: Adjust output ===
             # Delegates to ai_control_strategy.py

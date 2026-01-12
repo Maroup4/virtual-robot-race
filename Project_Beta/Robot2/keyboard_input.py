@@ -19,9 +19,9 @@ def clear_input_buffer():
 
 # === Control parameters ===
 TORQUE_STEP = 0.25     # Step per key press for drive torque
-STEER_STEP  = 0.10     # Step per key press for steering angle [rad]
+STEER_STEP  = 0.20     # Step per key press for steering angle [rad] (increased for faster response)
 MAX_TORQUE  = 1.0
-MAX_STEER   = 0.6      # ≈ ±34 deg
+MAX_STEER   = 0.524    # ~30 deg (matches Unity and smartphone)
 
 # === Key mapping ===
 # W/Z = forward/backward (drive torque)
@@ -59,12 +59,13 @@ def _loop(stop_event: threading.Event):
                 driveTorque = 0.0  # release
 
             # --- Steering angle (rad) ---
+            # キーを離したらリセット（スマホと同様の挙動）
             if _key_states["j"]:
                 steerAngle -= STEER_STEP
             elif _key_states["l"]:
                 steerAngle += STEER_STEP
-            elif _key_states["i"] or _key_states["m"]:
-                steerAngle = 0.0
+            else:
+                steerAngle = 0.0  # release
 
             # Clamp
             if driveTorque >  MAX_TORQUE: driveTorque =  MAX_TORQUE

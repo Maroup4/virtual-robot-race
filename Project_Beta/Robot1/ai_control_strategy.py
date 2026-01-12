@@ -93,7 +93,7 @@ MAX_STEER_DELTA_PER_FRAME = 0.50   # rad/frame - Original robustness setting (0.
 
 # Drive torque limits
 MAX_DRIVE_TORQUE = 0.32           # Overall speed limit
-MAX_STEER_RAD = 0.30              # Maximum steering angle (from original code)
+MAX_STEER_RAD = 0.524             # Maximum steering angle (~30 deg, matches Unity)
 
 # Corner-aware drive torque cap
 CORNER_STEER_THRESHOLD_LOW = 0.20   # rad - Below this, full torque allowed

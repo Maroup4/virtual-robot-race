@@ -37,7 +37,7 @@ class DriverConfig:
     # Steering blend (Yaw: right is +)
     k_theta: float = 0.90          # Gain for theta (angle)
     k_lateral: float = 0.60        # Gain for lateral offset
-    steer_limit: float = 0.785     # Max steer angle (radians, ~45 deg)
+    steer_limit: float = 0.524     # Max steer angle (radians, ~30 deg, matches Unity)
 
     # Output shaping
     torque_limit: float = 1.00
