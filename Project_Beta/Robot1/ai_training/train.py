@@ -62,7 +62,7 @@ def set_seed(seed: int):
 
 def calculate_frame_reward(row: Dict, run_score: float, total_frames: int) -> float:
     """
-    Calculate reward for a single frame.
+    Calculate reward for a single frame (simple mode - Phase 1).
 
     Args:
         row: DataFrame row with frame data
@@ -91,6 +91,158 @@ def calculate_frame_reward(row: Dict, run_score: float, total_frames: int) -> fl
     return reward
 
 
+# =============================================================================
+# Phase 2: Detailed Frame-Level Reward Calculation
+# =============================================================================
+
+# Reward weights for detailed calculation
+REWARD_CONFIG = {
+    # Per-frame rewards
+    'survival_bonus': 0.1,           # Reward for each frame survived
+    'soc_efficiency': 5.0,           # Multiplier for SOC preservation
+    'progress_reward': 1.0,          # Reward per unit of track progress
+    'smoothness_penalty': 0.5,       # Penalty multiplier for steering changes
+
+    # Status bonuses/penalties
+    'lap1_bonus': 50.0,              # Bonus for completing lap 1
+    'finish_bonus': 100.0,           # Bonus for finishing (2 laps)
+    'fallen_penalty': -100.0,        # Penalty for falling
+
+    # Cumulative reward settings
+    'discount_factor': 0.99,         # Gamma for discounted future rewards
+}
+
+
+def calculate_track_progress(pos_x: float, pos_z: float) -> float:
+    """
+    Calculate approximate progress on the track.
+
+    The VRR track is roughly oval-shaped. This function estimates
+    how far along the track the robot is based on position.
+
+    Args:
+        pos_x: X position
+        pos_z: Z position
+
+    Returns:
+        Progress value (higher = further along track)
+    """
+    # Simple heuristic: use distance from start position
+    # Start position is approximately (0, 0)
+    # This can be improved with actual track waypoints
+    import math
+    distance = math.sqrt(pos_x ** 2 + pos_z ** 2)
+    return distance
+
+
+def calculate_detailed_frame_rewards(
+    df: pd.DataFrame,
+    final_status: str,
+    reward_config: Dict = None
+) -> List[float]:
+    """
+    Calculate detailed per-frame rewards for a run (Phase 2).
+
+    Uses position, SOC, steering smoothness, and status information
+    to compute rewards that reflect the quality of each frame's action.
+
+    Args:
+        df: DataFrame with run data (must include pos_x, pos_z, soc, steer_angle, status)
+        final_status: Final status of the run (Finish, Fallen, etc.)
+        reward_config: Reward configuration dict (uses defaults if None)
+
+    Returns:
+        List of per-frame rewards
+    """
+    config = reward_config or REWARD_CONFIG
+    rewards = []
+
+    prev_soc = None
+    prev_steer = None
+    prev_progress = None
+
+    for idx, row in df.iterrows():
+        reward = 0.0
+
+        # 1. Survival bonus (every frame)
+        reward += config['survival_bonus']
+
+        # 2. SOC efficiency (reward for preserving battery)
+        soc = row.get('soc', 1.0)
+        if prev_soc is not None:
+            soc_change = soc - prev_soc
+            # Penalize SOC drop, but less if moving (expected consumption)
+            if soc_change < 0:
+                # Small penalty for normal consumption
+                reward += soc_change * config['soc_efficiency']
+        prev_soc = soc
+
+        # 3. Progress reward (moving forward on track)
+        pos_x = row.get('pos_x', 0.0)
+        pos_z = row.get('pos_z', 0.0)
+        progress = calculate_track_progress(pos_x, pos_z)
+        if prev_progress is not None:
+            progress_delta = progress - prev_progress
+            if progress_delta > 0:
+                reward += progress_delta * config['progress_reward']
+        prev_progress = progress
+
+        # 4. Smoothness penalty (penalize jerky steering)
+        steer = row.get('steer_angle', 0.0)
+        if prev_steer is not None:
+            steer_change = abs(steer - prev_steer)
+            reward -= steer_change * config['smoothness_penalty']
+        prev_steer = steer
+
+        # 5. Status-based rewards
+        status = row.get('status', '')
+        if status == 'Lap1' and idx > 0:
+            prev_status = df.iloc[idx - 1].get('status', '')
+            if prev_status == 'Lap0':
+                reward += config['lap1_bonus']
+        elif status == 'Finish':
+            reward += config['finish_bonus']
+
+        rewards.append(reward)
+
+    # 6. Terminal penalty for falling
+    if final_status == 'Fallen' or final_status == 'Force end':
+        if rewards:
+            rewards[-1] += config['fallen_penalty']
+
+    return rewards
+
+
+def compute_cumulative_rewards(
+    frame_rewards: List[float],
+    discount_factor: float = 0.99
+) -> List[float]:
+    """
+    Compute discounted cumulative rewards (returns) for each frame.
+
+    R_t = r_t + gamma * r_{t+1} + gamma^2 * r_{t+2} + ...
+
+    This gives each frame credit for future outcomes, not just immediate reward.
+
+    Args:
+        frame_rewards: List of per-frame rewards
+        discount_factor: Gamma for discounting future rewards
+
+    Returns:
+        List of cumulative rewards for each frame
+    """
+    n = len(frame_rewards)
+    cumulative = [0.0] * n
+
+    # Compute backwards (more efficient)
+    running_sum = 0.0
+    for i in range(n - 1, -1, -1):
+        running_sum = frame_rewards[i] + discount_factor * running_sum
+        cumulative[i] = running_sum
+
+    return cumulative
+
+
 class DrivingDataset(Dataset):
     """
     Dataset for driving imitation learning.
@@ -110,7 +262,8 @@ class DrivingDataset(Dataset):
         exclude_start_sequence: bool = True,
         valid_status: Optional[List[str]] = None,
         run_scores: Optional[Dict[str, float]] = None,
-        compute_rewards: bool = False
+        compute_rewards: bool = False,
+        reward_type: str = "simple"
     ):
         """
         Initialize dataset.
@@ -122,11 +275,13 @@ class DrivingDataset(Dataset):
             valid_status: List of valid status values (default: Lap1, Lap2, Finish)
             run_scores: Dict mapping run_name to score (for RW-BC mode)
             compute_rewards: Whether to compute per-frame rewards
+            reward_type: "simple" (Phase 1) or "detailed" (Phase 2)
         """
         self.samples = []
         self.transform = transform
         self.valid_status = valid_status or self.VALID_RACING_STATUS
         self.compute_rewards = compute_rewards
+        self.reward_type = reward_type
 
         for data_dir in data_dirs:
             data_dir = Path(data_dir)
@@ -144,8 +299,17 @@ class DrivingDataset(Dataset):
             run_score = run_scores.get(run_name, 1000.0) if run_scores else 1000.0
             total_frames = len(df)
 
+            # For detailed rewards, compute all frame rewards upfront
+            detailed_rewards = None
+            cumulative_rewards = None
+            if compute_rewards and reward_type == "detailed":
+                final_status = df.iloc[-1].get("status", "") if len(df) > 0 else ""
+                frame_rewards = calculate_detailed_frame_rewards(df, final_status)
+                cumulative_rewards = compute_cumulative_rewards(frame_rewards)
+
             loaded = 0
             skipped = 0
+            frame_idx = 0
 
             for _, row in df.iterrows():
                 status = row.get("status", "")
@@ -153,14 +317,17 @@ class DrivingDataset(Dataset):
                 # Filter by status
                 if exclude_start_sequence and status == "StartSequence":
                     skipped += 1
+                    frame_idx += 1
                     continue
 
                 if status not in self.valid_status:
                     skipped += 1
+                    frame_idx += 1
                     continue
 
                 img_path = images_dir / row["filename"]
                 if not img_path.exists():
+                    frame_idx += 1
                     continue
 
                 sample = {
@@ -173,14 +340,21 @@ class DrivingDataset(Dataset):
 
                 # Compute reward if requested
                 if compute_rewards:
-                    sample["reward"] = calculate_frame_reward(
-                        row.to_dict(), run_score, total_frames
-                    )
+                    if reward_type == "detailed" and cumulative_rewards is not None:
+                        # Use cumulative (discounted future) reward
+                        sample["reward"] = cumulative_rewards[frame_idx]
+                    else:
+                        # Simple reward based on run score
+                        sample["reward"] = calculate_frame_reward(
+                            row.to_dict(), run_score, total_frames
+                        )
 
                 self.samples.append(sample)
                 loaded += 1
+                frame_idx += 1
 
-            print(f"[Dataset] {run_name}: {loaded} samples, score={run_score:.0f}")
+            reward_info = f", reward_type={reward_type}" if compute_rewards else ""
+            print(f"[Dataset] {run_name}: {loaded} samples, score={run_score:.0f}{reward_info}")
 
         print(f"[Dataset] Total: {len(self.samples)} samples")
 
@@ -599,7 +773,8 @@ def train(
     top_percent: Optional[float] = None,
     mode: str = "bc",
     finetune_path: Optional[Path] = None,
-    temperature: float = 1.0
+    temperature: float = 1.0,
+    reward_type: str = "simple"
 ) -> Dict:
     """
     Main training function.
@@ -614,6 +789,7 @@ def train(
         mode: Training mode - "bc" (Behavioral Cloning) or "rw" (Reward-Weighted BC)
         finetune_path: Path to existing model for fine-tuning (optional)
         temperature: Temperature for reward weighting in RW mode (default: 1.0)
+        reward_type: "simple" (Phase 1) or "detailed" (Phase 2) reward calculation
 
     Returns:
         Training results dictionary
@@ -626,6 +802,7 @@ def train(
 
     if use_reward_weighting:
         print(f"[Train] Temperature: {temperature}")
+        print(f"[Train] Reward type: {reward_type}")
 
     # Setup paths
     training_data_dir = robot_dir / config['paths']['training_data']
@@ -680,7 +857,8 @@ def train(
         transform=train_transform,
         exclude_start_sequence=config.get('data_filtering', {}).get('exclude_start_sequence', True),
         run_scores=run_scores,
-        compute_rewards=use_reward_weighting
+        compute_rewards=use_reward_weighting,
+        reward_type=reward_type
     )
 
     if len(dataset) == 0:
@@ -924,6 +1102,8 @@ def main():
                         help="Path to existing model for fine-tuning (loads weights, uses smaller LR)")
     parser.add_argument("--temperature", type=float, default=1.0,
                         help="Temperature for reward weighting (higher = more uniform, default: 1.0)")
+    parser.add_argument("--reward-type", type=str, default="simple", choices=["simple", "detailed"],
+                        help="Reward calculation: simple (Phase 1) or detailed (Phase 2 with cumulative)")
 
     args = parser.parse_args()
 
@@ -1003,7 +1183,7 @@ def main():
 
     # Print training mode info
     if args.mode == "rw":
-        print(f"[Train] Mode: Reward-Weighted BC (temperature={args.temperature})")
+        print(f"[Train] Mode: Reward-Weighted BC (temperature={args.temperature}, reward_type={args.reward_type})")
     else:
         print(f"[Train] Mode: Standard Behavioral Cloning")
 
@@ -1018,7 +1198,8 @@ def main():
             top_percent=args.top_percent,
             mode=args.mode,
             finetune_path=finetune_path,
-            temperature=args.temperature
+            temperature=args.temperature,
+            reward_type=args.reward_type
         )
         print(f"\n[Train] Results: {json.dumps(results, indent=2)}")
     except Exception as e:
