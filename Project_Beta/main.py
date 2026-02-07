@@ -723,10 +723,11 @@ async def main() -> None:
 
         # Phase 1.5: Preload AI models BEFORE starting control loops
         # This prevents model loading delays during the start signal sequence
-        import importlib.util  # Import here for Phase 1.5
-        print("[Main] Preloading AI models for all AI-mode robots...")
-        for robot_id, (mode, robot_num, rc) in robot_modes.items():
-            if mode == "ai":
+        ai_robots = [(robot_id, robot_num, rc) for robot_id, (mode, robot_num, rc) in robot_modes.items() if mode == "ai"]
+        if ai_robots:
+            import importlib.util  # Import here for Phase 1.5
+            print(f"[Main] Preloading AI models for {len(ai_robots)} AI-mode robot(s)...")
+            for robot_id, robot_num, rc in ai_robots:
                 robot_dir = Path(f"Robot{robot_num}")
                 module_file = robot_dir / "inference_input.py"
                 try:
@@ -743,20 +744,19 @@ async def main() -> None:
                     print(f"[Main] WARNING: Failed to preload model for Robot{robot_num}: {e}")
                     import traceback
                     traceback.print_exc()
-        print("[Main] AI model preloading complete.")
+            print("[Main] AI model preloading complete.")
 
-        # Phase 1.6: CUDA warmup for AI robots
-        # This eliminates 10+ second delay on first inference by initializing GPU kernels
-        print("[Main] Warming up CUDA for AI-mode robots...")
-        for robot_id, (mode, robot_num, rc) in robot_modes.items():
-            if mode == "ai":
+            # Phase 1.6: CUDA warmup for AI robots
+            # This eliminates 10+ second delay on first inference by initializing GPU kernels
+            print("[Main] Warming up CUDA for AI-mode robots...")
+            for robot_id, robot_num, rc in ai_robots:
                 inference_module = rc.get('_preloaded_inference_module')
                 if inference_module:
                     try:
                         inference_module.warmup_cuda()
                     except Exception as e:
                         print(f"[Main] WARNING: CUDA warmup failed for Robot{robot_num}: {e}")
-        print("[Main] CUDA warmup complete.")
+            print("[Main] CUDA warmup complete.")
 
         # Start keyboard monitor early (before smartphone wait)
         print("[Main] Starting keyboard monitor...")
