@@ -32,6 +32,12 @@ Robot*/training_data/
 Robot*/training_data_bad/
 Robot*/data_interactive/
 
+# Debug output (generated images)
+Robot*/debug/
+
+# Temporary files
+Robot*/ai_training/tmp*
+
 # Utility scripts (not part of core)
 Robot*/make_promotion_video.py
 

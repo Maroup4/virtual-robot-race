@@ -2,18 +2,18 @@
 """
 create_iteration.py
 ===================
-新しいiterationフォルダを作成し、データソースをコピーして学習準備を行う
+Create a new iteration folder, copy data sources, and prepare for training
 
 Usage:
     python scripts/create_iteration.py --data training_data_selected
     python scripts/create_iteration.py --data training_data --runs run_20260104_140000 run_20260104_140300
 
 Features:
-    - iteration_YYMMDD_HHMMSS フォルダ作成
-    - データソースrun_*を全コピー
-    - データ統計を自動分析
-    - training_config.yaml自動生成
-    - フォルダ構造の自動セットアップ
+    - Create iteration_YYMMDD_HHMMSS folder
+    - Copy all data source run_* directories
+    - Automatically analyze data statistics
+    - Auto-generate training_config.yaml
+    - Automatic folder structure setup
 """
 
 import argparse
@@ -29,14 +29,14 @@ import yaml
 
 
 class IterationCreator:
-    """新しいiterationフォルダを作成・管理するクラス"""
+    """Class for creating and managing new iteration folders"""
 
     def __init__(self, robot_dir: Path):
         """
         Initialize iteration creator.
 
         Args:
-            robot_dir: Robot1ディレクトリのパス
+            robot_dir: Path to the Robot1 directory
         """
         self.robot_dir = Path(robot_dir)
         self.experiments_dir = self.robot_dir / "experiments"
@@ -49,17 +49,17 @@ class IterationCreator:
         description: str = ""
     ) -> Path:
         """
-        新しいiterationフォルダを作成
+        Create a new iteration folder
 
         Args:
-            data_source_dir: トレーニングデータのソースディレクトリ
-            specific_runs: 特定のrun名リスト（Noneの場合は全run）
-            description: iterationの説明
+            data_source_dir: Source directory for training data
+            specific_runs: List of specific run names (None for all runs)
+            description: Description of the iteration
 
         Returns:
-            作成されたiterationディレクトリのパス
+            Path to the created iteration directory
         """
-        # タイムスタンプGenerate # TODO: Manual translation needed
+        # Generate timestamp
         timestamp = datetime.now().strftime("%y%m%d_%H%M%S")
         iteration_dir = self.experiments_dir / f"iteration_{timestamp}"
 
@@ -67,11 +67,11 @@ class IterationCreator:
         print(f"Creating Iteration: iteration_{timestamp}")
         print(f"{'='*70}\n")
 
-        # Folder構造Create # TODO: Manual translation needed
+        # Create folder structure
         print("[1/5] Creating folder structure...")
         self._create_folder_structure(iteration_dir)
 
-        # Dataソースをコピー # TODO: Manual translation needed
+        # Copy data sources
         print("\n[2/5] Copying data sources...")
         run_dirs = self._copy_data_sources(
             data_source_dir,
@@ -84,11 +84,11 @@ class IterationCreator:
             shutil.rmtree(iteration_dir)
             sys.exit(1)
 
-        # Data統計を分析 # TODO: Manual translation needed
+        # Analyze data statistics
         print("\n[3/5] Analyzing data statistics...")
         data_stats = self._analyze_data_sources(iteration_dir / "data_sources")
 
-        # training_config.yaml作成
+        # Create training_config.yaml
         print("\n[4/5] Creating training_config.yaml...")
         self._create_training_config(
             iteration_dir,
@@ -99,7 +99,7 @@ class IterationCreator:
             description
         )
 
-        # README作成
+        # Create README
         print("\n[5/5] Creating README.md...")
         self._create_readme(iteration_dir, timestamp, data_stats)
 
@@ -120,7 +120,7 @@ class IterationCreator:
         return iteration_dir
 
     def _create_folder_structure(self, iteration_dir: Path):
-        """フォルダ構造を作成"""
+        """Create folder structure"""
         folders = [
             iteration_dir,
             iteration_dir / "data_sources",
@@ -139,21 +139,21 @@ class IterationCreator:
         specific_runs: Optional[List[str]] = None
     ) -> List[Path]:
         """
-        データソースをコピー
+        Copy data sources
 
         Args:
-            source_dir: コピー元ディレクトリ
-            dest_dir: コピー先ディレクトリ
-            specific_runs: 特定のrun名リスト
+            source_dir: Source directory to copy from
+            dest_dir: Destination directory to copy to
+            specific_runs: List of specific run names
 
         Returns:
-            コピーされたrunディレクトリのリスト
+            List of copied run directories
         """
         source_dir = Path(source_dir)
         run_dirs = []
 
         if specific_runs:
-            # 特定のrunのみコピー # TODO: Manual translation needed
+            # Copy only specific runs
             for run_name in specific_runs:
                 run_path = source_dir / run_name
                 if run_path.exists() and run_path.is_dir():
@@ -165,7 +165,7 @@ class IterationCreator:
                 else:
                     print(f"  [Warning] Run not found: {run_name}")
         else:
-            # 全runをコピー # TODO: Manual translation needed
+            # Copy all runs
             all_runs = sorted(source_dir.glob("run_*"))
             if not all_runs:
                 print(f"  [Warning] No run_* directories found in {source_dir}")
@@ -184,13 +184,13 @@ class IterationCreator:
 
     def _analyze_data_sources(self, data_sources_dir: Path) -> Dict:
         """
-        データソースの統計を分析
+        Analyze data source statistics
 
         Args:
-            data_sources_dir: data_sourcesディレクトリ
+            data_sources_dir: The data_sources directory
 
         Returns:
-            統計情報の辞書
+            Dictionary of statistical information
         """
         stats = {
             "total_runs": 0,
@@ -217,20 +217,20 @@ class IterationCreator:
             try:
                 df = pd.read_csv(metadata_path)
 
-                # Racing frames のみ抽出（StartSequenceを除外）
-                # statusカラムをCheck（final_statusまたはstatus） # TODO: Manual translation needed
+                # Extract racing frames only (exclude StartSequence)
+                # Check status column (final_status or status)
                 status_col = 'final_status' if 'final_status' in df.columns else 'status'
                 racing_df = df[df[status_col] != 'StartSequence']
 
                 if len(racing_df) == 0:
                     continue
 
-                # タイムスタンプカラムをCheck # TODO: Manual translation needed
+                # Check timestamp column
                 time_col = 'timestamp' if 'timestamp' in racing_df.columns else 'race_time_ms'
                 duration = racing_df[time_col].max() / 1000.0  # ms -> s
                 avg_steer = racing_df['steer_angle'].mean()
 
-                # 左右カウント（閾値: 0.05 rad） # TODO: Manual translation needed
+                # Left/right count (threshold: 0.05 rad)
                 left = (racing_df['steer_angle'] < -0.05).sum()
                 right = (racing_df['steer_angle'] > 0.05).sum()
                 neutral = len(racing_df) - left - right
@@ -262,7 +262,7 @@ class IterationCreator:
             except Exception as e:
                 print(f"  [Error] Failed to analyze {run_dir.name}: {e}")
 
-        # 全体統計Calculate # TODO: Manual translation needed
+        # Calculate overall statistics
         if all_steers:
             stats["avg_steer"] = round(sum(all_steers) / len(all_steers), 4)
 
@@ -278,7 +278,7 @@ class IterationCreator:
         print(f"    Left/Right/Neutral: {stats['left_steer_ratio']:.1f}% / "
               f"{stats['right_steer_ratio']:.1f}% / {stats['neutral_ratio']:.1f}%")
 
-        # バランスチェック # TODO: Manual translation needed
+        # Balance check
         if abs(stats['avg_steer']) > 0.05:
             print(f"\n  [WARNING] Steering bias detected! avg_steer = {stats['avg_steer']:.4f}")
         elif abs(stats['left_steer_ratio'] - stats['right_steer_ratio']) > 20:
@@ -298,7 +298,7 @@ class IterationCreator:
         data_stats: Dict,
         description: str
     ):
-        """training_config.yamlを作成"""
+        """Create training_config.yaml"""
         config = {
             "iteration": {
                 "timestamp": timestamp,
@@ -336,57 +336,57 @@ class IterationCreator:
 
         print(f"  [OK] {config_path.relative_to(self.robot_dir)}")
 
-        # JSONでもSave（Loadやすい） # TODO: Manual translation needed
+        # Also save as JSON (easier to load)
         json_path = iteration_dir / "training_config.json"
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(config, f, indent=2, ensure_ascii=False)
 
     def _create_readme(self, iteration_dir: Path, timestamp: str, data_stats: Dict):
-        """README.mdを作成"""
+        """Create README.md"""
         readme_content = f"""# Iteration {timestamp}
 
 **Created:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
-# # Dataソース # TODO: Manual translation needed
+## Data Source
 
-- **総run数:** {data_stats['total_runs']}
-- **総フレーム数:** {data_stats['total_frames']:,}
-- **レーシングフレーム数:** {data_stats['total_racing_frames']:,}
-- **平均ステア:** {data_stats['avg_steer']:.4f} rad
-- **左/右/ニュートラル:** {data_stats['left_steer_ratio']:.1f}% / {data_stats['right_steer_ratio']:.1f}% / {data_stats['neutral_ratio']:.1f}%
+- **Total runs:** {data_stats['total_runs']}
+- **Total frames:** {data_stats['total_frames']:,}
+- **Racing frames:** {data_stats['total_racing_frames']:,}
+- **Average steer:** {data_stats['avg_steer']:.4f} rad
+- **Left/Right/Neutral:** {data_stats['left_steer_ratio']:.1f}% / {data_stats['right_steer_ratio']:.1f}% / {data_stats['neutral_ratio']:.1f}%
 
-### Run詳細
+### Run Details
 
-| Run名 | フレーム数 | レーシング | 時間(s) | 平均ステア |
+| Run Name | Frames | Racing | Duration(s) | Avg Steer |
 |-------|-----------|----------|---------|-----------|
 """
         for run in data_stats['runs_detail']:
             readme_content += f"| {run['name']} | {run['frames']} | {run['racing_frames']} | {run['duration_sec']} | {run['avg_steer']:.4f} |\n"
 
         readme_content += f"""
-# # Folder構造 # TODO: Manual translation needed
+## Folder Structure
 
 ```
 iteration_{timestamp}/
-├── README.md                  # このFile # TODO: Manual translation needed
-├── training_config.yaml       # TrainingSettings・Dataソース情報 # TODO: Manual translation needed
-├── training_config.json       # 同上（JSON形式） # TODO: Manual translation needed
-├── data_sources/              # トレーニングData（全コピー） # TODO: Manual translation needed
+├── README.md                  # This file
+├── training_config.yaml       # Training settings and data source info
+├── training_config.json       # Same as above (JSON format)
+├── data_sources/              # Training data (full copy)
 │   ├── run_XXXXXX_XXXXXX/
 │   └── ...
-├── evaluation/                # Test走行結果 # TODO: Manual translation needed
+├── evaluation/                # Test run results
 │   ├── test_run_001.json
 │   ├── test_run_002.json
 │   ├── test_run_003.json
 │   └── evaluation_summary.md
-└── logs/                      # TrainingLog
+└── logs/                      # Training log
     ├── training_log.txt
     └── loss_curve.png
 ```
 
-# # 次のステップ # TODO: Manual translation needed
+## Next Steps
 
-# ## 1. TrainingExecute
+### 1. Run Training
 
 ```bash
 python train_model.py \\
@@ -396,23 +396,23 @@ python train_model.py \\
   --device cuda
 ```
 
-# ## 2. Test走行（3回） # TODO: Manual translation needed
+### 2. Test Runs (3 times)
 
-手動またはスクリプトで3回走行し、評価結果を記録
+Run 3 times manually or via script, and record the evaluation results
 
-# ## 3. 結果分析 # TODO: Manual translation needed
+### 3. Results Analysis
 
-- 完走率を確認
-- クラッシュ地点を分析
-- 次のiterationの方針を決定
+- Check completion rate
+- Analyze crash locations
+- Determine the direction for the next iteration
 
-# # Training結果 # TODO: Manual translation needed
+## Training Results
 
-（学習後に自動更新されます）
+(Automatically updated after training)
 
-# # 評価結果 # TODO: Manual translation needed
+## Evaluation Results
 
-（テスト走行後に記録されます）
+(Recorded after test runs)
 """
 
         readme_path = iteration_dir / "README.md"
@@ -428,14 +428,14 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # 全runをコピー # TODO: Manual translation needed
+  # Copy all runs
   python scripts/create_iteration.py --data training_data_selected
 
-  # 特定のrunのみコピー # TODO: Manual translation needed
+  # Copy only specific runs
   python scripts/create_iteration.py --data training_data \\
     --runs run_20260104_140000 run_20260104_140300 run_20260104_140500
 
-  # 説明をAdd # TODO: Manual translation needed
+  # Add a description
   python scripts/create_iteration.py --data training_data_selected \\
     --description "Manual keyboard runs only, balanced steering"
         """
@@ -466,13 +466,13 @@ Examples:
     script_dir = Path(__file__).parent
     robot_dir = script_dir.parent
 
-    # DataソースDirectoryのValidation # TODO: Manual translation needed
+    # Validate data source directory
     data_source_dir = robot_dir / args.data
     if not data_source_dir.exists():
         print(f"[Error] Data source directory not found: {data_source_dir}")
         sys.exit(1)
 
-    # Iteration作成
+    # Create iteration
     creator = IterationCreator(robot_dir)
     iteration_dir = creator.create(
         data_source_dir=data_source_dir,

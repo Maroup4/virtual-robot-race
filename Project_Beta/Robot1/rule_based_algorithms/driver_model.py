@@ -156,7 +156,7 @@ class DriverModel:
                 self._last_base = base
                 self._last_steer = steer
 
-                # ====== Pulse control for curves (ちょんちょんアクセル) ======
+                # ====== Pulse control for curves (tap-tap throttle) ======
                 # Disable pulse when single_side (estimated lane is less accurate)
                 use_pulse = False
                 if self.cfg.pulse_enabled and not single_side:

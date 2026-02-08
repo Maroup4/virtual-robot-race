@@ -1,21 +1,21 @@
 # calib_perception_Startsignal.py
 # =================================
-# スタートシグナル検出のキャリブレーション・調整用スクリプト # TODO: Manual translation needed
+# Calibration / tuning script for start signal detection
 #
-# 使用例: # TODO: Manual translation needed
-#   python calib_perception_Startsignal.py                           # デフォルト: input_jpg/ → output/
+# Usage:
+#   python calib_perception_Startsignal.py                           # Default: input_jpg/ -> output/
 #   python calib_perception_Startsignal.py --image debug/input_jpg/sample.jpg
 #   python calib_perception_Startsignal.py --sweep_thresh --image debug/input_jpg/sample.jpg
 #
-# Folder構造: # TODO: Manual translation needed
+# Folder structure:
 #   Robot1/debug/
-# ├── input_jpg/    # Validation用のInputImageを置く # TODO: Manual translation needed
-# └── output/       # 結果（オーバーレイImage + CSV）をOutput # TODO: Manual translation needed
+# ├── input_jpg/    # Place input images for validation here
+# └── output/       # Output results (overlay images + CSV)
 #
-# 機能: # TODO: Manual translation needed
-# 1. ランプ領域ROIの可視化 # TODO: Manual translation needed
-# 2. 各ランプの赤ピクセル比率表示 # TODO: Manual translation needed
-# 3. 閾値Parameterの変更Test # TODO: Manual translation needed
+# Features:
+# 1. Visualization of lamp region ROIs
+# 2. Display red pixel ratio for each lamp
+# 3. Test threshold parameter changes
 # 4. BatchProcess + CSVOutput
 
 import os
@@ -27,11 +27,11 @@ from dataclasses import dataclass
 from typing import List, Tuple, Optional
 from PIL import Image, ImageDraw, ImageFont
 
-# プロジェクトルートをPathにAdd # TODO: Manual translation needed
+# Add project root to path
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.insert(0, project_root)
 
-# デバッグDirectory（Robot1/debug/） # TODO: Manual translation needed
+# Debug directory (Robot1/debug/)
 DEBUG_BASE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "debug")
 INPUT_DIR = os.path.join(DEBUG_BASE, "input_jpg")
 OUTPUT_DIR = os.path.join(DEBUG_BASE, "output")
@@ -43,7 +43,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 @dataclass
 class LampResult:
-    """各ランプの検出結果"""
+    """Detection result for each lamp"""
     lamp_id: int
     red_pixels: int
     total_pixels: int
@@ -54,7 +54,7 @@ class LampResult:
 
 @dataclass
 class SignalResult:
-    """スタートシグナル全体の検出結果"""
+    """Detection result for the entire start signal"""
     lamps: List[LampResult]
     red_count: int
     ready_to_go: bool
@@ -62,8 +62,8 @@ class SignalResult:
 
 
 def is_red(pixel, red_thresh=140, green_thresh=130, blue_thresh=130) -> bool:
-    """RGBピクセルが赤かどうかを判定"""
-    r, g, b = pixel[:3]  # RGBA対応 # TODO: Manual translation needed
+    """Determine whether an RGB pixel is red"""
+    r, g, b = pixel[:3]  # RGBA compatible
     return r > red_thresh and g < green_thresh and b < blue_thresh
 
 
@@ -76,28 +76,28 @@ def analyze_startsignal(
     ready_to_go: bool = False,
 ) -> SignalResult:
     """
-    スタートシグナルを解析し、詳細な結果を返す
+    Analyze the start signal and return detailed results
 
     Args:
         img: PIL.Image (RGB)
-        red_thresh: 赤チャンネル閾値
-        green_thresh: 緑チャンネル閾値
-        blue_thresh: 青チャンネル閾値
-        ratio_thresh: 点灯判定の比率閾値
-        ready_to_go: 前回の ready_to_go 状態
+        red_thresh: Red channel threshold
+        green_thresh: Green channel threshold
+        blue_thresh: Blue channel threshold
+        ratio_thresh: Ratio threshold for lamp-on detection
+        ready_to_go: Previous ready_to_go state
 
     Returns:
-        SignalResult: 詳細な検出結果
+        SignalResult: Detailed detection result
     """
     width, height = img.size
     top = int(height * 0.05)
     bottom = int(height * 0.25)
 
-    # 3つのランプ領域 (Robot2: 左側) # TODO: Manual translation needed
+    # Three lamp regions (Robot2: left side)
     lamp_positions = [
-        (int(width * 0.18), int(width * 0.33)),  # ランプ1: 18%〜33% # TODO: Manual translation needed
-        (int(width * 0.33), int(width * 0.48)),  # ランプ2: 33%〜48% (左へ) # TODO: Manual translation needed
-        (int(width * 0.48), int(width * 0.63)),  # ランプ3: 48%〜63% (左へ) # TODO: Manual translation needed
+        (int(width * 0.18), int(width * 0.33)),  # Lamp 1: 18%-33%
+        (int(width * 0.33), int(width * 0.48)),  # Lamp 2: 33%-48% (shifted left)
+        (int(width * 0.48), int(width * 0.63)),  # Lamp 3: 48%-63% (shifted left)
     ]
 
     lamps = []
@@ -129,7 +129,7 @@ def analyze_startsignal(
             roi=(left, top, right, bottom),
         ))
 
-    # GO判定ロジック # TODO: Manual translation needed
+    # GO determination logic
     new_ready = ready_to_go
     is_go = False
 
@@ -156,21 +156,21 @@ def draw_overlay(
     ratio_thresh: float = 0.03,
 ) -> Image.Image:
     """
-    検出結果をオーバーレイした画像を生成
+    Generate an image with detection results overlaid
 
     Args:
-        img: 元画像
-        result: 検出結果
-        red_thresh, green_thresh, blue_thresh: 閾値（表示用）
-        ratio_thresh: 比率閾値（表示用）
+        img: Original image
+        result: Detection result
+        red_thresh, green_thresh, blue_thresh: Thresholds (for display)
+        ratio_thresh: Ratio threshold (for display)
 
     Returns:
-        オーバーレイ画像
+        Overlay image
     """
     overlay = img.copy()
     draw = ImageDraw.Draw(overlay)
 
-    # フォント（システムフォントがない場合はデフォルト） # TODO: Manual translation needed
+    # Font (fall back to default if system font is unavailable)
     try:
         font = ImageFont.truetype("arial.ttf", 14)
         font_large = ImageFont.truetype("arial.ttf", 18)
@@ -180,27 +180,27 @@ def draw_overlay(
 
     width, height = img.size
 
-    # 各ランプのROIを描画（枠線のみ、テキストは下半分にまとめる） # TODO: Manual translation needed
+    # Draw ROI for each lamp (outline only; text is grouped in the lower half)
     for lamp in result.lamps:
         left, top, right, bottom = lamp.roi
 
-        # ROI矩形（点灯:緑、消灯:赤） # TODO: Manual translation needed
+        # ROI rectangle (on: green, off: red)
         color = "lime" if lamp.is_on else "red"
         draw.rectangle([left, top, right, bottom], outline=color, width=3)
 
-    # === 下半分に情報パネルを配置 === # TODO: Manual translation needed
-    panel_top = int(height * 0.45)  # Imageの45%PositionからStart # TODO: Manual translation needed
+    # === Place info panel in the lower half ===
+    panel_top = int(height * 0.45)  # Start from 45% position of the image
     panel_left = 10
     line_height = 20
 
-    # ランプ情報 # TODO: Manual translation needed
+    # Lamp information
     lamp_lines = []
     for lamp in result.lamps:
         status = "ON" if lamp.is_on else "OFF"
         color = "lime" if lamp.is_on else "red"
         lamp_lines.append((f"Lamp{lamp.lamp_id}: {lamp.ratio*100:5.1f}% [{status}]", color))
 
-    # 全体Status # TODO: Manual translation needed
+    # Overall status
     status_lines = [
         (f"Red Count: {result.red_count}/3", "white"),
         (f"Ready: {result.ready_to_go}", "yellow" if result.ready_to_go else "white"),
@@ -212,24 +212,24 @@ def draw_overlay(
 
     all_lines = lamp_lines + status_lines
 
-    # 背景ボックス（半透明の白） # TODO: Manual translation needed
+    # Background box (semi-transparent white)
     box_height = len(all_lines) * line_height + 15
     box_width = 280
 
-    # 半透明描画のためRGBAModeで別レイヤーをCreate # TODO: Manual translation needed
+    # Create a separate RGBA layer for semi-transparent drawing
     panel_layer = Image.new("RGBA", overlay.size, (0, 0, 0, 0))
     panel_draw = ImageDraw.Draw(panel_layer)
     panel_draw.rectangle(
         [panel_left, panel_top, panel_left + box_width, panel_top + box_height],
-        fill=(255, 255, 255, 160)  # 半透明の白 # TODO: Manual translation needed
+        fill=(255, 255, 255, 160)  # Semi-transparent white
     )
     overlay = Image.alpha_composite(overlay.convert("RGBA"), panel_layer).convert("RGB")
     draw = ImageDraw.Draw(overlay)
 
-    # テキスト描画（黒文字に変更して見やすく） # TODO: Manual translation needed
+    # Draw text (changed to dark colors for readability)
     y = panel_top + 8
     for text, orig_color in all_lines:
-        # 白背景なので暗い色にConvert # TODO: Manual translation needed
+        # Convert to dark colors since the background is white
         if orig_color == "white":
             text_color = "black"
         elif orig_color == "lime":
@@ -256,7 +256,7 @@ def save_overlay(
     out_path: str,
     **thresh_kwargs,
 ) -> str:
-    """オーバーレイ画像を保存"""
+    """Save the overlay image"""
     overlay = draw_overlay(img, result, **thresh_kwargs)
     overlay.save(out_path, quality=90)
     return out_path
@@ -268,13 +268,13 @@ def process_single(
     out_dir: str = OUTPUT_DIR,
     **thresh_kwargs,
 ) -> SignalResult:
-    """単一画像を処理"""
+    """Process a single image"""
     img = Image.open(image_path).convert("RGB")
     result = analyze_startsignal(img, **thresh_kwargs)
 
     if save_overlay_flag:
         base = os.path.basename(image_path)
-        # 同名でoutputにSave # TODO: Manual translation needed
+        # Save to output with the same filename
         out_path = os.path.join(out_dir, base)
         save_overlay(img, result, out_path, **thresh_kwargs)
         print(f"[Calib] Saved: {out_path}")
@@ -289,13 +289,13 @@ def process_batch(
     csv_out: Optional[str] = None,
     **thresh_kwargs,
 ) -> List[Tuple[str, SignalResult]]:
-    """フォルダ内の画像をバッチ処理"""
-    # 小文字パターンのみ使用（Windowsは大文字小文字を区別しないため重複を防ぐ） # TODO: Manual translation needed
+    """Batch process images in a folder"""
+    # Use lowercase patterns only (to avoid duplicates since Windows is case-insensitive)
     patterns = ["*.jpg", "*.jpeg", "*.png"]
     paths = []
     for p in patterns:
         paths.extend(glob.glob(os.path.join(folder, p)))
-    # 重複を除去してソート # TODO: Manual translation needed
+    # Remove duplicates and sort
     paths = sorted(set(paths))
 
     if not paths:
@@ -308,18 +308,18 @@ def process_batch(
     print(f"[Calib] Processing {len(paths)} images...")
 
     results = []
-    ready_state = False  # シーケンス追跡用 # TODO: Manual translation needed
+    ready_state = False  # For sequence tracking
 
     for path in paths:
         img = Image.open(path).convert("RGB")
         result = analyze_startsignal(img, ready_to_go=ready_state, **thresh_kwargs)
-        ready_state = result.ready_to_go  # Stateを引き継ぐ # TODO: Manual translation needed
+        ready_state = result.ready_to_go  # Carry over the state
 
         results.append((path, result))
 
         if save_overlay_flag:
             base = os.path.basename(path)
-            # 同名でoutputにSave # TODO: Manual translation needed
+            # Save to output with the same filename
             out_path = os.path.join(out_dir, base)
             save_overlay(img, result, out_path, **thresh_kwargs)
 
@@ -358,10 +358,10 @@ def sweep_threshold(
     out_dir: str = OUTPUT_DIR,
 ) -> None:
     """
-    閾値をスイープして最適値を探索
+    Sweep thresholds to find optimal values
 
     Args:
-        image_path: テスト画像
+        image_path: Test image
         red_range: (min, max, step) for red_thresh
         green_range: (min, max, step) for green_thresh
     """
@@ -383,7 +383,7 @@ def sweep_threshold(
                     img,
                     red_thresh=r_th,
                     green_thresh=g_th,
-                    blue_thresh=g_th,  # 同じ値を使用 # TODO: Manual translation needed
+                    blue_thresh=g_th,  # Use the same value
                 )
                 writer.writerow([
                     r_th, g_th,
@@ -398,47 +398,47 @@ def sweep_threshold(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="スタートシグナル検出のキャリブレーションツール",
+        description="Calibration tool for start signal detection",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=f"""
-フォルダ構造:
+Folder structure:
   Robot1/debug/
-  ├── input_jpg/    # InputImageを置く # TODO: Manual translation needed
-  └── output/       # 結果をOutput # TODO: Manual translation needed
+  ├── input_jpg/    # Place input images here
+  └── output/       # Output results
 
-使用例:
-  python calib_perception_Startsignal.py                    # input_jpg/ → output/
-  python calib_perception_Startsignal.py --image sample.jpg # 単一Image # TODO: Manual translation needed
+Usage examples:
+  python calib_perception_Startsignal.py                    # input_jpg/ -> output/
+  python calib_perception_Startsignal.py --image sample.jpg # Single image
   python calib_perception_Startsignal.py --sweep_thresh --image sample.jpg
 
-デフォルトパス:
-  入力: {INPUT_DIR}
-  出力: {OUTPUT_DIR}
+Default paths:
+  Input:  {INPUT_DIR}
+  Output: {OUTPUT_DIR}
 """
     )
 
-    # Input（オプション、指定なしならデフォルトFolder） # TODO: Manual translation needed
+    # Input (optional; uses default folder if not specified)
     group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument("--image", help="単一画像のパス")
-    group.add_argument("--folder", help=f"画像フォルダのパス（デフォルト: {INPUT_DIR}）")
+    group.add_argument("--image", help="Path to a single image")
+    group.add_argument("--folder", help=f"Path to image folder (default: {INPUT_DIR})")
 
-    # オプション # TODO: Manual translation needed
+    # Options
     parser.add_argument("--no_overlay", action="store_true",
-                        help="オーバーレイ画像を保存しない")
+                        help="Do not save overlay images")
     parser.add_argument("--sweep_thresh", action="store_true",
-                        help="閾値スイープモード（--image必須）")
+                        help="Threshold sweep mode (--image required)")
     parser.add_argument("--out_dir", default=OUTPUT_DIR,
-                        help=f"出力ディレクトリ（デフォルト: {OUTPUT_DIR}）")
+                        help=f"Output directory (default: {OUTPUT_DIR})")
 
-    # 閾値Parameter # TODO: Manual translation needed
+    # Threshold parameters
     parser.add_argument("--red_thresh", type=int, default=140,
-                        help="赤チャンネル閾値（デフォルト: 140）")
+                        help="Red channel threshold (default: 140)")
     parser.add_argument("--green_thresh", type=int, default=130,
-                        help="緑チャンネル閾値（デフォルト: 130）")
+                        help="Green channel threshold (default: 130)")
     parser.add_argument("--blue_thresh", type=int, default=130,
-                        help="青チャンネル閾値（デフォルト: 130）")
+                        help="Blue channel threshold (default: 130)")
     parser.add_argument("--ratio_thresh", type=float, default=0.03,
-                        help="点灯判定の比率閾値（デフォルト: 0.03）")
+                        help="Ratio threshold for lamp-on detection (default: 0.03)")
 
     args = parser.parse_args()
 
@@ -471,7 +471,7 @@ def main():
             status = "ON" if lamp.is_on else "OFF"
             print(f"  Lamp{lamp.lamp_id}: {lamp.ratio*100:5.2f}% ({status})")
     else:
-        # デフォルト: input_jpg/ → output/
+        # Default: input_jpg/ -> output/
         folder = args.folder if args.folder else INPUT_DIR
         process_batch(
             folder,

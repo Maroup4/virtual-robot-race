@@ -59,7 +59,7 @@ def _loop(stop_event: threading.Event):
                 driveTorque = 0.0  # release
 
             # --- Steering angle (rad) ---
-            # キーを離したらリセット（スマホと同様の挙動）
+            # Reset on key release (same behavior as smartphone controls)
             if _key_states["j"]:
                 steerAngle -= STEER_STEP
             elif _key_states["l"]:

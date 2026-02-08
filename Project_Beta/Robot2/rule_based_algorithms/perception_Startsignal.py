@@ -24,9 +24,9 @@ def detect_start_signal(img):
         # Define 3 rectangular regions (start lamps) on the top part of the image
         # Robot2: Lamps are on the LEFT side of the image
         lamp_positions = [
-            (int(width * 0.18), int(width * 0.33)),  # ランプ1: 18%〜33% # TODO: Manual translation needed
-            (int(width * 0.33), int(width * 0.48)),  # ランプ2: 33%〜48% (左へ) # TODO: Manual translation needed
-            (int(width * 0.48), int(width * 0.63))   # ランプ3: 48%〜63% (左へ) # TODO: Manual translation needed
+            (int(width * 0.18), int(width * 0.33)),  # Lamp 1: 18%-33%
+            (int(width * 0.33), int(width * 0.48)),  # Lamp 2: 33%-48% (left side)
+            (int(width * 0.48), int(width * 0.63))   # Lamp 3: 48%-63% (left side)
         ]
 
         red_count = 0
