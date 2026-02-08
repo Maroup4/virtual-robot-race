@@ -261,7 +261,8 @@ class DataManager:
                 "drive_torque", "steer_angle",
                 "drive_valid", "steer_valid",
                 "status", "pos_x", "pos_y", "pos_z",
-                "yaw_deg", "error_code"
+                "yaw_deg", "error_code",
+                "collision_type", "collision_penalty"  # Beta 1.5
             ])
 
             # Helper to safely convert missing values
@@ -299,6 +300,9 @@ class DataManager:
                     pos_z        = f_or_0(r.get("pos_z"))
                     yaw          = f_or_0(r.get("yaw_deg") or r.get("yaw"))
                     err          = i_or_0(r.get("error_code"))
+                    # Beta 1.5: Collision data
+                    coll_type    = r.get("collision_type") or ""
+                    coll_penalty = f_or_0(r.get("collision_penalty"))
 
                     # Write row
                     w.writerow([
@@ -317,6 +321,8 @@ class DataManager:
                         pos_z,
                         yaw,
                         err,
+                        coll_type,       # Beta 1.5
+                        coll_penalty,    # Beta 1.5
                     ])
             else:
                 print("[DataManager] WARNING: Metadata payload not list, header only.")
@@ -410,7 +416,8 @@ class DataManager:
                     "drive_torque", "steer_angle",
                     "drive_valid", "steer_valid",
                     "status", "pos_x", "pos_y", "pos_z",
-                    "yaw_deg", "error_code"
+                    "yaw_deg", "error_code",
+                    "collision_type", "collision_penalty"  # Beta 1.5
                 ])
                 # Write single row indicating force end
                 w.writerow([
@@ -418,7 +425,8 @@ class DataManager:
                     0.0, 0.0,
                     0, 0,
                     "Force end", 0.0, 0.0, 0.0,
-                    0.0, 0
+                    0.0, 0,
+                    "", 0.0  # Beta 1.5: no collision
                 ])
             print(f"[DataManager] [{self.robot_id}] Force-end metadata.csv written → {meta_csv}")
         except Exception as e:

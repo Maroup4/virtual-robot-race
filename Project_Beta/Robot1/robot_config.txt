@@ -14,7 +14,7 @@ NAME=Player_AI
 # 3 = rule_based (autonomous lane following)
 # 4 = ai (neural network inference)
 # 5 = smartphone (smartphone controller via QR code)
-MODE_NUM=3
+MODE_NUM=4
 
 # Data saving:
 # 1 = Save CSV and JPEG images during run (also auto-creates MP4 video)
