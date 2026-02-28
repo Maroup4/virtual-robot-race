@@ -390,8 +390,6 @@ After completing a race with `RACE_FLAG=1`:
 - **YouTube**: [@RaceYourAlgo](https://www.youtube.com/@RaceYourAlgo)
 - **Issues**: [GitHub Issues](https://github.com/AAgrandprix/virtual-robot-race/issues)
 
-> **Alpha version** (original differential drive) is archived in the [`alpha` branch](https://github.com/AAgrandprix/virtual-robot-race/tree/alpha/Project_Alpha).
-
 ---
 
 ## Tested Environments
