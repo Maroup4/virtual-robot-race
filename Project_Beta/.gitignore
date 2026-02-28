@@ -2,7 +2,7 @@
 specs/
 
 # Development notes (personal)
-doc/
+docs_dev/
 
 # Python cache
 __pycache__/
