@@ -44,6 +44,13 @@ Robot*/ai_training/tmp*
 # Utility scripts (not part of core)
 Robot*/make_promotion_video.py
 
+# Backup files
+*.backup
+*.bak
+
+# JSON logs (runtime generated)
+Robot*/scripts/auto_collect_log.json
+
 # Logs
 *.log
 nul
