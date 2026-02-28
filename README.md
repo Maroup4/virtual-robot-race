@@ -20,9 +20,9 @@ Perfect for students, hobbyists, and AI enthusiasts!
 
 ## Current Version
 
-### **Beta 1.5** (Latest) - [`/Project_Beta`](./Project_Beta)
+### **Beta 1.6** (Latest) - [`/Project_Beta`](./Project_Beta)
 
-**Released:** 2026-02-08
+**Released:** 2026-02-28
 
 This version includes:
 - Realistic torque steer driving (like a real car, not a tank!)
@@ -37,7 +37,7 @@ This version includes:
 
 ---
 
-### Alpha Version - [`/Project_Alpha`](./Project_Alpha)
+### Alpha Version - [`alpha` branch](https://github.com/AAgrandprix/virtual-robot-race/tree/alpha/Project_Alpha)
 
 The original version with differential drive (tank-style steering):
 - Single robot racing
@@ -45,7 +45,7 @@ The original version with differential drive (tank-style steering):
 - Training data collection
 - AI model training
 
-**[-> See Alpha Documentation](./Project_Alpha/README.md)**
+> Archived in the [`alpha` branch](https://github.com/AAgrandprix/virtual-robot-race/tree/alpha/Project_Alpha).
 
 ---
 
@@ -87,20 +87,19 @@ Unity will auto-launch and the race begins!
 
 ```
 virtual-robot-race/
-├── Project_Beta/          # Latest version (Beta 1.5)
+├── Project_Beta/          # Latest version (Beta 1.6)
 │   ├── main.py           # Main launcher
 │   ├── Robot1/           # First robot configuration
 │   ├── Robot2/           # Second robot configuration
 │   ├── Windows/          # Unity executable
 │   └── README.md         # Detailed documentation
 │
-├── Project_Alpha/        # Original version (differential drive)
-│   └── README.md
-│
 ├── README.md             # This file
 ├── .gitignore
 └── LICENSE
 ```
+
+> **Alpha version** is archived in the [`alpha` branch](https://github.com/AAgrandprix/virtual-robot-race/tree/alpha/Project_Alpha).
 
 ---
 
