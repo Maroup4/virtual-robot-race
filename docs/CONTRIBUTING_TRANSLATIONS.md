@@ -88,7 +88,7 @@ We will review and merge your contribution as quickly as possible.
 
 ## Questions?
 
-If you have any questions or need help, feel free to open a [GitHub Issue](https://github.com/AAgrandprix/virtual-robot-race/issues).
+If you have any questions or need help, feel free to open a [GitHub Issue](https://github.com/aira-race/virtual-robot-race/issues).
 
 Thank you for helping the aira community grow!
 **Together, let's bring autonomous racing education to everyone.**

@@ -54,7 +54,7 @@ Virtual Robot Race is a **beginner-friendly robot simulation environment** where
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/AAgrandprix/virtual-robot-race.git
+git clone https://github.com/aira-race/virtual-robot-race.git
 cd virtual-robot-race
 ```
 
@@ -388,7 +388,7 @@ After completing a race with `RACE_FLAG=1`:
 
 - **Official Website**: [virtualrobotrace.com](https://virtualrobotrace.com)
 - **YouTube**: [@RaceYourAlgo](https://www.youtube.com/@RaceYourAlgo)
-- **Issues**: [GitHub Issues](https://github.com/AAgrandprix/virtual-robot-race/issues)
+- **Issues**: [GitHub Issues](https://github.com/aira-race/virtual-robot-race/issues)
 
 ---
 
