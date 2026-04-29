@@ -5,9 +5,10 @@
 # ===== Player =====
 
 # Player name: alphanumeric and underscore, up to 16 characters (A-Z, a-z, 0-9, _)
-NAME=YourName
+NAME=AndyTest
+
 # Competition name: must match a valid competition ID registered on the platform
-COMPETITION_NAME=Tutorial
+COMPETITION_NAME=Race_260501
 
 
 # ===== Robot Setup =====
@@ -23,7 +24,7 @@ ACTIVE_ROBOTS=1,2
 # 3 = rule_based (autonomous lane following)
 # 4 = ai (neural network inference)
 # 5 = smartphone (controller via QR code)
-R1_MODE_NUM=3
+R1_MODE_NUM=4
 R2_MODE_NUM=4
 
 
