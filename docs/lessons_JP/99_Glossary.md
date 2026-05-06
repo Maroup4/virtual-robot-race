@@ -7,7 +7,7 @@
 ### **A-Z**
 
 *   **ACTIVE_ROBOTS**: `config.txt`内の設定項目。レースに参加するロボットの台数（1または2）を指定する。
-*   **AIアシスタント (AI Assistant)**: Gemini Code Assistなど、コーディングを支援してくれるAI。このレッスンでは積極的に活用することが推奨されている。
+*   **AIアシスタント (AI Assistant)**: Gemini Code Assist、Claude Code、Codexなど、コーディングを支援してくれるAI。このレッスンでは積極的に活用することが推奨されている。
 *   **AIモード (AI Mode)**: ニューラルネットワークモデルによる推論結果に基づき、ロボットが自律走行するモード。ランチャーの **R mode=`ai`** で選択できる。
 *   **aira**: "autonomous intelligence racing arena"の略。本仮想ロボットレースプラットフォームの名称。
 *   **CNN (Convolutional Neural Network)**: 畳み込みニューラルネットワーク。画像データから特徴を抽出するのによく使われる。

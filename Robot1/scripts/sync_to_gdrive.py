@@ -30,23 +30,71 @@ PROJECT_ROOT = SCRIPT_DIR.parent.parent  # repo root
 ROBOT1_ROOT = PROJECT_ROOT / "Robot1"
 LOCAL_TRAINING_DATA = ROBOT1_ROOT / "training_data"
 
-# Google Drive path (change according to your environment)
-# Windows: C:\Users\[username]\Google Drive\My Drive\
-# Mac: ~/Google Drive/My Drive/
-GDRIVE_PATHS = [
-    Path(os.path.expanduser("~")) / "Google Drive" / "マイドライブ" / "virtual-robot-race" / "training_data",
-    Path(os.path.expanduser("~")) / "Google Drive" / "My Drive" / "virtual-robot-race" / "training_data",
-    Path(os.path.expanduser("~")) / "GoogleDrive" / "マイドライブ" / "virtual-robot-race" / "training_data",
-    # Add custom paths here if needed
+# ===========================
+# Google Drive Root detection
+# ===========================
+# Folder names that Google Drive uses for "My Drive"
+GDRIVE_FOLDER_NAMES = ["マイドライブ", "My Drive", "MyDrive"]
+
+# Drive letters to check (new Google Drive desktop app mounts as a virtual drive)
+GDRIVE_DRIVE_LETTERS = ["G", "H", "I", "J"]
+
+# Legacy paths (older Google Drive app synced to a folder)
+GDRIVE_LEGACY_ROOTS = [
+    Path(os.path.expanduser("~")) / "Google Drive",
+    Path(os.path.expanduser("~")) / "GoogleDrive",
+    Path(os.path.expanduser("~")) / "Google ドライブ",
 ]
 
-def find_gdrive_path():
-    """Detect the Google Drive training_data path"""
-    for path in GDRIVE_PATHS:
-        if path.exists():
-            return path
+PROJECT_SUBPATH = "virtual-robot-race"
+TRAINING_SUBPATH = "training_data"
+
+
+def find_gdrive_root():
+    """
+    Find the Google Drive 'My Drive' root folder.
+    Supports both virtual drive letters (new app) and legacy folder paths.
+    Returns Path to the My Drive root, or None if not found.
+    """
+    # 1. Check virtual drive letters (new Google Drive desktop app)
+    for letter in GDRIVE_DRIVE_LETTERS:
+        drive = Path(f"{letter}:\\")
+        if drive.exists():
+            for folder_name in GDRIVE_FOLDER_NAMES:
+                candidate = drive / folder_name
+                if candidate.exists():
+                    return candidate
+            # Drive exists but no named subfolder — might be the root itself
+            # Check for .shortcut-targets-by-id which Google Drive creates
+            if (drive / ".shortcut-targets-by-id").exists():
+                # The drive root IS My Drive
+                return drive
+
+    # 2. Check legacy paths
+    for root in GDRIVE_LEGACY_ROOTS:
+        if root.exists():
+            for folder_name in GDRIVE_FOLDER_NAMES:
+                candidate = root / folder_name
+                if candidate.exists():
+                    return candidate
+            # Some versions put files directly in "Google Drive/"
+            if root.exists():
+                return root
 
     return None
+
+
+def find_gdrive_path():
+    """
+    Find the virtual-robot-race/training_data path on Google Drive.
+    Returns Path if the folder already exists, None otherwise.
+    """
+    gdrive_root = find_gdrive_root()
+    if gdrive_root is None:
+        return None
+
+    candidate = gdrive_root / PROJECT_SUBPATH / TRAINING_SUBPATH
+    return candidate if candidate.exists() else None
 
 def get_run_folders(root_path):
     """Get a list of run_ folders"""
@@ -60,7 +108,7 @@ def get_run_folders(root_path):
 
 def get_run_info(run_folder):
     """Get information about a run_ folder"""
-    csv_file = run_folder / "sensor_data.csv"
+    csv_file = run_folder / "metadata.csv"
     if not csv_file.exists():
         return None
 
@@ -85,13 +133,20 @@ def check_status():
     gdrive_path = find_gdrive_path()
 
     if gdrive_path is None:
-        print("\nWarning: Google Drive not found")
-        print("\nPlease verify:")
-        print("  1. Google Drive desktop app is installed")
-        print("  2. My Drive/virtual-robot-race/training_data/ folder has been created")
-        print("\nSearched paths:")
-        for path in GDRIVE_PATHS:
-            print(f"  - {path}")
+        gdrive_root = find_gdrive_root()
+        if gdrive_root is None:
+            print("\nWarning: Google Drive not found")
+            print("\nPlease verify:")
+            print("  1. Google Drive desktop app is installed and running")
+            print("  2. You are signed in")
+            print("\nIf Google Drive is mounted as a drive letter (e.g. G:), this script")
+            print("will detect it automatically on the next run.")
+        else:
+            print(f"\nGoogle Drive found at: {gdrive_root}")
+            print(f"\nBut the project folder does not exist yet:")
+            print(f"  {gdrive_root / PROJECT_SUBPATH / TRAINING_SUBPATH}")
+            print(f"\nRun --setup to create it automatically:")
+            print(f"  python scripts/sync_to_gdrive.py --setup")
         return False
 
     print(f"\nGoogle Drive detected: {gdrive_path}")
@@ -165,7 +220,7 @@ def sync_new_runs():
 
         info = get_run_info(src)
         if info is None:
-            print(f"Warning: {run_name}: sensor_data.csv not found. Skipping.")
+            print(f"Warning: {run_name}: metadata.csv not found. Skipping.")
             continue
 
         print(f"{run_name} ({info['size_mb']:.1f} MB, {info['num_files']} files)")
@@ -213,7 +268,7 @@ def sync_all_runs(force=False):
 
         info = get_run_info(src)
         if info is None:
-            print(f"Warning: {run_name}: sensor_data.csv not found. Skipping.")
+            print(f"Warning: {run_name}: metadata.csv not found. Skipping.")
             continue
 
         print(f"{run_name} ({info['size_mb']:.1f} MB, {info['num_files']} files)")
@@ -235,35 +290,50 @@ def sync_all_runs(force=False):
 
 def setup_gdrive_structure():
     """Create the required folder structure on Google Drive"""
-    gdrive_base = find_gdrive_path()
+    gdrive_my_drive = find_gdrive_root()
 
-    if gdrive_base is None:
-        print("Warning: Google Drive not found")
-        print("\nPlease manually create the following folder:")
-        print("  My Drive/virtual-robot-race/training_data/")
+    if gdrive_my_drive is None:
+        print("Warning: Google Drive (My Drive) not found")
+        print("\nPlease verify:")
+        print("  1. Google Drive desktop app is installed and running")
+        print("  2. You are signed in to Google Drive")
+        print("\nIf Google Drive is mounted as a drive letter (e.g. G:), check:")
+        for letter in GDRIVE_DRIVE_LETTERS:
+            print(f"  - {letter}:\\マイドライブ  or  {letter}:\\My Drive")
         return False
 
-    # Parent folder path
-    gdrive_root = gdrive_base.parent  # virtual-robot-race/
+    project_root = gdrive_my_drive / PROJECT_SUBPATH
+    print(f"\nGoogle Drive (My Drive) detected: {gdrive_my_drive}")
+    print(f"Will create folder structure under: {project_root}")
 
-    print(f"\nGoogle Drive detected: {gdrive_root}")
-
-    # Required folders
     folders_to_create = [
-        gdrive_root / "training_data",
-        gdrive_root / "experiments",
-        gdrive_root / "experiments" / "iterations",
+        project_root / "training_data",
+        project_root / "experiments",
     ]
 
     print("\nCreating folder structure...")
     for folder in folders_to_create:
         if folder.exists():
-            print(f"  {folder.relative_to(gdrive_root.parent)} (already exists)")
+            print(f"  {folder}  (already exists)")
         else:
             folder.mkdir(parents=True, exist_ok=True)
-            print(f"  {folder.relative_to(gdrive_root.parent)} (created)")
+            print(f"  {folder}  (created)")
 
-    print("\nGoogle Drive folder structure setup complete")
+    # Copy Colab notebook
+    notebook_src = PROJECT_ROOT / "colab" / "train_on_colab.ipynb"
+    notebook_dst = project_root / "train_on_colab.ipynb"
+    if notebook_src.exists():
+        if notebook_dst.exists():
+            print(f"  {notebook_dst}  (already exists, skipped)")
+        else:
+            import shutil as _shutil
+            _shutil.copy2(notebook_src, notebook_dst)
+            print(f"  {notebook_dst}  (copied)")
+    else:
+        print(f"  Warning: Colab notebook not found at {notebook_src}")
+
+    print("\nSetup complete. You can now run --check to verify.")
+    print("Open train_on_colab.ipynb in Google Drive to start training on Colab.")
     return True
 
 def main():

@@ -7,7 +7,7 @@ This document summarizes the technical terms and important keywords used in the 
 ### A–Z
 
 *   **ACTIVE_ROBOTS**: A setting in `config.txt`. Specifies the number of robots participating in the race (1 or 2).
-*   **AI Assistant**: An AI such as Gemini Code Assist that helps with coding. Active use of an AI assistant is recommended throughout this training.
+*   **AI Assistant**: An AI such as Gemini Code Assist, Claude Code, or Codex that helps with coding. Active use of an AI assistant is recommended throughout this training.
 *   **AI Mode**: A mode in which the robot drives autonomously based on inference results from a neural network model. Select **R mode=`ai`** in the launcher.
 *   **aira**: Short for "autonomous intelligence racing arena." The name of this virtual robot racing platform.
 *   **CNN (Convolutional Neural Network)**: A type of neural network commonly used to extract features from image data.

@@ -23,10 +23,10 @@ ON_BG   = "#001F2D"   # Toggle ON background
 ON_FG   = "#00D4FF"   # Toggle ON foreground (Cyan)
 OFF_FG  = "#4A5878"   # Toggle OFF foreground (Muted)
 
-FONT_UI   = ("Courier", 9)
-FONT_BOLD = ("Courier", 10, "bold")
-FONT_MONO = ("Courier", 10)
-FONT_TITLE= ("Courier", 16, "bold")
+FONT_UI   = ("Courier", 11)
+FONT_BOLD = ("Courier", 12, "bold")
+FONT_MONO = ("Courier", 12)
+FONT_TITLE= ("Courier", 20, "bold")
 
 MODE_OPTIONS = ["keyboard", "table", "rule_based", "ai", "smartphone"]
 MODE_TO_NUM  = {"keyboard": "1", "table": "2", "rule_based": "3",
@@ -39,7 +39,8 @@ SECRET_PATH  = Path("player_secret.txt")
 TOKEN_OK  = "#00C878"   # Green — token saved
 TOKEN_NG  = "#FF8C00"   # Amber — token missing
 
-GAS_SUBMIT_URL = "https://script.google.com/macros/s/AKfycbznske4j3QuZl3_nMmmXE3L_fs7LtTpjyBSq0v-T8PE_Z_iu4-_xEoXZoJCKpSZ2hhZ/exec"
+GAS_SUBMIT_URL  = "https://script.google.com/macros/s/AKfycbznske4j3QuZl3_nMmmXE3L_fs7LtTpjyBSq0v-T8PE_Z_iu4-_xEoXZoJCKpSZ2hhZ/exec"
+DOCS_GITHUB_URL = "https://github.com/aira-race/virtual-robot-race/tree/main/docs"
 
 
 # ── Config I/O ────────────────────────────────────────────────────────────────
@@ -102,7 +103,7 @@ def _dropdown(parent, var, options) -> tk.Frame:
     m.configure(
         bg=SURFACE, fg=TEXT, activebackground=BORDER, activeforeground=ACCENT,
         relief="flat", font=FONT_MONO, bd=0, highlightthickness=0,
-        indicatoron=True, width=14,
+        indicatoron=True, width=16,
     )
     m["menu"].configure(
         bg=SURFACE, fg=TEXT, activebackground=BORDER,
@@ -114,14 +115,14 @@ def _dropdown(parent, var, options) -> tk.Frame:
 
 def _section(parent, label: str) -> None:
     tk.Label(parent, text=label, bg=BG, fg=AMBER,
-             font=("Courier", 8), anchor="w").pack(fill="x", padx=24, pady=(16, 2))
+             font=("Courier", 10), anchor="w").pack(fill="x", padx=24, pady=(18, 2))
 
 
 def _row(parent, label: str, widget_fn) -> None:
     row = tk.Frame(parent, bg=BG)
-    row.pack(fill="x", padx=24, pady=5)
+    row.pack(fill="x", padx=24, pady=6)
     tk.Label(row, text=label, bg=BG, fg=MUTED,
-             font=FONT_UI, width=13, anchor="w").pack(side="left")
+             font=FONT_UI, width=14, anchor="w").pack(side="left")
     widget_fn(row).pack(side="left", fill="x", expand=True)
 
 
@@ -160,11 +161,12 @@ def show_launcher() -> bool:
     root.configure(bg=BG)
     root.resizable(False, False)
 
-    # Center on screen (token section hidden by default, expands to 570 on SUBMIT)
-    W, H = 420, 490
+    # Center on screen; use max possible height for Y so the window never goes offscreen
+    W, H = 500, 560
+    MAX_H = 700
     root.update_idletasks()
     x = (root.winfo_screenwidth()  - W) // 2
-    y = (root.winfo_screenheight() - H) // 2
+    y = max(10, (root.winfo_screenheight() - MAX_H) // 2)
     root.geometry(f"{W}x{H}+{x}+{y}")
 
     # ── Amber accent line (top) ────────────────────────────────
@@ -174,9 +176,9 @@ def show_launcher() -> bool:
     title_bar = tk.Frame(root, bg=BG)
     title_bar.pack(fill="x")
     tk.Label(title_bar, text="aira", bg=BG, fg=ACCENT,
-             font=FONT_TITLE, padx=24, pady=12, anchor="w").pack(side="left")
+             font=FONT_TITLE, padx=24, pady=14, anchor="w").pack(side="left")
     tk.Label(title_bar, text="Beta 1.7", bg=BG, fg=AMBER,
-             font=FONT_UI, padx=24).pack(side="right", anchor="s", pady=14)
+             font=FONT_UI, padx=24).pack(side="right", anchor="s", pady=16)
 
     # ── Player ────────────────────────────────────────────────
     _section(root, "PLAYER")
@@ -233,17 +235,17 @@ def show_launcher() -> bool:
     token_section = tk.Frame(root, bg=BG)
 
     tk.Label(token_section, text="PLAYER TOKEN", bg=BG, fg=AMBER,
-             font=("Courier", 8), anchor="w").pack(fill="x", padx=24, pady=(16, 2))
+             font=("Courier", 10), anchor="w").pack(fill="x", padx=24, pady=(18, 2))
 
     token_row = tk.Frame(token_section, bg=BG)
     token_row.pack(fill="x", padx=24, pady=5)
     tk.Label(token_row, text="Token", bg=BG, fg=MUTED,
-             font=FONT_UI, width=13, anchor="w").pack(side="left")
+             font=FONT_UI, width=14, anchor="w").pack(side="left")
 
     token_entry = tk.Entry(
         token_row, textvariable=token_var,
         bg=SURFACE, fg=TEXT, insertbackground=TEXT,
-        relief="flat", font=("Courier", 9),
+        relief="flat", font=FONT_MONO,
         highlightthickness=1, highlightbackground=BORDER,
         highlightcolor=ACCENT, bd=4, show="●",
     )
@@ -258,19 +260,19 @@ def show_launcher() -> bool:
         token_row, text="show", variable=show_token,
         bg=BG, fg=MUTED, selectcolor=SURFACE,
         activebackground=BG, activeforeground=TEXT,
-        font=("Courier", 8), bd=0, highlightthickness=0,
-    ).pack(side="left", padx=(6, 0))
+        font=("Courier", 10), bd=0, highlightthickness=0,
+    ).pack(side="left", padx=(8, 0))
 
     # Status / link row
     status_row = tk.Frame(token_section, bg=BG)
     status_row.pack(fill="x", padx=24)
 
-    status_lbl = tk.Label(status_row, bg=BG, font=("Courier", 8), anchor="w")
+    status_lbl = tk.Label(status_row, bg=BG, font=("Courier", 10), anchor="w")
     status_lbl.pack(side="left")
 
     link_lbl = tk.Label(
         status_row, text="Get your token at aira-race.com →",
-        bg=BG, fg=ACCENT, font=("Courier", 8, "underline"),
+        bg=BG, fg=ACCENT, font=("Courier", 10, "underline"),
         cursor="hand2", anchor="w",
     )
     link_lbl.bind("<Button-1>", lambda _: webbrowser.open("https://aira-race.com"))
@@ -319,10 +321,10 @@ def show_launcher() -> bool:
         if needs_token:
             token_section.pack(fill="x", before=spacer_frame)
             _update_token_status()
-            root.geometry(f"{W}x600+{x}+{y}")
+            root.geometry(f"{W}x700+{x}+{y}")
         else:
             token_section.pack_forget()
-            root.geometry(f"{W}x{'540' if is_submit else '490'}+{x}+{y}")
+            root.geometry(f"{W}x{'625' if is_submit else '560'}+{x}+{y}")
 
     race_var.trace_add("write", _on_race_flag_change)
     comp_var.trace_add("write", _on_race_flag_change)
@@ -396,14 +398,24 @@ def show_launcher() -> bool:
     tk.Button(
         btn_frame, text="QUIT", command=on_quit,
         bg=BORDER, fg=MUTED, relief="flat", font=FONT_UI,
-        padx=20, pady=8, cursor="hand2",
+        padx=22, pady=10, cursor="hand2",
         activebackground=BORDER, activeforeground=TEXT,
     ).pack(side="left")
+
+    def _open_help():
+        webbrowser.open(DOCS_GITHUB_URL)
+
+    help_lbl = tk.Label(
+        btn_frame, text="? Help", bg=BG, fg=MUTED,
+        font=("Courier", 10, "underline"), cursor="hand2",
+    )
+    help_lbl.bind("<Button-1>", lambda _: _open_help())
+    help_lbl.pack(side="left", expand=True)
 
     tk.Button(
         btn_frame, text="START", command=on_start,
         bg=ACCENT, fg=BG, relief="flat", font=FONT_BOLD,
-        padx=28, pady=8, cursor="hand2",
+        padx=32, pady=10, cursor="hand2",
         activebackground="#66E8FF", activeforeground=BG,
     ).pack(side="right")
 

@@ -2,6 +2,8 @@
 
 In this lesson, you will review the driving log (Log) saved during the previous manual control session, and learn about "Table Mode" — a mode that replays a run using that log data.
 
+> **▶ Watch this lesson first**: [Lesson 04 Log Data & Table Mode (YouTube)](https://youtu.be/kwLAPdCD-jU?t=335)
+
 **Learning goals:**
 - Understand the folder structure and contents of log data saved with `DATA_SAVE=1`
 - Learn the meaning of the detailed driving data in `metadata.csv`
@@ -44,6 +46,8 @@ Open `metadata.csv` with a spreadsheet application like Excel or Google Sheets. 
 | **`race_time_ms`** | Elapsed time (ms) from the moment the "GO" signal fires. Stays `0` during the countdown. |
 | **`filename`** | The corresponding image filename in the `images/` folder (e.g., `frame_000079.jpg`). |
 
+> **💡 Data volume guide**: 1 tick = 50 ms, so **1,000 rows ≈ 50 seconds** of data. A 2-lap run will typically produce around 1,000–2,000 rows. The row count alone gives you a quick estimate of total run time.
+
 #### Robot Operation / State
 
 | Column | Contents |
@@ -70,7 +74,20 @@ Open `metadata.csv` with a spreadsheet application like Excel or Google Sheets. 
 #### Position / Orientation
 
 > **Note**: The column order is `pos_z, pos_x, yaw, pos_y` — not alphabetical.
-> **[Important]** `steer_angle` is in **radians**, but `yaw` is in **degrees**. Be careful when analyzing data.
+> **[Important]** `steer_angle` is in **radians**, but `yaw` is in **degrees**. When overlaying both on the same graph, convert units first:
+> - **Excel / Google Sheets**: `=DEGREES(steer_angle)` converts to degrees
+> - **Python (NumPy)**: `numpy.degrees(steer_angle)` or `steer_angle * (180 / numpy.pi)`
+
+> **❓ "Why is `steer_angle` in radians but `yaw` in degrees?"**
+> Unity manages Euler angles internally in degrees, so the world-space heading (`yaw`) is exported as-is in degrees. `steer_angle`, on the other hand, is used in the Python control model where radians are convenient for trigonometric functions (sin, cos), so it stays in radians. This mixed-unit design is a known gotcha — always convert to a common unit before analysis.
+
+> **❓ "Writing unit conversion code every time violates DRY — can I build a wrapper class that normalizes units on load?"**
+> Absolutely — and you should. It's exactly the right engineering instinct. The core conversions look like this:
+> ```python
+> df["steer_deg"] = np.degrees(df["steer_angle"])  # radians → degrees
+> df = df[df["race_time_ms"] > 0]                  # drop countdown rows
+> ```
+> Ask your AI assistant (Gemini Code Assist, Claude Code, Codex, etc.): "Write a DataLoader class that reads metadata.csv, converts steer_angle to degrees, and returns only rows where race_time_ms > 0." It will generate reusable code you can drop into any analysis script.
 
 | Column | Contents |
 |--------|----------|
@@ -78,6 +95,9 @@ Open `metadata.csv` with a spreadsheet application like Excel or Google Sheets. 
 | **`pos_x`** | X coordinate [m]. **Left/right** position (positive = right). |
 | **`yaw`** | Yaw angle (heading direction) [**degrees**]. Forward direction = 0, clockwise = positive. |
 | **`pos_y`** | Y coordinate [m]. **Up/down** position (positive = up). Below `-0.1 m` is judged as off-course. |
+
+> **❓ "Are these local (robot-relative) coordinates or world coordinates?"**
+> **World coordinates.** These are Unity world-space positions with the origin near the course start point. Unity uses a **left-handed coordinate system** (Z = forward, X = right, Y = up), and the data follows the same convention. The non-alphabetical column order `pos_z, pos_x, yaw, pos_y` reflects priority: Z (forward/backward) is the primary racing axis, X (left/right) is secondary.
 
 #### Error / Collision Information
 
@@ -149,6 +169,21 @@ This file is very simple — it has only 3 columns:
 >
 > To move as intended, you need either carefully crafted command values with margin, or the **feedback control** you will learn next.
 
+> **❓ "Does Unity execute commands the moment they arrive, rather than replaying them by timestamp?"**
+> Correct. Unity applies received commands immediately in the current physics frame — there is no timestamp-based replay buffer or delay compensation. This means communication jitter (timing variation) directly translates to control error.
+
+> **❓ "Why 50 ms (20 fps)? Can't the control loop go faster?"**
+> It's a balance of several factors: ① WebSocket round-trip overhead (a few ms even on localhost), ② Python AI inference time (designed to fit within 50 ms on CPU), ③ Unity rendering load. Achieving sub-millisecond cycles would require shared memory or UDP instead of WebSocket — but **simplicity and accessibility** were prioritized over raw speed.
+
+> **❓ "Table Mode is open-loop control, right? Is Lesson 05 going to be PID control?"**
+> Exactly — Table Mode is pure **open-loop control**. It reads no sensor data, so initial position errors and jitter accumulate unchecked. In Lesson 05 you will implement **closed-loop (feedback) control**: the robot reads its camera image, detects the lane offset, and corrects steering accordingly. It's conceptually equivalent to the proportional (P) term of a PID controller.
+
+> **❓ "Could we add a timestamp-based buffering queue on the Unity side to implement delay compensation?"**
+> Technically yes. Implementing a timestamped command queue in Unity's C# and having Python attach a send-time to each command would enable more precise replay. However, there are practical constraints: ① localhost jitter is typically 1–5 ms, which has limited impact within a 50 ms cycle; ② Unity's physics engine update rate (default 50 fps) is itself a bottleneck; ③ the implementation complexity increases significantly. **Designing feedback control that is robust to disturbances** is a more practical and fundamentally sound approach than chasing perfect replay.
+
+> **❓ "Could we use UDP or shared memory to push the control cycle up to 10 ms (100 fps)?"**
+> At the transport layer, yes. Python's `asyncio + socket` (UDP) or `multiprocessing.shared_memory` can achieve sub-millisecond latency, and Unity's C# has `System.IO.MemoryMappedFiles` for the same. However: ① Unity's `Fixed Timestep` (default 50 fps) must also be tuned or the simulator won't keep up; ② UDP requires you to implement retransmission and ordering guarantees yourself, which WebSocket provides for free. This is a worthwhile research topic if you want to implement advanced algorithms like MPC.
+
 ### Task 2: Edit the Driving Data (Advanced)
 
 - Rewrite all `steer_angle` values in a specific section of `table_input.csv` to `0`, save, and observe how the robot moves (it should drive in a straight line).
@@ -160,6 +195,14 @@ As you can see, Table Mode is highly effective for creating and testing precise 
 
 Log data is just numbers, but **graphing it makes the run "visible."**
 Try using Excel, Google Sheets, or Python (`pandas` + `matplotlib`) — whatever works for you.
+
+> **💡 Not sure how to write the Python code?** Ask your AI assistant (Gemini Code Assist, Claude Code, Codex, etc.):
+> ```
+> Read the metadata.csv file under Robot1/training_data/,
+> then write Python code to plot a line chart with
+> race_time_ms on the x-axis and drive_torque and steer_angle on the y-axis.
+> ```
+> Paste the generated code and run it directly.
 
 ---
 
@@ -197,6 +240,17 @@ Plot a line chart with `race_time_ms` on the horizontal axis and three lines: `p
 
 ---
 
+#### Task 3-4: Going Further (Optional)
+
+> **💡 3D driving trajectory**: Use `mpl_toolkits.mplot3d` to plot `pos_x`, `pos_z`, and `pos_y` in 3D — this reveals the course's physical structure (slopes, drops).
+>
+> **💡 Control input heatmap**: Create a 2D histogram (`plt.hist2d`) with `steer_angle` on the X-axis and `drive_torque` on the Y-axis to instantly visualize your driving habits (braking tendencies, steering bias). Ask your AI assistant: "Draw a 2D histogram of steer_angle vs drive_torque from my metadata.csv."
+
+> **❓ "Can I build a Streamlit or Dash dashboard that auto-visualizes new log folders?"**
+> Highly recommended — it's a high-leverage investment in your development efficiency. The basic architecture: use the `watchdog` library to monitor `Robot1/training_data/` for new `run_` folders, render 3D trajectories and heatmaps with `plotly`, and display them in a Streamlit browser app. Ask your AI assistant: "Write a Streamlit dashboard that watches Robot1/training_data/ and automatically displays the latest metadata.csv as interactive plots." This tool will pay dividends throughout Lesson 05 and beyond.
+
+---
+
 ### Related Resources
 - [03_Manual_Control.md](03_Manual_Control.md)
 - [05_Rule_Based_Control.md](05_Rule_Based_Control.md)
@@ -205,7 +259,7 @@ Plot a line chart with `race_time_ms` on the horizontal axis and three lines: `p
 ---
 
 > **❓ Having trouble?**
-> Paste your error message directly into [NotebookLM](https://notebooklm.google.com/notebook/ab916e69-f78b-47c3-9982-a5210a07d713) and ask for help.
+> Paste your error message directly into [NotebookLM](https://notebooklm.google.com/notebook/e16cd6bf-f642-459f-91fd-1146aa75398e) and ask for help.
 
 ---
 

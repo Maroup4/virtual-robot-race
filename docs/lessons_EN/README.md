@@ -24,7 +24,7 @@ These lessons take you from first setup to submitting your own algorithm in an o
 
 **Recommended VSCode extensions**
 - **Python** (Microsoft) — Python language support
-- **Gemini Code Assist** (Google Cloud) — AI coding assistance used in lessons
+- **AI coding assistant** (Gemini Code Assist, Claude Code, Codex, etc.) — AI coding assistance used in lessons
 - **Markdown Preview Enhanced** (shd101wyy) — preview these `.md` files with `Ctrl+Shift+V`; adds a copy button to every code block
 
 ---
@@ -56,7 +56,7 @@ Work through the lessons in order. Each one builds on the previous.
 2. **Open a lesson file** and press `Ctrl+Shift+V` to open the Markdown preview
 3. **Copy code blocks** using the copy button that appears in the top-right of each block
 4. **Paste into your terminal** by right-clicking (no `Ctrl+V` needed in the VSCode terminal)
-5. **Ask questions** using Gemini Code Assist or NotebookLM (covered in Lesson 02)
+5. **Ask questions** using an AI assistant (Gemini Code Assist, Claude Code, Codex, etc.) or NotebookLM (covered in Lesson 02)
 
 > If you get stuck at any step, open a [GitHub Issue](https://github.com/aira-race/virtual-robot-race/issues) and describe what happened.
 

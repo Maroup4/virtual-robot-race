@@ -55,8 +55,8 @@ No prior AI experience required. Available in English and Japanese.
 |---|---|
 | Platform & Leaderboard | [aira-race.com](https://aira-race.com) |
 | Competitions | [aira-race.com/competitions](https://aira-race.com/competitions) |
-| YouTube | [@RaceYourAlgo](https://www.youtube.com/@RaceYourAlgo) |
-| X (Twitter) | [@RaceYourAlgo](https://x.com/RaceYourAlgo) |
+| YouTube | [@RaceYourAlgo](https://www.youtube.com/@aira_race) |
+| X (Twitter) | [@RaceYourAlgo](https://x.com/aira_race) |
 | Issues | [GitHub Issues](https://github.com/aira-race/virtual-robot-race/issues) |
 
 ---

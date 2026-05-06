@@ -1,4 +1,4 @@
-# 0. Preparation
+﻿# 0. Preparation
 
 ## Introduction
 Welcome! In this training, you will learn how to develop AI and rule-based control programs on the virtual robot racing platform "aira."
@@ -21,7 +21,7 @@ This training is intended for:
 
 *   People interested in AI, autonomous driving, and robot control who want to learn hands-on — university students (3rd year or above) and working professionals.
 *   No prior Python programming experience required. However, basic PC skills (typing, copy & paste, running commands in a terminal) are assumed.
-*   People who agree to the terms of service for Google's AI services (Gemini Code Assist, etc.) used in this training and can use them with their own accounts (18 years or older recommended).
+*   People who agree to the terms of service for AI services (Gemini Code Assist, Claude Code, Codex, etc.) used in this training and can use them with their own accounts (18 years or older recommended).
 
 ---
 
@@ -39,6 +39,10 @@ First, check the hardware and software requirements for this training.
 | **GPU** | Not required | NVIDIA GeForce (CUDA-compatible) | GPU recommended for AI training |
 | **Network** | **Required** | - | Needed to install libraries (~2.5 GB) |
 
+> **❓ "Why is it Windows 11 only?"**
+> The simulator is a Unity-built Windows executable (`.exe`). While Unity can technically target Mac and Linux from the same source, the current version of aira is provided for Windows only. Running a GUI app via WSL2 or Docker is technically possible, but requires complex GPU, networking, and window-rendering configuration, so it is not officially supported.
+> **Mac / Linux users**: The AI training portion (Lesson 06) can be experienced in **Google Colab** (browser-based, no simulator needed). See the `colab/` folder for details.
+
 ### Software Requirements
 
 | Software | Version | Source | Installation Notes |
@@ -46,7 +50,7 @@ First, check the hardware and software requirements for this training.
 | **Python** | 3.12 or later (64-bit) | [Official site](https://www.python.org/downloads/) | **Be sure to check "Add Python to PATH"** |
 | **VSCode** | Latest | [Official site](https://code.visualstudio.com/) | |
 | **Git** | Latest | [Official site](https://git-scm.com/) | Default settings are fine |
-| **Google account** | - | [Sign-up page](https://accounts.google.com/signup) | Used for NotebookLM and Gemini Code Assist |
+| **Google account** | - | [Sign-up page](https://accounts.google.com/signup) | Used for NotebookLM and Gemini Code Assist (if using Gemini) |
 | **GitHub account** | - | [Sign-up page](https://github.com/signup) | Required to fork the repository |
 | **PayPal account** | - (Optional) | [Sign-up page](https://www.paypal.com/signup) | Required to receive prize money in paid competitions |
 
@@ -58,6 +62,8 @@ First, check the hardware and software requirements for this training.
 ## 2. Setup Steps
 
 Here are the actual steps. You will build your own personal development environment on your PC.
+
+> **▶ Watch this section in the video**: [Setup Steps (YouTube)](https://youtu.be/kwLAPdCD-jU)
 
 ### Step 1: Prepare Your Own Repository (Fork & Clone)
 
@@ -100,13 +106,32 @@ Next, set up the Python development environment for controlling the robot.
     ```
     > **💡 Why `.\`?**: In PowerShell, typing `setup_env.bat` alone is not recognized as a command. The `.\` prefix means "**the file in the current folder**" — it tells PowerShell to run `setup_env.bat` from the current directory.
 
-    This script automatically creates a virtual environment, installs the required Python libraries, and generates a VS Code settings file. When it completes, a message will guide you to the next steps. If you see `(.venv)` at the beginning of the prompt, it worked.
+    This script automatically creates a virtual environment, installs the required Python libraries, and generates a VS Code settings file.
+
+    > **❓ "What does setup_env.bat actually install?"**
+    > Internally, it runs `pip install -r requirements.txt`. The main libraries are:
+    >
+    > | Category | Key libraries |
+    > |----------|--------------|
+    > | Deep Learning | `torch`, `torchvision` (PyTorch) |
+    > | Numerical / Data | `numpy`, `pandas` |
+    > | Image Processing | `opencv-python`, `pillow` |
+    > | Networking | `websockets`, `aiohttp` |
+    > | Visualization | `matplotlib` |
+    > | Other | `keyboard`, `qrcode`, `pyyaml`, etc. |
+    >
+    > See `requirements.txt` for the full list. Total download size is approximately 2.5 GB (PyTorch accounts for most of it).
+
+    When the script completes, a message will guide you to the next steps. If you see `(.venv)` at the beginning of the prompt, it worked.
 
     > **💡 Want to work in VS Code's terminal?** Run the following in VS Code's terminal (`Ctrl + Shift + @`):
     > ```bash
     > .venv\Scripts\activate
     > ```
     > Once `(.venv)` appears in the prompt, you're ready.
+
+    > **❓ "Why `.venv` instead of Anaconda or Docker?"**
+    > Standard `venv` was chosen because it requires **no additional installation and minimal configuration**. Anaconda is powerful but its installer is several GB and can overwrite your system Python by default. Docker is great for portability, but displaying GUI apps (like the Unity simulator) requires extra setup. With `venv + pip`, it works as long as Python is installed, and cleanup is as simple as deleting the `.venv` folder.
 
 ### Step 3: Configure VS Code
 
@@ -118,7 +143,7 @@ Finally, configure `Visual Studio Code`.
 2.  **Install recommended extensions**
     - Search for and install the following extensions in the VS Code extensions marketplace:
       - **Python** (by Microsoft): Essential tool for Python development.
-      - **Gemini Code Assist** (by Google Cloud): AI-powered coding assistance. You will use this in the latter half of the lessons. (Sign in with your Google account.)
+      - **AI coding assistant** (Gemini Code Assist, Claude Code, Codex, etc.): AI-powered coding assistance. You will use this in the latter half of the lessons. Install whichever you prefer. (Gemini Code Assist requires a Google account.)
       - **Markdown Preview Enhanced** (by shd101wyy): Makes reading these lesson documents much easier. With a `.md` file open, press `Ctrl + Shift + V` to open the preview — **a copy button will appear in the top-right corner of every code block.**
 
     > **💡 Pasting into the terminal**: In the VS Code terminal, simply **right-click** to paste — no need for `Ctrl+V`.
@@ -130,7 +155,10 @@ Finally, configure `Visual Studio Code`.
 ---
 
 ## 3. GPU Acceleration (Optional)
-If your PC has an NVIDIA GPU, you can speed up AI training and inference.
+If your PC has an NVIDIA GPU, you can significantly speed up **AI training (Lesson 06)**.
+
+> **❓ "Do I need a GPU just to run the robot (inference)?"**
+> **No.** CPU alone handles real-time inference at the 50 ms control cycle without issues. GPU acceleration mainly benefits the **training phase** (updating the model from large amounts of driving data). Feel free to skip this section and come back when training speed becomes a concern in Lesson 06.
 
 1.  Open the virtual environment terminal (the one with `(.venv)` at the start of the prompt).
 2.  Run the following two commands **in order**. The first removes the CPU version; the second installs the GPU version.
@@ -158,6 +186,9 @@ Let's do a test run to confirm everything is set up correctly.
     .\start.bat
     ```
     > **💡 `python main.py` works too.** `start.bat` is a shortcut that activates `.venv` then runs `python main.py`. If `.venv` is already active, either works.
+
+    > **❓ "How do Python and Unity communicate?"**
+    > They communicate over **WebSocket** (port 12346). Unity acts as the server and Python connects as a client, exchanging sensor data (camera image, speed, etc.) and control commands (steering, throttle) at approximately 50 ms intervals. No standard interface like OpenAI Gym is used — aira uses its own simple protocol. You will read the actual code in **Lesson 05 (Rule-Based Control)**.
 3.  Confirm the following:
     > **💡 First launch**: A Windows Security (firewall) dialog may appear. Click **"Allow access"** to continue. This is needed for communication between Unity and Python.
 

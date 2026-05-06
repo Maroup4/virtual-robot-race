@@ -1009,7 +1009,7 @@ async def main() -> None:
         # Terminate Unity process if we started it
         # In non-headless mode, skip termination — Unity closes itself after user clicks SUBMIT/CANCEL
         if unity_proc and unity_proc.poll() is None:
-            if config_loader.HEADLESS == 1:
+            if config_loader.HEADLESS == 1 or force_ended:
                 print("[Main] Terminating Unity process...")
                 unity_proc.terminate()
                 try:
