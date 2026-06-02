@@ -47,7 +47,7 @@ First, check the hardware and software requirements for this training.
 
 | Software | Version | Source | Installation Notes |
 |:---------|:--------|:-------|:------------------|
-| **Python** | 3.12 or later (64-bit) | [Official site](https://www.python.org/downloads/) | **Be sure to check "Add Python to PATH"** |
+| **Python** | 3.12 or 3.13 (64-bit) | [Official downloads page](https://www.python.org/downloads/windows/) | **Be sure to check "Add Python to PATH"**. Python 3.14 is **NOT** supported yet. |
 | **VSCode** | Latest | [Official site](https://code.visualstudio.com/) | |
 | **Git** | Latest | [Official site](https://git-scm.com/) | Default settings are fine |
 | **Google account** | - | [Sign-up page](https://accounts.google.com/signup) | Used for NotebookLM and Gemini Code Assist (if using Gemini) |
@@ -56,6 +56,13 @@ First, check the hardware and software requirements for this training.
 
 > **⚠️ Most Important**
 > If you forget to check "**Add Python to PATH**" during installation, the `python` command will not be recognized and all subsequent steps will fail. If you missed it, uninstall Python and reinstall it.
+
+> **⚠️ Do NOT install Python 3.14**
+> The "Latest Python 3 Release" link at the top of python.org currently points to Python **3.14**, but this project's dependencies (`torch`, `pandas`, `numpy`, `opencv-python`) do **not** provide pre-built wheels for 3.14 yet. If you install 3.14, `setup_env.bat` will appear to hang and ultimately fail.
+>
+> Use the [**Windows downloads page**](https://www.python.org/downloads/windows/) and scroll to **"Stable Releases"** — pick **Python 3.12.x** (recommended) or 3.13.x. The direct installer link looks like `python-3.12.x-amd64.exe`.
+>
+> If you already installed 3.14 by mistake, uninstall it from **Settings → Apps**, then install 3.12, open a **new** terminal, and verify with `python --version`.
 
 ---
 

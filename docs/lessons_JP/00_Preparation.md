@@ -46,7 +46,7 @@ aira:autonomous intelligence racing arena
 
 | ソフトウェア | バージョン | 入手先 | インストール時の注意 |
 |:---|:---|:---|:---|
-| **Python** | 3.12 以上 (64bit) | [公式サイト](https://www.python.org/downloads/) | **「Add Python to PATH」に必ずチェック** |
+| **Python** | 3.12 または 3.13 (64bit) | [公式ダウンロードページ](https://www.python.org/downloads/windows/) | **「Add Python to PATH」に必ずチェック**。Python 3.14 は**未対応**です。 |
 | **VSCode** | 最新版 | [公式サイト](https://code.visualstudio.com/) | 日本語化パック推奨 |
 | **Git** | 最新版 | [公式サイト](https://git-scm.com/) | デフォルト設定でOK |
 | **Googleアカウント** | - | [作成ページ](https://accounts.google.com/signup) | NotebookLM、Gemini Code Assist（使用する場合）で利用 |
@@ -55,6 +55,13 @@ aira:autonomous intelligence racing arena
 
 > **⚠️ 最重要ポイント**
 > Pythonインストール時に「**Add Python to PATH**」にチェックを入れ忘れると、`python` コマンドが認識されず、この後の手順がすべて失敗します。もし忘れてしまった場合は、一度アンインストールして再インストールしてください。
+
+> **⚠️ Python 3.14 はインストールしないでください**
+> python.org トップの「Latest Python 3 Release」リンクは現在 Python **3.14** を指していますが、本プロジェクトの依存パッケージ（`torch`, `pandas`, `numpy`, `opencv-python`）は **3.14 用の wheel（ビルド済みバイナリ）をまだ提供していません**。3.14 をインストールすると `setup_env.bat` が固まったように見えて最終的に失敗します。
+>
+> 必ず [**Windows 用ダウンロードページ**](https://www.python.org/downloads/windows/) を開き、「**Stable Releases**」セクションまでスクロールして **Python 3.12.x（推奨）** または 3.13.x を選んでください。直接ダウンロードするインストーラは `python-3.12.x-amd64.exe` のような名前です。
+>
+> もし誤って 3.14 を入れてしまった場合は、**Windows設定 → アプリ**からアンインストールし、3.12 を入れ直してから**新しい**ターミナルを開いて `python --version` で確認してください。
 
 > **✅ PATHが通っているか確認する方法**: インストール後にターミナル（PowerShell）を開いて、以下を実行してください。
 > ```bash
