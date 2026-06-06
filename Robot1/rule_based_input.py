@@ -45,7 +45,7 @@ steerAngle: float = 0.0
 
 # --- Internal state ---
 _started_latch = False  # Once GO is detected, stays True
-SAVE_DEBUG_OVERLAYS = True  # Save overlay images to debug/ every frame
+SAVE_DEBUG_OVERLAYS = False  # Save overlay images to debug/ every frame
 
 # Lane-loss handling
 _lost_age = 0
@@ -66,8 +66,8 @@ _driver = DriverModel(DriverConfig(
     forward_sign=+1,
     v_min=0.15,
     v_max=0.75,
-    k_theta=0.90,
-    k_lateral=0.60,
+    k_theta=0.80,
+    k_lateral=0.50,
     steer_limit=0.524,  # ~30 degrees max (matches Unity)
     alpha_smooth=0.30,
     torque_limit=1.00,

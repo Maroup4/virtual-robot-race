@@ -40,8 +40,8 @@ def parse_args():
     for i, arg in enumerate(sys.argv[1:]):
         if arg.isdigit():
             episodes = int(arg)
-        elif arg == "--retrain" and i + 2 < len(sys.argv):
-            retrain_cmd = sys.argv[i + 2]
+        elif arg == "--retrain" and i + 2 <= len(sys.argv) - 1:
+            retrain_cmd = " ".join(sys.argv[i + 2:])
     return episodes, retrain_cmd
 
 

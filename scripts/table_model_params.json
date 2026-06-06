@@ -1,0 +1,186 @@
+{
+  "params": {
+    "dt": 0.05,
+    "runs_used": 16,
+    "bicycle": {
+      "wheelbase_L": 0.274,
+      "steer_to_yaw_R2": 0.807,
+      "_model": "yaw_rate = (v / L) * tan(steer)"
+    },
+    "speed": {
+      "a_drive": 13.201,
+      "b_drag": 10.9623,
+      "c_roll": -0.5785,
+      "speed_R2": 0.303,
+      "_model": "v_dot = a_drive*torque - b_drag*v - c_roll",
+      "v_terminal_full_throttle": 1.257
+    },
+    "latency": {
+      "best_lag_frames": 0,
+      "best_lag_ms": 0,
+      "norm_xcorr": 0.702
+    }
+  },
+  "summary": [
+    {
+      "run": "run_20260506_162643",
+      "ok": true,
+      "rows": 908,
+      "race_time_s": 49.5,
+      "v_mean": 0.398,
+      "v_max": 1.06,
+      "torque_mean": 0.286,
+      "steer_abs_mean": 0.3684
+    },
+    {
+      "run": "run_20260506_163204",
+      "ok": true,
+      "rows": 1649,
+      "race_time_s": 89.9,
+      "v_mean": 0.212,
+      "v_max": 1.086,
+      "torque_mean": 0.152,
+      "steer_abs_mean": 0.4205
+    },
+    {
+      "run": "run_20260506_163401",
+      "ok": true,
+      "rows": 988,
+      "race_time_s": 53.9,
+      "v_mean": 0.358,
+      "v_max": 1.062,
+      "torque_mean": 0.258,
+      "steer_abs_mean": 0.3856
+    },
+    {
+      "run": "run_20260506_163519",
+      "ok": true,
+      "rows": 1649,
+      "race_time_s": 89.9,
+      "v_mean": 0.092,
+      "v_max": 1.021,
+      "torque_mean": 0.065,
+      "steer_abs_mean": 0.4737
+    },
+    {
+      "run": "run_20260506_163715",
+      "ok": true,
+      "rows": 896,
+      "race_time_s": 48.8,
+      "v_mean": 0.389,
+      "v_max": 0.973,
+      "torque_mean": 0.279,
+      "steer_abs_mean": 0.3333
+    },
+    {
+      "run": "run_20260506_163827",
+      "ok": true,
+      "rows": 1005,
+      "race_time_s": 54.8,
+      "v_mean": 0.355,
+      "v_max": 1.09,
+      "torque_mean": 0.255,
+      "steer_abs_mean": 0.3649
+    },
+    {
+      "run": "run_20260506_164456",
+      "ok": true,
+      "rows": 896,
+      "race_time_s": 48.8,
+      "v_mean": 0.391,
+      "v_max": 1.071,
+      "torque_mean": 0.279,
+      "steer_abs_mean": 0.3484
+    },
+    {
+      "run": "run_20260506_164608",
+      "ok": true,
+      "rows": 896,
+      "race_time_s": 48.8,
+      "v_mean": 0.383,
+      "v_max": 1.065,
+      "torque_mean": 0.276,
+      "steer_abs_mean": 0.3659
+    },
+    {
+      "run": "run_20260506_164720",
+      "ok": true,
+      "rows": 920,
+      "race_time_s": 50.2,
+      "v_mean": 0.39,
+      "v_max": 1.055,
+      "torque_mean": 0.282,
+      "steer_abs_mean": 0.387
+    },
+    {
+      "run": "run_20260506_164833",
+      "ok": true,
+      "rows": 877,
+      "race_time_s": 47.8,
+      "v_mean": 0.408,
+      "v_max": 1.069,
+      "torque_mean": 0.29,
+      "steer_abs_mean": 0.3586
+    },
+    {
+      "run": "run_20260506_164944",
+      "ok": true,
+      "rows": 963,
+      "race_time_s": 52.4,
+      "v_mean": 0.371,
+      "v_max": 1.115,
+      "torque_mean": 0.271,
+      "steer_abs_mean": 0.3866
+    },
+    {
+      "run": "run_20260506_165102",
+      "ok": true,
+      "rows": 954,
+      "race_time_s": 51.8,
+      "v_mean": 0.374,
+      "v_max": 1.055,
+      "torque_mean": 0.272,
+      "steer_abs_mean": 0.3921
+    },
+    {
+      "run": "run_20260506_165218",
+      "ok": true,
+      "rows": 945,
+      "race_time_s": 51.5,
+      "v_mean": 0.37,
+      "v_max": 1.061,
+      "torque_mean": 0.264,
+      "steer_abs_mean": 0.3658
+    },
+    {
+      "run": "run_20260506_165335",
+      "ok": true,
+      "rows": 867,
+      "race_time_s": 47.2,
+      "v_mean": 0.41,
+      "v_max": 1.054,
+      "torque_mean": 0.293,
+      "steer_abs_mean": 0.3688
+    },
+    {
+      "run": "run_20260506_165447",
+      "ok": true,
+      "rows": 899,
+      "race_time_s": 49.0,
+      "v_mean": 0.398,
+      "v_max": 1.081,
+      "torque_mean": 0.285,
+      "steer_abs_mean": 0.3547
+    },
+    {
+      "run": "run_20260506_165600",
+      "ok": true,
+      "rows": 845,
+      "race_time_s": 46.1,
+      "v_mean": 0.41,
+      "v_max": 1.078,
+      "torque_mean": 0.29,
+      "steer_abs_mean": 0.3469
+    }
+  ]
+}
